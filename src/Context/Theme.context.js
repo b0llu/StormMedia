@@ -4,7 +4,7 @@ const ThemeContext = createContext();
 
 const ThemeProvider = ({ children }) => {
   const localStorageTheme = localStorage.getItem("data-theme");
-  const [theme, setTheme] = useState(localStorageTheme ?? "light");
+  const [theme, setTheme] = useState(localStorageTheme ?? "dark");
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);

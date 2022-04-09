@@ -3,6 +3,8 @@
     width: 100%;
     display: flex;
     color: var(--content-color);
+    grid-area: contentarea;
+    overflow-y: hidden;
 }
 
 .rsp_img {

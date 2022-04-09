@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import * as styles from "./LoginBox.module.css";
 
 export const LoginBox = ({ setAuth }) => {
@@ -82,9 +83,11 @@ export const LoginBox = ({ setAuth }) => {
         <button type="button" className="btn">
           Login with Test Credentials
         </button>
-        <button onClick={loginHandler} type="button" className="btn">
-          Login
-        </button>
+        <Link to="/home">
+          <button onClick={loginHandler} type="button" className="btn">
+            Login
+          </button>
+        </Link>
         <span onClick={() => setAuth(false)} className={styles.to_signup}>
           Create New Account <i className="fas fa-chevron-right"></i>
         </span>

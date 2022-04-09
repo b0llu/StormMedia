@@ -1,0 +1,11 @@
+.grid_container {
+  display: grid;
+  grid-template-columns: 1fr 35rem repeat(2, 40rem) 30rem 1fr;
+  grid-template-areas: "... left-sidebar contentarea contentarea right-sidebar ...";
+}
+
+.grid_container_home {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-areas: "contentarea contentarea contentarea contentarea contentarea contentarea";
+}

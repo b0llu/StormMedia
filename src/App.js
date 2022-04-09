@@ -1,15 +1,17 @@
-import { ThemeToggler } from "Components";
+import { GridContainer, LeftSidebar, ThemeToggler } from "Components";
 import { Routes, Route } from "react-router-dom";
-import { LandingPage } from "./Pages";
+import { HomePage, LandingPage } from "./Pages";
 
 function App() {
   return (
-    <>
+    <GridContainer>
       <ThemeToggler />
+      <LeftSidebar />
       <Routes>
         <Route path="/" element={<LandingPage />} />
+        <Route path="/home" element={<HomePage />} />
       </Routes>
-    </>
+    </GridContainer>
   );
 }
 

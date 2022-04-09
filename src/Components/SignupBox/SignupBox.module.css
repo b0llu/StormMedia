@@ -1,0 +1,63 @@
+.signup_container {
+    display: flex;
+    flex-direction: column;
+}
+
+.signup_header {
+    font-size: 2rem;
+    margin: 1rem 0;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.signup_container label {
+    margin: 1rem 0;
+    font-size: 1.5rem;
+}
+
+.signup_container input {
+    padding: 7px;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--default-color);
+    border: 1px solid var(--content-color);
+    color: var(--content-color);
+}
+
+.password_input_holder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.password_input_holder span {
+    margin: 0 1rem;
+    cursor: pointer;
+}
+
+.password_input_holder span:hover {
+    color: var(--primary-color);
+    transition: 0.2s ease-in-out;
+}
+
+.signup_container button {
+    border: none;
+    margin: 2rem 0 0 0;
+    background-color: var(--primary-color);
+    font-weight: 500;
+    font-size: 1.5rem;
+}
+
+.signup_container button:hover {
+    background-color: #4dcedd;
+    transition: 0.2s ease-in-out;
+}
+
+.to_login {
+    width: 100%;
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+}

@@ -47,6 +47,8 @@
     color: var(--content-color);
     padding: 1.5rem;
     cursor: pointer;
+    border-bottom-left-radius: 2rem;
+    border-bottom-right-radius: 2rem;
 }
 
 .small_profile:hover {

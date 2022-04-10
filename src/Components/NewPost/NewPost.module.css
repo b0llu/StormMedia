@@ -26,34 +26,38 @@
 }
 
 .post_details .textarea:focus {
-    border-bottom: 1px solid var(--content-color);
+  border-bottom: 1px solid var(--content-color);
 }
 
 .post_cta_section {
-    padding: 1rem 2rem 1rem 0;
-    display: flex;
-    align-items: center;
-    width: 100%;
+  padding: 1rem 2rem 1rem 0;
+  display: flex;
+  align-items: center;
+  width: 100%;
 }
 
 .icons span {
-    font-size: 3rem;
-    color: var(--cta-btn-bg);
-    cursor: pointer;
-    border-radius: 100rem;
-    padding: 1rem;
+  font-size: 3rem;
+  color: var(--cta-btn-bg);
+  cursor: pointer;
+  border-radius: 100rem;
+  padding: 1rem;
 }
 
 .icons span:hover {
-    background-color: var(--faint-bg);
+  background-color: var(--faint-bg);
 }
 
 .post_cta_section button {
-    margin-left: auto;
-    padding: 1rem 2.5rem;
-    border-radius: 100rem;
-    background-color: var(--cta-btn-bg);
-    border: none;
-    color: var(--cta-btn);
-    font-size: 1.7rem;
+  margin-left: auto;
+  padding: 1rem 2.5rem;
+  border-radius: 100rem;
+  background-color: var(--cta-btn-bg);
+  border: none;
+  color: var(--cta-btn);
+  font-size: 1.7rem;
+}
+
+p:empty:not(:focus)::before {
+  content: attr(data-placeholder);
 }

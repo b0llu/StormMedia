@@ -9,9 +9,10 @@ export const NewPost = () => {
       />
       <div className={styles.post_details}>
         <p
+        data-placeholder="What's Happening...."
         contentEditable
         className={styles.textarea}
-        >What's Happening...</p>
+        ></p>
         <div className={styles.post_cta_section}>
           <div className={styles.icons}>
             <span className="material-icons">image</span>

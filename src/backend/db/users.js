@@ -11,6 +11,7 @@ export const users = [
     firstName: "Adarsh",
     lastName: "Balika",
     username: "adarshbalika",
+    usertag: "@adarshbalak",
     password: "adarshBalika123",
     createdAt: formatDate(),
     updatedAt: formatDate(),

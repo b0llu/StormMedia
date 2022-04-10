@@ -2,6 +2,7 @@ import { v4 as uuid } from "uuid";
 import { Response } from "miragejs";
 import { formatDate } from "../utils/authUtils";
 const sign = require("jwt-encode");
+import jwt_decode from "jwt-decode";
 
 /**
  * All the routes related to Auth are present here.
@@ -94,6 +95,41 @@ export const loginHandler = function (schema, request) {
           "The credentials you entered are invalid. Unauthorized access error.",
         ],
       }
+    );
+  } catch (error) {
+    return new Response(
+      500,
+      {},
+      {
+        error,
+      }
+    );
+  }
+};
+
+/**
+ * This handler handles user verification.
+ * send POST Request at /api/auth/verify
+ * body contains {encodedToken}
+ * */
+
+export const verifyUser = function (schema, request) {
+  const { encodedToken } = JSON.parse(request.requestBody);
+  const decodedToken = jwt_decode(
+    encodedToken,
+    process.env.REACT_APP_JWT_SECRET
+  );
+  try {
+    if (decodedToken) {
+      const user = this.db.users.findBy({ email: decodedToken.email });
+      if (user) {
+        return new Response(200, {}, { user });
+      }
+    }
+    return new Response(
+      401,
+      {},
+      { errors: ["The token is invalid. Unauthorized access error."] }
     );
   } catch (error) {
     return new Response(

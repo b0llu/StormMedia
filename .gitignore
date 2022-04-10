@@ -7,6 +7,7 @@
 package-lock.json 
 package.json
 yarn.lock
+jsconfig.json
 
 # testing
 /coverage

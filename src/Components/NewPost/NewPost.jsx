@@ -5,7 +5,7 @@ export const NewPost = () => {
     <div className={styles.post_container}>
       <img
         src="https://pbs.twimg.com/profile_images/1464407388228780036/NFY5UUPn_bigger.jpg"
-        alt=""
+        alt="user image"
       />
       <div className={styles.post_details}>
         <p

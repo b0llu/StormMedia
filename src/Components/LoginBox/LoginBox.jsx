@@ -49,49 +49,47 @@ export const LoginBox = ({ setAuth }) => {
   };
 
   return (
-    <>
-      <form className={styles.login_container}>
-        {error.state ? <p className="for-alert">{error.text}</p> : null}
-        <p className={styles.login_header}>Login</p>
-        <label htmlFor="username">Email address :</label>
-        <input placeholder="JohnWick@gmail.com" type="email" name="email" />
-        <label htmlFor="password">Password :</label>
-        <div className={styles.password_input_holder}>
-          <input
-            onChange={(e) =>
-              setUserDetails({ ...userDetails, password: e.target.value })
-            }
-            placeholder="*****"
-            type={type ? "password" : "text"}
-          />
-          {type ? (
-            <span
-              onClick={() => setType(!type)}
-              className="material-icons visibility-icon"
-            >
-              visibility_off
-            </span>
-          ) : (
-            <span
-              onClick={() => setType(!type)}
-              className="material-icons visibility-icon"
-            >
-              visibility
-            </span>
-          )}
-        </div>
-        <button type="button" className="btn">
-          Login with Test Credentials
+    <form className={styles.login_container}>
+      {error.state ? <p className="for-alert">{error.text}</p> : null}
+      <p className={styles.login_header}>Login</p>
+      <label htmlFor="username">Email address :</label>
+      <input placeholder="JohnWick@gmail.com" type="email" name="email" />
+      <label htmlFor="password">Password :</label>
+      <div className={styles.password_input_holder}>
+        <input
+          onChange={(e) =>
+            setUserDetails({ ...userDetails, password: e.target.value })
+          }
+          placeholder="*****"
+          type={type ? "password" : "text"}
+        />
+        {type ? (
+          <span
+            onClick={() => setType(!type)}
+            className="material-icons visibility-icon"
+          >
+            visibility_off
+          </span>
+        ) : (
+          <span
+            onClick={() => setType(!type)}
+            className="material-icons visibility-icon"
+          >
+            visibility
+          </span>
+        )}
+      </div>
+      <button type="button" className="btn">
+        Login with Test Credentials
+      </button>
+      <Link to="/home">
+        <button onClick={loginHandler} type="button" className="btn">
+          Login
         </button>
-        <Link to="/home">
-          <button onClick={loginHandler} type="button" className="btn">
-            Login
-          </button>
-        </Link>
-        <span onClick={() => setAuth(false)} className={styles.to_signup}>
-          Create New Account <i className="fas fa-chevron-right"></i>
-        </span>
-      </form>
-    </>
+      </Link>
+      <span onClick={() => setAuth(false)} className={styles.to_signup}>
+        Create New Account <i className="fas fa-chevron-right"></i>
+      </span>
+    </form>
   );
 };

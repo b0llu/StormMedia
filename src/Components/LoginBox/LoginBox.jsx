@@ -58,7 +58,7 @@ export const LoginBox = ({ setAuth }) => {
         onChange={(e) =>
           setUserDetails({ ...userDetails, username: e.target.value })
         }
-        placeholder="JohnWick@gmail.com"
+        placeholder="Luffy"
         type="email"
         name="email"
       />
@@ -68,7 +68,7 @@ export const LoginBox = ({ setAuth }) => {
           onChange={(e) =>
             setUserDetails({ ...userDetails, password: e.target.value })
           }
-          placeholder="*****"
+          placeholder="ex. Name123"
           type={type ? "password" : "text"}
         />
         {type ? (

@@ -7,14 +7,16 @@ import {
   RightSidebar,
   ThemeToggler,
 } from "Components";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { HomePage, LandingPage } from "./Pages";
 
 function App() {
+  const location = useLocation()
+
   return (
     <GridContainer>
       <ThemeToggler />
-      <LeftSidebar />
+      {location.pathname !== "/" && <LeftSidebar />}
       <Routes>
         <Route element={<RestrictAuth />}>
           <Route path="/" element={<LandingPage />} />
@@ -23,7 +25,7 @@ function App() {
           <Route path="/home" element={<HomePage />} />
         </Route>
       </Routes>
-      <RightSidebar />
+      {location.pathname !== "/" && <RightSidebar />}
     </GridContainer>
   );
 }

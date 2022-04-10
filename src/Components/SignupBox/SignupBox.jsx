@@ -5,6 +5,7 @@ export const SignupBox = ({ setAuth }) => {
   //   useDocTitle("Signup | StormKeep");
   //   const { signup } = useAuthContext();
   const [userDetails, setUserDetails] = useState({
+    name: '',
     username: "",
     usertag: "",
     passwordOne: "",
@@ -73,22 +74,31 @@ export const SignupBox = ({ setAuth }) => {
       <form className={styles.signup_container}>
         {error.state ? <p className="for-alert">{error.text}</p> : null}
         <p className={styles.signup_header}>SignUp</p>
-        <label htmlFor="username">UserName:</label>
+        <label htmlFor="name">Name:</label>
+        <input
+          type="text"
+          name="firstName"
+          onChange={(e) =>
+            setUserDetails({ ...userDetails, name: e.target.value })
+          }
+          placeholder="Luffy"
+        />
+        <label htmlFor="username">Username:</label>
         <input
           type="text"
           name="firstName"
           onChange={(e) =>
             setUserDetails({ ...userDetails, username: e.target.value })
           }
-          placeholder="IamBatman"
+          placeholder="Mugiwara"
         />
-        <label htmlFor="username">UserTag:</label>
+        <label htmlFor="username">Usertag:</label>
         <input
           onChange={(e) =>
             setUserDetails({ ...userDetails, usertag: e.target.value })
           }
           className="block-inputs"
-          placeholder="IamBatman@gmail.com"
+          placeholder="@gumgumNO"
           type="email"
           name="email"
         />

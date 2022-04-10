@@ -1,0 +1,30 @@
+html[data-theme="light"] {
+  --faint-bg: #dcdfe1;
+  --user-hover: rgba(42, 41, 41, 0.03);
+  --follow-btn-bg: #0c0c0c;
+  --follow-btn-clr: #ffffff;
+  --follow-btn-hover: #242424;
+  --cta-btn: #ffffff;
+  --cta-btn-bg: #238ac5;
+  --cta-btn-hover: #207cb1;
+}
+
+html[data-theme="dark"] {
+  --faint-bg: #272727;
+  --user-hover: rgba(225, 225, 225, 0.03);
+  --follow-btn-bg: #ffffff;
+  --follow-btn-clr: #0c0c0c;
+  --follow-btn-hover: #cccccc;
+  --cta-btn: #ffffff;
+  --cta-btn-bg: #238ac5;
+  --cta-btn-hover: #207cb1;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 10px;
+}

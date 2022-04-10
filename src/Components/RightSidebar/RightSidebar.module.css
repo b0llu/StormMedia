@@ -1,0 +1,95 @@
+.right_sidebar {
+  grid-area: right-sidebar;
+  width: 100%;
+  border-left: 1px solid var(--content-color);
+  padding-left: 2rem;
+  padding-right: 1rem;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.right_sidebar input {
+    margin-top: 1rem;
+    padding: 1.5rem;
+    background-color: var(--faint-bg);
+    border: none;
+    border-radius: 100rem;
+    color: var(--content-color);
+}
+
+.right_sidebar input::placeholder {
+    padding-left: 1rem;
+}
+
+.right_sidebar input:focus {
+    border: 1px solid var(--primary-color);
+    outline: none;
+}
+
+.follower_section {
+    background-color: var(--faint-bg);
+    margin-top: 2rem;
+    border-radius: 2rem;
+}
+
+.follower_section h1 {
+    font-size: 2.5rem;
+    padding: 1.5rem;
+    color: var(--content-color);
+    font-weight: 500;
+}
+
+.small_profile {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: var(--content-color);
+    padding: 1.5rem;
+    cursor: pointer;
+}
+
+.small_profile:hover {
+    background-color: var(--user-hover);
+    transition: 0.2s ease-in-out;
+}
+
+.avatar {
+    height: 5rem;
+    width: 5rem;
+    border-radius: 50%;
+}
+
+.small_profile h1 {
+    font-size: 1.5rem;
+    margin-left: 2rem;
+    font-weight: 600;
+    padding: 0;
+}
+
+.small_profile h3 {
+    font-size: 1.5rem;
+    margin-left: 2rem;
+    font-weight: 500;
+}
+
+.user {
+    display: flex;
+    align-self: flex-start;
+    width: 100%;
+}
+
+.follow_btn {
+    margin-left: auto;
+    padding: 1rem 2rem;
+    border-radius: 100rem;
+    background-color: var(--follow-btn-bg);
+    color: var(--follow-btn-clr);
+    border: none;
+    cursor: pointer;
+}
+
+.follow_btn:hover {
+    background-color: var(--follow-btn-hover);
+}
+

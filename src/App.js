@@ -2,6 +2,7 @@ import "App.css";
 import {
   GridContainer,
   LeftSidebar,
+  LogoutBtn,
   RequireAuth,
   RestrictAuth,
   RightSidebar,
@@ -16,6 +17,7 @@ function App() {
   return (
     <GridContainer>
       <ThemeToggler />
+      <LogoutBtn />
       {location.pathname !== "/" && <LeftSidebar />}
       <Routes>
         <Route element={<RestrictAuth />}>

@@ -8,3 +8,4 @@ export { NewPost } from "./NewPost/NewPost";
 export { EachPost } from "./EachPost/EachPost";
 export { RequireAuth } from "./PrivateRoute/RequireAuth";
 export { RestrictAuth } from "./PrivateRoute/RestrictAuth";
+export { LogoutBtn } from "./LogoutBtn/LogoutBtn";

@@ -56,7 +56,6 @@ const AuthProvider = ({ children }) => {
         username: "adarshbalika",
         password: "adarshBalika123",
       });
-      console.log(data)
       localStorage.setItem("StormMediaToken", data.encodedToken);
       localStorage.setItem("StormMediaUser", data.foundUser.firstName);
       // SuccessToast("Login Successful");

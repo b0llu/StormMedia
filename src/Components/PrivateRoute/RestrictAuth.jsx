@@ -3,7 +3,6 @@ import { useAuthContext } from "Context";
 
 export const RestrictAuth = () => {
   const { userState } = useAuthContext();
-  console.log(userState)
   const location = useLocation();
 
   return userState._id ? (

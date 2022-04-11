@@ -1,9 +1,10 @@
+import { useAuthContext } from "Context";
 import { useState, useEffect } from "react";
 import * as styles from "./SignupBox.module.css";
 
 export const SignupBox = ({ setAuth }) => {
   //   useDocTitle("Signup | StormKeep");
-  //   const { signup } = useAuthContext();
+    const { signup } = useAuthContext();
   const [userDetails, setUserDetails] = useState({
     name: '',
     username: "",
@@ -152,7 +153,7 @@ export const SignupBox = ({ setAuth }) => {
             </span>
           )}
         </div>
-        <button type="button" className="btn">
+        <button onClick={() => signup(userDetails)} type="button" className="btn">
           Signup
         </button>
         <span className={styles.to_login} onClick={() => setAuth(true)}>

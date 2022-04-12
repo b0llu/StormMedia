@@ -12,16 +12,16 @@ const AuthProvider = ({ children }) => {
   const login = async (userDetails) => {
     try {
       const { data } = await axios.post(`/api/auth/login`, {
-        username: userDetails.userName,
+        username: userDetails.username,
         password: userDetails.password,
       });
       // saving the encodedToken in the localStorage
       localStorage.setItem("StormMediaToken", data.encodedToken);
       localStorage.setItem("StormMediaUser", data.foundUser.firstName);
-      // SuccessToast("Login Successful");
+      SuccessToast("Login Successful");
       setEffectTrigger(!effectTrigger);
     } catch (error) {
-      // AlertToast(`${error.response.data.errors}`);
+      AlertToast(`${error.response.data.errors}`);
     }
   };
 
@@ -35,16 +35,16 @@ const AuthProvider = ({ children }) => {
       // saving the encodedToken in the localStorage
       localStorage.setItem("StormMediaToken", data.encodedToken);
       localStorage.setItem("StormMediaUser", data.createdUser.firstName);
-      // SuccessToast("Signup Successful");
+      SuccessToast("Signup Successful");
       setEffectTrigger(!effectTrigger);
     } catch (error) {
-      // AlertToast(`${error.response.data.errors}`);
+      AlertToast(`${error.response.data.errors}`);
     }
   };
 
   const signout = () => {
     setEffectTrigger(!effectTrigger);
-    // AlertToast(`Logged Out`);
+    AlertToast(`Logged Out`);
     localStorage.removeItem("StormMediaToken");
     localStorage.removeItem("StormMediaUser");
     setUserState([]);
@@ -53,15 +53,15 @@ const AuthProvider = ({ children }) => {
   const testLogger = async () => {
     try {
       const { data } = await axios.post("/api/auth/login", {
-        username: "adarshbalika",
-        password: "adarshBalika123",
+        username: "TheAdmin",
+        password: "Admin123",
       });
       localStorage.setItem("StormMediaToken", data.encodedToken);
       localStorage.setItem("StormMediaUser", data.foundUser.firstName);
-      // SuccessToast("Login Successful");
+      SuccessToast("Login Successful");
       setEffectTrigger(!effectTrigger);
     } catch (error) {
-      // AlertToast(`${error.response.data.errors}`);
+      AlertToast(`${error.response.data.errors}`);
     }
   };
 
@@ -76,7 +76,7 @@ const AuthProvider = ({ children }) => {
             setUserState(response.data.user);
           }
         } catch (error) {
-          // AlertToast(`${error.response.data.errors}`);
+          AlertToast(`${error.response.data.errors}`);
           console.log(error)
         }
       }

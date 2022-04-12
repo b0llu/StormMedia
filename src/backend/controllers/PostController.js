@@ -77,16 +77,18 @@ export const createPostHandler = function (schema, request) {
         }
       );
     }
-    const { postData } = JSON.parse(request.requestBody);
+    const { content } = JSON.parse(request.requestBody);
     const post = {
       _id: uuid(),
-      ...postData,
+      content: content,
       likes: {
         likeCount: 0,
         likedBy: [],
         dislikedBy: [],
       },
+      name: user.firstName,
       username: user.username,
+      profilePhoto: user.profilePhoto,
       createdAt: formatDate(),
       updatedAt: formatDate(),
     };

@@ -1,19 +1,43 @@
-import * as styles from './EachPost.module.css'
+import axios from "axios";
+import { useReducerContext } from "Context";
+import { useEffect, useState } from "react";
+import * as styles from "./EachPost.module.css";
 
 export const EachPost = () => {
+  const [posts, setPosts] = useState([]);
+  const { effectTrigger } = useReducerContext();
+
+  useEffect(() => {
+    return (async function () {
+      try {
+        const response = await axios.get("/api/posts");
+        if (response.status === 200) {
+          setPosts(response.data.posts);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, [effectTrigger]);
+
+  return posts.map((post) => {
     return (
-      <div className={styles.post}>
+      <div key={post._id} className={styles.post}>
         <img
-          src="https://pbs.twimg.com/profile_images/1464407388228780036/NFY5UUPn_bigger.jpg"
+          src={
+            post.profilePhoto
+              ? post.profilePhoto
+              : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+          }
           alt="User Thumbnail"
         />
         <div className={styles.post_user_details}>
           <div className={styles.user_name}>
-            <h1>username</h1>
-            <h2>@usertag</h2>
+            <h1>{post.name}</h1>
+            <h2>@{post.username}</h2>
             <h3>9.43 AM</h3>
           </div>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+          <p>{post.content}</p>
           <div className={styles.icons_container}>
             <span className="material-icons">chat_bubble</span>
             <span className="material-icons">favorite_border</span>
@@ -21,4 +45,5 @@ export const EachPost = () => {
         </div>
       </div>
     );
-}
+  });
+};

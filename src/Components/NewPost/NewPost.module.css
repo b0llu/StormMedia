@@ -15,7 +15,7 @@
   width: 85%;
 }
 
-.post_details .textarea {
+.post_details textarea {
   width: 100%;
   outline: none;
   word-wrap: break-word;
@@ -23,9 +23,13 @@
   padding: 1rem 1rem 3rem 1rem;
   color: var(--content-color);
   height: fit-content;
+  background-color: var(--default-color);
+  resize: none;
+  outline: none;
+  border: none;
 }
 
-.post_details .textarea:focus {
+.post_details textarea:focus {
   border-bottom: 1px solid var(--content-color);
 }
 
@@ -56,6 +60,7 @@
   border: none;
   color: var(--cta-btn);
   font-size: 1.7rem;
+  cursor: pointer;
 }
 
 p:empty:not(:focus)::before {

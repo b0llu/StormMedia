@@ -9,27 +9,79 @@ import { formatDate } from "../utils/authUtils";
 export const posts = [
   {
     _id: uuid(),
+    name: "Dhruv",
+    username: "TheBestDhruv",
+    profilePhoto:
+      "https://pbs.twimg.com/profile_images/1464407388228780036/NFY5UUPn_200x200.jpg",
     content:
-      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.",
+      "It's been 1 and half year since I started playing Dota 2! With this much experience let me tell you something, Dota 2 is the number one free-to-play online game for me until now and I hope it always be.",
     likes: {
-      likeCount: 0,
+      likeCount: 10,
       likedBy: [],
       dislikedBy: [],
     },
-    username: "adarshbalika",
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
   {
     _id: uuid(),
+    name: "Akshay",
+    username: "Gadgetfather",
+    profilePhoto:
+      "https://pbs.twimg.com/profile_images/1463934993692987392/TXpTXOl6_200x200.jpg",
     content:
-      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.",
+      "Already Diamond in Apex. I just cant get enough of this Game man!",
     likes: {
-      likeCount: 0,
+      likeCount: 50,
       likedBy: [],
       dislikedBy: [],
     },
-    username: "shubhamsoni",
+    createdAt: formatDate(),
+    updatedAt: formatDate(),
+  },
+  {
+    _id: uuid(),
+    name: "Tanay",
+    username: "tanaypratap",
+    profilePhoto:
+      "https://pbs.twimg.com/profile_images/1501178147420585987/5_2plEJW_200x200.jpg",
+    content:
+      "Kids playing pubg and fortnight need to realize how beautiful the world outside gaming is!",
+    likes: {
+      likeCount: 500,
+      likedBy: [],
+      dislikedBy: [],
+    },
+    createdAt: formatDate(),
+    updatedAt: formatDate(),
+  },
+  {
+    _id: uuid(),
+    name: "Narendra Modi",
+    username: "narendramodi",
+    profilePhoto:
+      "https://pbs.twimg.com/profile_images/1479443900368519169/PgOyX1vt_200x200.jpg",
+    content: "Ye PUBG wala hei kya?",
+    likes: {
+      likeCount: 500,
+      likedBy: [],
+      dislikedBy: [],
+    },
+    createdAt: formatDate(),
+    updatedAt: formatDate(),
+  },
+  {
+    _id: uuid(),
+    name: "Rahul Gandhi",
+    username: "RahulGandhi",
+    profilePhoto:
+      "https://pbs.twimg.com/profile_images/1394646637004431361/43eyqnqr_200x200.jpg",
+    content: "This Morning I Got up at Night!",
+    likes: {
+      likeCount: 20000,
+      likedBy: [],
+      dislikedBy: [],
+    },
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },

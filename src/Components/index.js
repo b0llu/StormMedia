@@ -9,3 +9,4 @@ export { EachPost } from "./EachPost/EachPost";
 export { RequireAuth } from "./PrivateRoute/RequireAuth";
 export { RestrictAuth } from "./PrivateRoute/RestrictAuth";
 export { LogoutBtn } from "./LogoutBtn/LogoutBtn";
+export { SuccessToast, AlertToast } from "./Toasts";

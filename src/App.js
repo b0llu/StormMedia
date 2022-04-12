@@ -2,22 +2,32 @@ import "App.css";
 import {
   GridContainer,
   LeftSidebar,
+  LogoutBtn,
+  RequireAuth,
+  RestrictAuth,
   RightSidebar,
   ThemeToggler,
 } from "Components";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { HomePage, LandingPage } from "./Pages";
 
 function App() {
+  const location = useLocation()
+
   return (
     <GridContainer>
       <ThemeToggler />
-      <LeftSidebar />
+      <LogoutBtn />
+      {location.pathname !== "/" && <LeftSidebar />}
       <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/home" element={<HomePage />} />
+        <Route element={<RestrictAuth />}>
+          <Route path="/" element={<LandingPage />} />
+        </Route>
+        <Route element={<RequireAuth />}>
+          <Route path="/home" element={<HomePage />} />
+        </Route>
       </Routes>
-      <RightSidebar />
+      {location.pathname !== "/" && <RightSidebar />}
     </GridContainer>
   );
 }

@@ -1,10 +1,11 @@
+import { useAuthContext } from "Context";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import * as styles from "./LoginBox.module.css";
 
 export const LoginBox = ({ setAuth }) => {
-  //   const { login, testLogger } = useAuthContext();
-  const [userDetails, setUserDetails] = useState({ email: "", password: "" });
+  const { login, testLogger } = useAuthContext();
+  const [userDetails, setUserDetails] = useState({ username: "", password: "" });
   const [error, setError] = useState({ state: false, text: "" });
   const [type, setType] = useState(true);
   const [trigger, setTrigger] = useState(true);
@@ -52,15 +53,22 @@ export const LoginBox = ({ setAuth }) => {
     <form className={styles.login_container}>
       {error.state ? <p className="for-alert">{error.text}</p> : null}
       <p className={styles.login_header}>Login</p>
-      <label htmlFor="username">Email address :</label>
-      <input placeholder="JohnWick@gmail.com" type="email" name="email" />
+      <label htmlFor="username">UserName :</label>
+      <input
+        onChange={(e) =>
+          setUserDetails({ ...userDetails, username: e.target.value })
+        }
+        placeholder="Luffy"
+        type="email"
+        name="email"
+      />
       <label htmlFor="password">Password :</label>
       <div className={styles.password_input_holder}>
         <input
           onChange={(e) =>
             setUserDetails({ ...userDetails, password: e.target.value })
           }
-          placeholder="*****"
+          placeholder="ex. Name123"
           type={type ? "password" : "text"}
         />
         {type ? (
@@ -79,7 +87,7 @@ export const LoginBox = ({ setAuth }) => {
           </span>
         )}
       </div>
-      <button type="button" className="btn">
+      <button onClick={testLogger} type="button" className="btn">
         Login with Test Credentials
       </button>
       <Link to="/home">

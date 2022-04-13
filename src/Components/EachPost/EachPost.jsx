@@ -40,7 +40,10 @@ export const EachPost = () => {
           <p>{post.content}</p>
           <div className={styles.icons_container}>
             <span className="material-icons">chat_bubble</span>
+            <div className={styles.like_div}>
             <span className="material-icons">favorite_border</span>
+            <p>{post.likes.likeCount}</p>
+            </div>
           </div>
         </div>
       </div>

@@ -7,6 +7,7 @@ html[data-theme="light"] {
   --cta-btn: #ffffff;
   --cta-btn-bg: #238ac5;
   --cta-btn-hover: #207cb1;
+  --faint-text-clr: #606368;
 }
 
 html[data-theme="dark"] {
@@ -18,6 +19,7 @@ html[data-theme="dark"] {
   --cta-btn: #ffffff;
   --cta-btn-bg: #238ac5;
   --cta-btn-hover: #207cb1;
+  --faint-text-clr: #606368;
 }
 
 ::-webkit-scrollbar {

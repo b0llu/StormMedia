@@ -6,6 +6,7 @@ import {
   PostProvider,
   ReducerProvider,
   ThemeProvider,
+  UserProvider,
 } from "Context";
 import { makeServer } from "./server";
 import { BrowserRouter } from "react-router-dom";
@@ -18,11 +19,13 @@ ReactDOM.render(
     <AuthProvider>
       <ReducerProvider>
         <PostProvider>
-          <ThemeProvider>
-            <BrowserRouter>
-              <App />
-            </BrowserRouter>
-          </ThemeProvider>
+          <UserProvider>
+            <ThemeProvider>
+              <BrowserRouter>
+                <App />
+              </BrowserRouter>
+            </ThemeProvider>
+          </UserProvider>
         </PostProvider>
       </ReducerProvider>
     </AuthProvider>

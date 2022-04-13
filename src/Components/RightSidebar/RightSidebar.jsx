@@ -1,20 +1,25 @@
 import axios from "axios";
-import { useAuthContext } from "Context";
+import { useAuthContext, useReducerContext, useUserContext } from "Context";
 import * as styles from "./RightSidebar.module.css";
 
 export const RightSidebar = () => {
-  const { userState, users } = useAuthContext();
+  const { userState } = useAuthContext();
+  const { followUser, unfollowUser } = useUserContext();
+  const { users, userFollowing } = useReducerContext();
 
   return (
     <aside className={styles.right_sidebar}>
       <input placeholder="Search Here...." type="text" />
       <div className={styles.follower_section}>
-        {Object.keys(userState).length > 0 &&
-        userState.following.length !== 0 ? (
-          userState.following.map((user) => {
+        {userFollowing.length !== 0 ? (
+          <h1>Following</h1>
+        ) : (
+          <h1>No Following</h1>
+        )}
+        {userFollowing.length !== 0 &&
+          userFollowing.map((user) => {
             return (
               <div key={user._id}>
-                <h1>Following</h1>
                 <div className={styles.small_profile}>
                   <img
                     src={
@@ -30,20 +35,30 @@ export const RightSidebar = () => {
                       <h1>{user.firstName}</h1>
                       <h3>@{user.username}</h3>
                     </div>
-                    <button className={styles.follow_btn}>Unfollow</button>
+                    <button
+                      onClick={() => unfollowUser(user._id)}
+                      className={styles.follow_btn}
+                    >
+                      Unfollow
+                    </button>
                   </div>
                 </div>
               </div>
             );
-          })
-        ) : (
-          <h1>No Following</h1>
-        )}
+          })}
       </div>
       <div className={styles.follower_section}>
+        
         <h1>Who to Follow</h1>
         {users
           .filter((user) => user.username !== userState.username)
+          .filter((user) =>
+            userFollowing.length === 0
+              ? user
+              : !userFollowing
+                  .map((user) => user.username)
+                  .includes(user.username)
+          )
           .map((user) => {
             return (
               <div key={user._id} className={styles.small_profile}>
@@ -61,7 +76,12 @@ export const RightSidebar = () => {
                     <h1>{user.firstName}</h1>
                     <h3>@{user.username}</h3>
                   </div>
-                  <button className={styles.follow_btn}>Follow</button>
+                  <button
+                    onClick={() => followUser(user._id)}
+                    className={styles.follow_btn}
+                  >
+                    Follow
+                  </button>
                 </div>
               </div>
             );

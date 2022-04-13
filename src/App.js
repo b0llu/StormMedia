@@ -8,7 +8,9 @@ import {
   RightSidebar,
   ThemeToggler,
 } from "Components";
+import MockAPI from "Mockman";
 import { Routes, Route, useLocation } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import { HomePage, LandingPage } from "./Pages";
 
 function App() {
@@ -18,6 +20,7 @@ function App() {
     <GridContainer>
       <ThemeToggler />
       <LogoutBtn />
+      <ToastContainer />
       {location.pathname !== "/" && <LeftSidebar />}
       <Routes>
         <Route element={<RestrictAuth />}>
@@ -26,6 +29,7 @@ function App() {
         <Route element={<RequireAuth />}>
           <Route path="/home" element={<HomePage />} />
         </Route>
+        <Route path="/mockman" element={<MockAPI />} />
       </Routes>
       {location.pathname !== "/" && <RightSidebar />}
     </GridContainer>

@@ -28,7 +28,7 @@ a {
 
 .list li {
   margin: 2rem 0;
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: 500;
   cursor: pointer;
   width: max-content;
@@ -41,7 +41,7 @@ a {
 }
 
 .list li span {
-  font-size: 3rem;
+  font-size: 2.5rem;
   margin-right: 1.5rem;
 }
 

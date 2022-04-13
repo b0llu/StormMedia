@@ -1,5 +1,5 @@
 import { Response } from "miragejs";
-import { formatDate, requiresAuth } from "../utils/authUtils";
+import { formatDate, formatTime, requiresAuth } from "../utils/authUtils";
 import { v4 as uuid } from "uuid";
 
 /**
@@ -77,16 +77,19 @@ export const createPostHandler = function (schema, request) {
         }
       );
     }
-    const { postData } = JSON.parse(request.requestBody);
+    const { content } = JSON.parse(request.requestBody);
     const post = {
       _id: uuid(),
-      ...postData,
+      content: content,
       likes: {
         likeCount: 0,
         likedBy: [],
         dislikedBy: [],
       },
+      name: user.firstName,
       username: user.username,
+      profilePhoto: user.profilePhoto,
+      time: formatTime(),
       createdAt: formatDate(),
       updatedAt: formatDate(),
     };

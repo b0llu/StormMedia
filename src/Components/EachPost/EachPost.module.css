@@ -7,6 +7,8 @@
 .post img {
     border-radius: 50%;
     align-self: flex-start;
+    height: 7rem;
+    width: 7rem;
 }
 
 .post_user_details {
@@ -48,7 +50,7 @@
 }
 
 .icons_container {
-    margin-top: 2rem;
+    margin-top: 1rem;
     color: var(--cta-btn-bg);
     display: flex;
     align-items: center;

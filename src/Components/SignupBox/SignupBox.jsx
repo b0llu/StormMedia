@@ -8,7 +8,6 @@ export const SignupBox = ({ setAuth }) => {
   const [userDetails, setUserDetails] = useState({
     name: '',
     username: "",
-    usertag: "",
     passwordOne: "",
     passwordTwo: "",
     terms: false,
@@ -92,16 +91,6 @@ export const SignupBox = ({ setAuth }) => {
             setUserDetails({ ...userDetails, username: e.target.value })
           }
           placeholder="Mugiwara"
-        />
-        <label htmlFor="username">Usertag:</label>
-        <input
-          onChange={(e) =>
-            setUserDetails({ ...userDetails, usertag: e.target.value })
-          }
-          className="block-inputs"
-          placeholder="@gumgumNO"
-          type="email"
-          name="email"
         />
         <label htmlFor="password">Password:</label>
         <div className={styles.password_input_holder}>

@@ -34,6 +34,7 @@ const AuthProvider = ({ children }) => {
     try {
       const { data } = await axios.post(`/api/auth/signup`, {
         firstName: userDetails.name,
+        username: userDetails.username,
         password: userDetails.passwordOne,
       });
       // saving the encodedToken in the localStorage

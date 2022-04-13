@@ -1,6 +1,6 @@
 .grid_container {
   display: grid;
-  grid-template-columns: 1fr 25rem repeat(2, 35rem) 35rem 1fr;
+  grid-template-columns: 1fr 30rem repeat(2, 35rem) 35rem 1fr;
   grid-template-areas: "... left-sidebar contentarea contentarea right-sidebar ...";
 }
 

@@ -1,5 +1,5 @@
 import { Response } from "miragejs";
-import { formatDate, requiresAuth } from "../utils/authUtils";
+import { formatDate, formatTime, requiresAuth } from "../utils/authUtils";
 import { v4 as uuid } from "uuid";
 
 /**
@@ -89,6 +89,7 @@ export const createPostHandler = function (schema, request) {
       name: user.firstName,
       username: user.username,
       profilePhoto: user.profilePhoto,
+      time: formatTime(),
       createdAt: formatDate(),
       updatedAt: formatDate(),
     };

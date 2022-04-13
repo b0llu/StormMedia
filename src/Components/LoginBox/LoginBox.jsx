@@ -5,15 +5,16 @@ import * as styles from "./LoginBox.module.css";
 
 export const LoginBox = ({ setAuth }) => {
   const { login, testLogger } = useAuthContext();
-  const [userDetails, setUserDetails] = useState({ username: "", password: "" });
+  const [userDetails, setUserDetails] = useState({
+    username: "",
+    password: "",
+  });
   const [error, setError] = useState({ state: false, text: "" });
   const [type, setType] = useState(true);
   const [trigger, setTrigger] = useState(true);
   //   useDocTitle("Login | StormKeep");
 
-  const validation = /^(?=.*\d)(?=.*[a-z]).{5,10}$/;
-  const emailValidation =
-    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const passowrdValidation = /^(?=.*\d)(?=.*[a-z]).{5,10}$/;
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -26,17 +27,11 @@ export const LoginBox = ({ setAuth }) => {
   }, [trigger]);
 
   const loginHandler = () => {
-    if (userDetails.password.match(validation)) {
+    if (userDetails.password.match(passowrdValidation)) {
       login(userDetails);
-    } else if (!userDetails.email || !userDetails.password) {
+    } else if (!userDetails.username || !userDetails.password) {
       setError({
         text: "Dont leave any field empty",
-        state: true,
-      });
-      setTrigger(!trigger);
-    } else if (!userDetails.email.match(emailValidation)) {
-      setError({
-        text: "Please enter correct email",
         state: true,
       });
       setTrigger(!trigger);
@@ -90,11 +85,9 @@ export const LoginBox = ({ setAuth }) => {
       <button onClick={testLogger} type="button" className="btn">
         Login with Test Credentials
       </button>
-      <Link to="/home">
-        <button onClick={loginHandler} type="button" className="btn">
-          Login
-        </button>
-      </Link>
+      <button onClick={loginHandler} type="button" className="btn">
+        Login
+      </button>
       <span onClick={() => setAuth(false)} className={styles.to_signup}>
         Create New Account <i className="fas fa-chevron-right"></i>
       </span>

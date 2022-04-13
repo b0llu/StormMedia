@@ -35,7 +35,7 @@ export const EachPost = () => {
           <div className={styles.user_name}>
             <h1>{post.name}</h1>
             <h2>@{post.username}</h2>
-            <h3>9.43 AM</h3>
+            <h3>{post.time}</h3>
           </div>
           <p>{post.content}</p>
           <div className={styles.icons_container}>

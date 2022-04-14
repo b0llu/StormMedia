@@ -14,7 +14,7 @@ export const LoginBox = ({ setAuth }) => {
   const [trigger, setTrigger] = useState(true);
   //   useDocTitle("Login | StormKeep");
 
-  const passowrdValidation = /^(?=.*\d)(?=.*[a-z]).{5,10}$/;
+  const passowrdValidation = /^(?=.*\d)(?=.*[a-z]).{5,15}$/;
 
   useEffect(() => {
     const timeout = setTimeout(() => {

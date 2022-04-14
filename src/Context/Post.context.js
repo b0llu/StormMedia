@@ -1,8 +1,9 @@
-import { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
+import { createContext, useContext } from "react";
 import { useAuthContext } from "./Auth.context";
 import { useReducerContext } from "./Reducer.context";
 import { ADD_POST } from "Utils/Action";
+import { AlertToast, SuccessToast } from "Components";
 
 const PostContext = createContext();
 
@@ -19,9 +20,10 @@ const PostProvider = ({ children }) => {
       );
       if (reponse.status === 201) {
         dispatch({ type: ADD_POST });
+        SuccessToast("Posted")
       }
     } catch (error) {
-      console.log(error);
+      AlertToast(error.response.data.message);
     }
   };
 

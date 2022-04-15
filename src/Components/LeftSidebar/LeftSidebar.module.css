@@ -40,6 +40,10 @@ a {
   padding: 1rem 2rem;
 }
 
+.list li a {
+  color: var(--content-color);
+}
+
 .list li span {
   font-size: 2.5rem;
   margin-right: 1.5rem;
@@ -52,7 +56,9 @@ a {
 }
 
 .list .bold {
-  font-weight: 900;
+  color: var(--primary-color);
+  transition: 0.2s ease-in-out;
+  transform: translateX(1%);
 }
 
 .cta_btn {

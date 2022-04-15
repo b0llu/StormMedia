@@ -13,14 +13,14 @@ const PostProvider = ({ children }) => {
 
   const addPost = async (post) => {
     try {
-      const reponse = await axios.post(
+      const response = await axios.post(
         "/api/user/posts/",
         { content: post },
         { headers: { authorization: encodedToken } }
       );
-      if (reponse.status === 201) {
-        dispatch({ type: ADD_POST });
-        SuccessToast("Posted")
+      if (response.status === 201) {
+        dispatch({ type: ADD_POST, payload: response.data.posts });
+        SuccessToast("Posted");
       }
     } catch (error) {
       AlertToast(error.response.data.message);

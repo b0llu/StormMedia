@@ -24,7 +24,9 @@ export const users = [
     profilePhoto:
       "https://pbs.twimg.com/profile_images/1464407388228780036/NFY5UUPn_200x200.jpg",
     coverPhoto:
-      "https://pbs.twimg.com/profile_banners/4025742919/1637987458/1080x360",
+      "https://pbs.twimg.com/profile_banners/4025742919/1649866987/1080x360",
+    bio: `Learning Programming with Neog Camp.💻
+I have a knack for creating websites and styling them.🎨`,
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },

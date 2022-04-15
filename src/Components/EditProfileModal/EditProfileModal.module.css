@@ -1,0 +1,160 @@
+.edit_modal {
+  width: 100vw;
+  height: 100vh;
+  z-index: 20;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: fixed;
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-area: contentarea;
+}
+
+.modal {
+  background-color: var(--card-container-bg);
+  color: var(--content-color);
+  border-radius: 1rem;
+  position: relative;
+  max-width: 70rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--default-color);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.5rem;
+  padding: 1rem;
+  width: 100%;
+}
+
+.left {
+  display: flex;
+}
+
+.header span {
+  margin-right: 2rem;
+  cursor: pointer;
+}
+
+.header span:hover {
+  color: var(--primary-color);
+  transition: 0.2s ease-in-out;
+}
+
+.header button {
+  margin-right: 1rem;
+  padding: 1rem 2rem;
+  border-radius: 100rem;
+  border: none;
+  background-color: var(--follow-btn-bg);
+  color: var(--follow-btn-clr);
+  cursor: pointer;
+}
+
+.header button:hover {
+  background-color: var(--follow-btn-hover);
+  transition: 0.2s ease-in-out;
+}
+
+.modal img {
+  width: 100%;
+}
+
+.user_img {
+  display: flex;
+  width: 100%;
+  position: relative;
+  flex-direction: column;
+}
+
+.user_img img {
+  height: 15rem;
+  width: 15rem;
+  border-radius: 50%;
+  border: 5px solid var(--default-color);
+  position: absolute;
+  bottom: 0;
+  left: 2rem;
+  top: -7.5rem;
+  position: relative;
+}
+
+.user_img .photo_upload_div {
+    position: absolute;
+}
+
+.user_img .photo_upload_div .photo_change {
+    display: none;
+}
+
+.user_img .photo_upload_div .label_img {
+    position: absolute;
+    cursor: pointer;
+    height: 5rem;
+    width: 5rem;
+    top: -2.5rem;
+    left: 7rem;
+    border: none;
+    opacity: 0.5;
+}
+
+.data {
+    margin-top: -7rem;
+}
+
+.name_section {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--content-color);
+  padding: 1rem;
+  border-radius: 5px;
+  margin: 1rem;
+}
+
+.name_section label {
+  font-size: 2rem;
+  font-weight: 500;
+  color: var(--faint-text-clr);
+}
+
+.name_section input {
+  border: none;
+  background-color: transparent;
+  font-size: 2rem;
+  outline: none;
+  color: var(--content-color);
+}
+
+.bio_section {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--content-color);
+  padding: 1rem;
+  border-radius: 5px;
+  margin: 1rem;
+}
+
+.bio_section label {
+  font-size: 2rem;
+  font-weight: 500;
+  color: var(--faint-text-clr);
+}
+
+.bio_section textarea {
+  border: none;
+  background-color: transparent;
+  font-size: 2rem;
+  resize: none;
+  outline: none;
+  color: var(--content-color);
+  font-family: inherit;
+}

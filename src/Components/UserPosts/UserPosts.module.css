@@ -2,6 +2,7 @@
     padding: 2rem;
     display: flex;
     border-bottom: 1px solid var(--content-color);
+    width: 100%;
 }
 
 .post img {

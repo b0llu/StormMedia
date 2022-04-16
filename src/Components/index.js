@@ -10,3 +10,5 @@ export { RequireAuth } from "./PrivateRoute/RequireAuth";
 export { RestrictAuth } from "./PrivateRoute/RestrictAuth";
 export { LogoutBtn } from "./LogoutBtn/LogoutBtn";
 export { SuccessToast, AlertToast } from "./Toasts";
+export { UserPosts } from "./UserPosts/UserPosts";
+export { EditProfileModal } from "./EditProfileModal/EditProfileModal";

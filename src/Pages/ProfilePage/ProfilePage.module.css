@@ -1,0 +1,110 @@
+.profile_container {
+  grid-area: contentarea;
+  width: 100%;
+}
+
+.profile_backdrop {
+  width: 100%;
+}
+
+.no_img {
+  height: 20rem;
+  width: 100%;
+  background-color: #2c2c2c;
+}
+
+.user_img {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  position: relative;
+}
+
+.user_img img {
+  height: 15rem;
+  width: 15rem;
+  border-radius: 50%;
+  border: 5px solid var(--default-color);
+  position: absolute;
+  bottom: 0;
+  left: 2rem;
+}
+
+.user_img button {
+  height: max-content;
+  padding: 1rem 2rem;
+  border-radius: 100rem;
+  background-color: var(--default-color);
+  color: var(--content-color);
+  border: 1px solid var(--content-color);
+  margin: 1.5rem 1.5rem 1.5rem auto;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+.user_img button:hover {
+  background-color: var(--user-hover);
+  transition: 0.2s ease-in-out;
+}
+
+.user_data {
+  margin: 2rem;
+}
+
+.user_data h1 {
+  color: var(--content-color);
+  font-size: 3rem;
+  margin-top: 1rem;
+}
+
+.user_data h3 {
+  color: var(--faint-text-clr);
+  font-size: 2rem;
+  margin-top: 1rem;
+}
+
+.user_data p {
+  color: var(--content-color);
+  white-space: pre-line;
+  font-size: 2rem;
+  margin-top: 1rem;
+}
+
+.follower_status {
+  display: flex;
+}
+
+.follower_status p {
+  margin-right: 1rem;
+}
+
+.post_show_container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.post_header {
+  border-bottom: 1px solid var(--content-color);
+  padding: 2rem 0;
+  font-size: 3rem;
+  color: var(--content-color);
+  width: 100%;
+  text-align: center;
+}
+
+.user_info .follow_btn {
+  margin-left: auto;
+  padding: 1rem 2rem;
+  border-radius: 100rem;
+  background-color: var(--follow-btn-bg);
+  color: var(--follow-btn-clr);
+  border: none;
+  cursor: pointer;
+}
+
+.user_info .follow_btn:hover {
+  background-color: var(--follow-btn-hover);
+}

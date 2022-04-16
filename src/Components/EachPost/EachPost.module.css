@@ -7,8 +7,8 @@
 .post img {
     border-radius: 50%;
     align-self: flex-start;
-    height: 7rem;
-    width: 7rem;
+    height: 8rem;
+    width: 8rem;
 }
 
 .post_user_details {
@@ -36,11 +36,13 @@
 .user_name h2 {
     font-size: 2rem;
     font-weight: 500;
+    color: var(--faint-text-clr);
 }
 
 .user_name h3 {
     font-size: 1.5rem;
     font-weight: 500;
+    color: var(--faint-text-clr);
 }
 
 .post_user_details p {
@@ -58,12 +60,19 @@
 
 .icons_container span {
     font-size: 3rem;
-    margin-right: 3rem;
     cursor: pointer;
     padding: 1rem;
+    margin-right: 5px;
     border-radius: 50%;
 }
 
 .icons_container span:hover {
     background-color: var(--faint-bg);
+}
+
+.like_div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 3rem;
 }

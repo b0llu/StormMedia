@@ -8,17 +8,14 @@ const AuthProvider = ({ children }) => {
   const encodedToken = localStorage.getItem("StormMediaToken");
   const [userState, setUserState] = useState({});
   const [effectTrigger, setEffectTrigger] = useState(false);
-  const [users, setUsers] = useState([]);
 
   const login = async (userDetails) => {
-    console.log(userDetails);
     try {
       const response = await axios.post(`/api/auth/login`, {
         username: userDetails.username,
         password: userDetails.password,
       });
       // saving the encodedToken in the localStorage
-      console.log(response);
       if (response.status === 200) {
         localStorage.setItem("StormMediaToken", response.data.encodedToken);
         localStorage.setItem(
@@ -74,23 +71,11 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     (async function () {
-      try {
-        const response = await axios.get("/api/users");
-        if (response.status === 200) {
-          setUsers(response.data.users);
-        }
-      } catch (error) {}
-    })();
-  }, []);
-
-  useEffect(() => {
-    (async function () {
       if (encodedToken) {
         try {
           const response = await axios.post("/api/auth/verify", {
             encodedToken: encodedToken,
           });
-          console.log(response);
           if (response && response.data) {
             setUserState(response.data.user);
           }
@@ -104,7 +89,7 @@ const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ login, signup, signout, testLogger, userState, encodedToken, users }}
+      value={{ login, signup, signout, testLogger, userState, encodedToken }}
     >
       {children}
     </AuthContext.Provider>

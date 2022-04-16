@@ -1,4 +1,4 @@
-import { usePostContext } from "Context";
+import { useAuthContext, usePostContext } from "Context";
 import { useState } from "react";
 import * as styles from "./NewPost.module.css";
 
@@ -6,11 +6,16 @@ export const NewPost = () => {
   const [postDetails, setPostDetails] = useState("");
 
   const { addPost } = usePostContext();
+  const { userState } = useAuthContext();
 
   return (
     <div className={styles.post_container}>
       <img
-        src="https://pbs.twimg.com/profile_images/1464407388228780036/NFY5UUPn_bigger.jpg"
+        src={
+          userState.profilePhoto
+            ? userState.profilePhoto
+            : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+        }
         alt="user image"
       />
       <div className={styles.post_details}>

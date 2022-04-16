@@ -1,13 +1,20 @@
 import axios from "axios";
 import { createContext, useContext, useState, useEffect } from "react";
 import { AlertToast, SuccessToast } from "Components";
+import { useReducerContext } from "./Reducer.context";
+import {
+  ADD_FOLLOWERS,
+  ADD_FOLLOWING,
+  RESET_FOLLOW_STATUS,
+  EFFECT_TRIGGER,
+} from "Utils/Action";
 
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const encodedToken = localStorage.getItem("StormMediaToken");
   const [userState, setUserState] = useState({});
-  const [effectTrigger, setEffectTrigger] = useState(false);
+  const { dispatch, effectTrigger } = useReducerContext();
 
   const login = async (userDetails) => {
     try {
@@ -23,7 +30,7 @@ const AuthProvider = ({ children }) => {
           response.data.foundUser.firstName
         );
         SuccessToast("Login Successful");
-        setEffectTrigger(!effectTrigger);
+        dispatch({ type: EFFECT_TRIGGER });
       }
     } catch (error) {
       AlertToast(`${error.response.data.errors}`);
@@ -34,24 +41,26 @@ const AuthProvider = ({ children }) => {
     try {
       const { data } = await axios.post(`/api/auth/signup`, {
         firstName: userDetails.name,
+        username: userDetails.username,
         password: userDetails.passwordOne,
       });
       // saving the encodedToken in the localStorage
       localStorage.setItem("StormMediaToken", data.encodedToken);
       localStorage.setItem("StormMediaUser", data.createdUser.firstName);
       SuccessToast("Signup Successful");
-      setEffectTrigger(!effectTrigger);
+      dispatch({ type: EFFECT_TRIGGER });
     } catch (error) {
       AlertToast(`${error.response.data.errors}`);
     }
   };
 
   const signout = () => {
-    setEffectTrigger(!effectTrigger);
+    dispatch({ type: EFFECT_TRIGGER });
     AlertToast(`Logged Out`);
     localStorage.removeItem("StormMediaToken");
     localStorage.removeItem("StormMediaUser");
     setUserState([]);
+    dispatch({ type: RESET_FOLLOW_STATUS });
   };
 
   const testLogger = async () => {
@@ -63,7 +72,7 @@ const AuthProvider = ({ children }) => {
       localStorage.setItem("StormMediaToken", data.encodedToken);
       localStorage.setItem("StormMediaUser", data.foundUser.firstName);
       SuccessToast("Login Successful");
-      setEffectTrigger(!effectTrigger);
+      dispatch({ type: EFFECT_TRIGGER });
     } catch (error) {
       AlertToast(`${error.response.data.errors}`);
     }
@@ -78,9 +87,16 @@ const AuthProvider = ({ children }) => {
           });
           if (response && response.data) {
             setUserState(response.data.user);
+            dispatch({
+              type: ADD_FOLLOWING,
+              payload: response.data.user.following,
+            });
+            dispatch({
+              type: ADD_FOLLOWERS,
+              payload: response.data.user.followers,
+            });
           }
         } catch (error) {
-          AlertToast(`${error.response.data.errors}`);
           console.log(error);
         }
       }
@@ -89,7 +105,14 @@ const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ login, signup, signout, testLogger, userState, encodedToken }}
+      value={{
+        login,
+        signup,
+        signout,
+        testLogger,
+        userState,
+        encodedToken,
+      }}
     >
       {children}
     </AuthContext.Provider>

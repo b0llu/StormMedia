@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useAuthContext, useReducerContext, useUserContext } from "Context";
 import * as styles from "./RightSidebar.module.css";
 
@@ -48,8 +47,17 @@ export const RightSidebar = () => {
           })}
       </div>
       <div className={styles.follower_section}>
-        
-        <h1>Who to Follow</h1>
+        {users.filter((user) =>
+          userFollowing.length === 0
+            ? user
+            : !userFollowing
+                .map((user) => user.username)
+                .includes(user.username)
+        ).length !== 1 ? (
+          <h1>Who to Follow</h1>
+        ) : (
+          <h1>No Suggetions</h1>
+        )}
         {users
           .filter((user) => user.username !== userState.username)
           .filter((user) =>

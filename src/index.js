@@ -16,8 +16,8 @@ makeServer();
 
 ReactDOM.render(
   <React.StrictMode>
-    <AuthProvider>
-      <ReducerProvider>
+    <ReducerProvider>
+      <AuthProvider>
         <PostProvider>
           <UserProvider>
             <ThemeProvider>
@@ -27,8 +27,8 @@ ReactDOM.render(
             </ThemeProvider>
           </UserProvider>
         </PostProvider>
-      </ReducerProvider>
-    </AuthProvider>
+      </AuthProvider>
+    </ReducerProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

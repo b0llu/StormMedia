@@ -4,21 +4,37 @@ import { ReducerCases } from "Reducer/ReducerCases";
 const ReducerContext = createContext();
 
 const ReducerProvider = ({ children }) => {
-  const [{ loading, effectTrigger, users, userFollowing }, dispatch] =
-    useReducer(ReducerCases, {
-      loading: false,
-      effectTrigger: false,
-      users: [],
-      userFollowing: [],
-    });
+  const [
+    {
+      loading,
+      posts,
+      effectTrigger,
+      users,
+      userFollowing,
+      userFollowers,
+      userTrigger,
+    },
+    dispatch,
+  ] = useReducer(ReducerCases, {
+    loading: false,
+    effectTrigger: false,
+    posts: [],
+    users: [],
+    userFollowing: [],
+    userFollowers: [],
+    userTrigger: false,
+  });
 
   return (
     <ReducerContext.Provider
       value={{
         loading,
+        posts,
         effectTrigger,
         users,
         userFollowing,
+        userFollowers,
+        userTrigger,
         dispatch,
       }}
     >

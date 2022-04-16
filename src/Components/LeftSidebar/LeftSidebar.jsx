@@ -1,5 +1,5 @@
 import * as styles from "./LeftSidebar.module.css";
-import { NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { useAuthContext } from "Context";
 
 export const LeftSidebar = () => {
@@ -12,21 +12,35 @@ export const LeftSidebar = () => {
         <i className="fas fa-bolt"></i> StormPlay
       </p>
       <ul className={styles.list}>
-        <li className={`${location.pathname === "/home" && styles.bold}`}>
-          <span className="material-icons">home</span>
-          Home
-        </li>
-        <li className={`${location.pathname === "/explore" && styles.bold}`}>
-          <span className="material-icons">tag</span>
-          Explore
-        </li>
-        <li className={`${location.pathname === "/bookmark" && styles.bold}`}>
-          <span className="material-icons">bookmark</span>Bookmarks
-        </li>
-        <li className={`${location.pathname === "/profile" && styles.bold}`}>
-          <span className="material-icons">person</span>Profile
-        </li>
-        <button className={styles.cta_btn}>Say Something</button>
+        <Link to={`/home`}>
+          <li className={`${location.pathname === "/home" && styles.bold}`}>
+            <span className="material-icons">home</span>
+            Home
+          </li>
+        </Link>
+        <Link to={`/explore`}>
+          <li className={`${location.pathname === "/explore" && styles.bold}`}>
+            <span className="material-icons">tag</span>
+            Explore
+          </li>
+        </Link>
+        <Link to={`/bookmark`}>
+          <li className={`${location.pathname === "/bookmark" && styles.bold}`}>
+            <span className="material-icons">bookmark</span>Bookmarks
+          </li>
+        </Link>
+        <Link to={`/${userState.username}`}>
+          <li
+            className={`${
+              location.pathname === `/${userState.username}` && styles.bold
+            }`}
+          >
+            <span className="material-icons">person</span>Profile
+          </li>
+        </Link>
+        <Link to={'/home'}>
+          <button className={styles.cta_btn}>Say Something</button>
+        </Link>
       </ul>
       <div className={styles.small_profile}>
         <img

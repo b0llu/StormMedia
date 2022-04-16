@@ -1,3 +1,4 @@
+import { AlertToast } from "Components/Toasts";
 import { useAuthContext } from "Context";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -9,44 +10,23 @@ export const LoginBox = ({ setAuth }) => {
     username: "",
     password: "",
   });
-  const [error, setError] = useState({ state: false, text: "" });
   const [type, setType] = useState(true);
-  const [trigger, setTrigger] = useState(true);
   //   useDocTitle("Login | StormKeep");
 
   const passowrdValidation = /^(?=.*\d)(?=.*[a-z]).{5,15}$/;
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setError({
-        ...error,
-        state: false,
-      });
-    }, 3000);
-    return () => clearTimeout(timeout);
-  }, [trigger]);
 
   const loginHandler = () => {
     if (userDetails.password.match(passowrdValidation)) {
       login(userDetails);
     } else if (!userDetails.username || !userDetails.password) {
-      setError({
-        text: "Dont leave any field empty",
-        state: true,
-      });
-      setTrigger(!trigger);
+      AlertToast("Dont leave any field empty");
     } else {
-      setError({
-        text: "Password should be AlphaNumeric and more than 5 letters",
-        state: true,
-      });
-      setTrigger(!trigger);
+      AlertToast("Password should be AlphaNumeric and more than 5 letters");
     }
   };
 
   return (
     <form className={styles.login_container}>
-      {error.state ? <p className="for-alert">{error.text}</p> : null}
       <p className={styles.login_header}>Login</p>
       <label htmlFor="username">UserName :</label>
       <input

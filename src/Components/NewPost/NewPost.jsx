@@ -1,5 +1,6 @@
 import { useAuthContext, usePostContext } from "Context";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import * as styles from "./NewPost.module.css";
 
 export const NewPost = () => {
@@ -10,14 +11,16 @@ export const NewPost = () => {
 
   return (
     <div className={styles.post_container}>
-      <img
-        src={
-          userState.profilePhoto
-            ? userState.profilePhoto
-            : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
-        }
-        alt="user image"
-      />
+      <Link to={`/${userState.username}`}>
+        <img
+          src={
+            userState.profilePhoto
+              ? userState.profilePhoto
+              : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+          }
+          alt="user image"
+        />
+      </Link>
       <div className={styles.post_details}>
         <textarea
           role="textbox"

@@ -11,10 +11,10 @@ import {
 import MockAPI from "Mockman";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import { HomePage, LandingPage } from "./Pages";
+import { HomePage, LandingPage, ProfilePage } from "./Pages";
 
 function App() {
-  const location = useLocation()
+  const location = useLocation();
 
   return (
     <GridContainer>
@@ -28,6 +28,7 @@ function App() {
         </Route>
         <Route element={<RequireAuth />}>
           <Route path="/home" element={<HomePage />} />
+          <Route path="/:username" element={<ProfilePage />} />
         </Route>
         <Route path="/mockman" element={<MockAPI />} />
       </Routes>

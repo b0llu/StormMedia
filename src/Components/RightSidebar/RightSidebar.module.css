@@ -75,6 +75,7 @@
   font-size: 1.5rem;
   margin-left: 2rem;
   font-weight: 500;
+  color: var(--faint-text-clr);
 }
 
 .user {

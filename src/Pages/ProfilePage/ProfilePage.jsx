@@ -1,24 +1,26 @@
 import axios from "axios";
-import { EditProfileModal, UserPosts } from "Components";
+import { EditProfileModal, Loader, UserPosts } from "Components";
 import { useAuthContext, useReducerContext, useUserContext } from "Context";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { FETCH_POSTS } from "Utils/Action";
+import { FETCH_POSTS, LOADING } from "Utils/Action";
 import * as styles from "./ProfilePage.module.css";
 
 export const ProfilePage = () => {
   const [modal, setModal] = useState(false);
   const { userState } = useAuthContext();
-  const { userFollowing, userFollowers, posts, users, dispatch } =
+  const { userFollowing, userFollowers, posts, users, loading, dispatch } =
     useReducerContext();
   const { username } = useParams();
-    const { followUser, unfollowUser } = useUserContext();
+  const { followUser, unfollowUser } = useUserContext();
 
   useEffect(() => {
     (async function () {
       try {
+        dispatch({ type: LOADING });
         const response = await axios.get("/api/posts");
         if (response.status === 200) {
+          dispatch({ type: LOADING });
           dispatch({ type: FETCH_POSTS, payload: response.data.posts });
         }
       } catch (error) {
@@ -27,7 +29,9 @@ export const ProfilePage = () => {
     })();
   }, []);
 
-  return username === userState.username ? (
+  return loading ? (
+    <Loader />
+  ) : username === userState.username ? (
     <div className={styles.profile_container}>
       {modal && (
         <EditProfileModal

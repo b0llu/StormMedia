@@ -1,0 +1,16 @@
+.circle{
+    margin: 7rem auto;
+    width: 6rem;
+    height: 6rem;
+    border: 5px solid var(--default-color);
+    border-radius: 50%;
+    border-top-color: var(--for-theme);
+    animation: spin 1s linear infinite;
+    grid-area: contentarea;
+}
+
+@keyframes spin {
+    100%{
+        transform: rotate(360deg);
+    }
+}

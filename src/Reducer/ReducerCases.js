@@ -7,10 +7,17 @@ import {
   RESET_FOLLOW_STATUS,
   ADD_FOLLOWERS,
   EFFECT_TRIGGER,
+  LOADING,
 } from "Utils/Action";
 
 export const ReducerCases = (state, action) => {
   switch (action.type) {
+    case LOADING:
+      return {
+        ...state,
+        loading: !state.loading,
+      };
+
     case GET_USERS:
       return {
         ...state,
@@ -33,14 +40,14 @@ export const ReducerCases = (state, action) => {
       return {
         ...state,
         userFollowers: action.payload,
-        userTrigger: !state.userTrigger
+        userTrigger: !state.userTrigger,
       };
 
     case ADD_FOLLOWING:
       return {
         ...state,
         userFollowing: action.payload,
-        userTrigger: !state.userTrigger
+        userTrigger: !state.userTrigger,
       };
 
     case REMOVE_FOLLOWING:
@@ -54,14 +61,14 @@ export const ReducerCases = (state, action) => {
       return {
         ...state,
         userFollowing: [],
-        userFollowers: []
-      }
+        userFollowers: [],
+      };
 
     case EFFECT_TRIGGER:
       return {
         ...state,
-        effectTrigger: !state.effectTrigger
-      }
+        effectTrigger: !state.effectTrigger,
+      };
 
     default:
       throw new Error(`Unhandled action type: ${action.type}`);

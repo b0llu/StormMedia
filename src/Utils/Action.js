@@ -1,3 +1,4 @@
+export const LOADING = "LOADING";
 export const FETCH_POSTS = "FETCH_POSTS";
 export const GET_USERS = "GET_USERS";
 export const ADD_POST = "ADD_POST";

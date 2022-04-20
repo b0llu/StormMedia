@@ -1,7 +1,12 @@
 import axios from "axios";
 import { AlertToast, SuccessToast } from "Components";
 import { createContext, useContext, useEffect } from "react";
-import { ADD_FOLLOWING, REMOVE_FOLLOWING, GET_USERS, EFFECT_TRIGGER } from "Utils/Action";
+import {
+  ADD_FOLLOWING,
+  REMOVE_FOLLOWING,
+  GET_USERS,
+  EFFECT_TRIGGER,
+} from "Utils/Action";
 import { useAuthContext } from "./Auth.context";
 import { useReducerContext } from "./Reducer.context";
 

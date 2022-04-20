@@ -2,6 +2,8 @@
     padding: 2rem;
     display: flex;
     border-bottom: 1px solid var(--content-color);
+    height: max-content;
+    margin: 0 2rem;
 }
 
 .post img {
@@ -52,12 +54,14 @@
 }
 
 .icons_container {
-    margin-top: 1rem;
+    padding: 1rem 0;
     color: var(--cta-btn-bg);
     display: flex;
     align-items: center;
+    justify-content: space-around;
+    border-bottom: 1px solid var(--content-color);
+    margin: 0 2rem;
 }
-
 
 .icons_container span {
     font-size: 3rem;
@@ -76,4 +80,9 @@
     align-items: center;
     justify-content: center;
     margin-right: 3rem;
+}
+
+.like_div p {
+    font-size: 2rem;
+    color: var(--content-color);
 }

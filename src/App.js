@@ -16,7 +16,14 @@ import { ToastContainer } from "react-toastify";
 import { tokenChecker } from "Redux/Reducers/authSlice";
 import { getAllPosts } from "Redux/Reducers/postsSlice";
 import { getAllUsers } from "Redux/Reducers/usersSlice";
-import { HomePage, LandingPage, ProfilePage, SinglePostPage } from "./Pages";
+import {
+  BookmarksPage,
+  ExplorePage,
+  HomePage,
+  LandingPage,
+  ProfilePage,
+  SinglePostPage,
+} from "./Pages";
 
 function App() {
   const location = useLocation();
@@ -42,6 +49,8 @@ function App() {
           <Route path="/home" element={<HomePage />} />
           <Route path="/:username" element={<ProfilePage />} />
           <Route path="/:username/:postId" element={<SinglePostPage />} />
+          <Route path="/explore" element={<ExplorePage />} />
+          <Route path="/bookmarks" element={<BookmarksPage />} />
         </Route>
         <Route path="/mockman" element={<MockAPI />} />
       </Routes>

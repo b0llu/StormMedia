@@ -1,0 +1,11 @@
+.explore_container {
+    grid-area: contentarea;
+}
+
+.header {
+    font-size: 3rem;
+    padding: 2rem;
+    color: var(--content-color);
+    border-bottom: 1px solid var(--content-color);
+    font-weight: 500;
+}

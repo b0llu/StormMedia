@@ -1,7 +1,12 @@
 import { Loader } from "Components";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { dislikePost, likePost } from "Redux/Reducers/postsSlice";
+import {
+  bookmark,
+  dislikePost,
+  likePost,
+  removeBookmark,
+} from "Redux/Reducers/postsSlice";
 import styles from "./EachPost.module.css";
 
 export const EachPost = () => {
@@ -9,6 +14,8 @@ export const EachPost = () => {
   const allPosts = useSelector((state) => state.posts.posts);
   const loading = useSelector((state) => state.posts.loading);
   const currentUser = useSelector((state) => state.auth.currentUser);
+  const bookmarks = useSelector((state) => state.posts.bookmarks);
+  console.log(bookmarks)
 
   return loading ? (
     <Loader />
@@ -52,6 +59,23 @@ export const EachPost = () => {
               >
                 <span className="material-icons">chat_bubble</span>
               </Link>
+              {bookmarks
+                .map((bookmarked) => bookmarked._id)
+                .includes(post._id) ? (
+                <span
+                  onClick={() => dispatch(removeBookmark(post._id))}
+                  className="material-icons"
+                >
+                  bookmark
+                </span>
+              ) : (
+                <span
+                  onClick={() => dispatch(bookmark(post._id))}
+                  className="material-icons"
+                >
+                  bookmark_border
+                </span>
+              )}
               <div className={styles.like_div}>
                 {post.likes.likedBy
                   .map((liked) => liked.username)

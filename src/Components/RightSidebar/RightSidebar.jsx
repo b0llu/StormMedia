@@ -6,7 +6,6 @@ export const RightSidebar = () => {
   const allUsers = useSelector((state) => state.users.users);
   const currentUser = useSelector(state => state.auth.currentUser)
   const dispatch = useDispatch();
-  console.log(allUsers);
 
   return (
     <aside className={styles.right_sidebar}>

@@ -80,7 +80,7 @@
 
 .user {
   display: flex;
-  align-self: flex-start;
+  align-self: center;
   width: 100%;
 }
 

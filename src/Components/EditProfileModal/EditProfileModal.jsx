@@ -1,6 +1,6 @@
 import { useUserContext } from "Context";
 import { useState } from "react";
-import * as styles from "./EditProfileModal.module.css";
+import styles from "./EditProfileModal.module.css";
 
 export const EditProfileModal = ({
   firstName,
@@ -16,7 +16,6 @@ export const EditProfileModal = ({
     profilePhoto: profilePhoto,
     coverPhoto: coverPhoto,
   });
-  // console.log(editedData);
   return (
     <div className={styles.edit_modal}>
       <div className={styles.modal}>
@@ -61,13 +60,13 @@ export const EditProfileModal = ({
               className={styles.photo_change}
               id="photo_change"
               type="file"
+              accept="image/jpeg,image/png,image/webp"
             />
             <label htmlFor="photo_change">
               <img
                 className={styles.label_img}
                 src="https://w7.pngwing.com/pngs/386/187/png-transparent-computer-icons-blog-change-angle-text-logo-thumbnail.png"
                 alt="change image label"
-                accept="image/jpeg,image/png,image/webp"
               />
             </label>
           </div>

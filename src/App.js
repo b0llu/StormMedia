@@ -11,7 +11,7 @@ import {
 import MockAPI from "Mockman";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import { HomePage, LandingPage, ProfilePage } from "./Pages";
+import { HomePage, LandingPage, ProfilePage, SinglePostPage } from "./Pages";
 
 function App() {
   const location = useLocation();
@@ -29,6 +29,7 @@ function App() {
         <Route element={<RequireAuth />}>
           <Route path="/home" element={<HomePage />} />
           <Route path="/:username" element={<ProfilePage />} />
+          <Route path="/:username/:postId" element={<SinglePostPage />} />
         </Route>
         <Route path="/mockman" element={<MockAPI />} />
       </Routes>

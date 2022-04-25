@@ -15,7 +15,6 @@ import { BrowserRouter } from "react-router-dom";
 makeServer();
 
 ReactDOM.render(
-  <React.StrictMode>
     <ReducerProvider>
       <AuthProvider>
         <PostProvider>
@@ -28,7 +27,6 @@ ReactDOM.render(
           </UserProvider>
         </PostProvider>
       </AuthProvider>
-    </ReducerProvider>
-  </React.StrictMode>,
+    </ReducerProvider>,
   document.getElementById("root")
 );

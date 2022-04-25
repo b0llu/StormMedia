@@ -1,6 +1,10 @@
+import { useAuthContext, usePostContext } from "Context";
 import * as styles from "./UserPosts.module.css";
 
 export const UserPosts = ({ posts }) => {
+  const { userState } = useAuthContext();
+  const { likePost, dislikePost } = usePostContext();
+
   return (
     posts !== undefined &&
     posts.map((post) => {
@@ -24,7 +28,26 @@ export const UserPosts = ({ posts }) => {
             <div className={styles.icons_container}>
               <span className="material-icons">chat_bubble</span>
               <div className={styles.like_div}>
-                <span className="material-icons">favorite_border</span>
+                {post.likes.likedBy
+                  .map((liked) => liked.username)
+                  .includes(userState.username) ? (
+                  <span
+                    onClick={() => dislikePost(post._id)}
+                    className="material-icons"
+                    style={{
+                      color: "var(--alert-color)",
+                    }}
+                  >
+                    favorite
+                  </span>
+                ) : (
+                  <span
+                    onClick={() => likePost(post._id)}
+                    className="material-icons"
+                  >
+                    favorite_border
+                  </span>
+                )}
                 <p>{post.likes.likeCount}</p>
               </div>
             </div>

@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { AlertToast, SuccessToast } from "Components";
 import axios from "axios";
 
-const encodedToken = localStorage.getItem("StormMediaToken");
 const initialState = {
   posts: [],
   singlePost: [],
@@ -22,6 +21,7 @@ export const getAllPosts = createAsyncThunk("posts/getAll", async () => {
 export const createNewPost = createAsyncThunk(
   "posts/createNew",
   async (post) => {
+    const encodedToken = localStorage.getItem("StormMediaToken");
     try {
       const response = await axios.post(
         "/api/user/posts/",
@@ -37,6 +37,7 @@ export const createNewPost = createAsyncThunk(
 
 export const likePost = createAsyncThunk("posts/like", async (id) => {
   try {
+    const encodedToken = localStorage.getItem("StormMediaToken");
     const response = await axios.post(
       `/api/posts/like/${id}`,
       {},
@@ -50,6 +51,7 @@ export const likePost = createAsyncThunk("posts/like", async (id) => {
 
 export const dislikePost = createAsyncThunk("posts/dislike", async (id) => {
   try {
+    const encodedToken = localStorage.getItem("StormMediaToken");
     const response = await axios.post(
       `/api/posts/dislike/${id}`,
       {},

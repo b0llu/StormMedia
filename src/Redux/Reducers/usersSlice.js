@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { AlertToast, SuccessToast } from "Components";
 
-const encodedToken = localStorage.getItem("StormMediaToken");
 const initialState = {
   users: [],
 };
@@ -18,6 +17,7 @@ export const getAllUsers = createAsyncThunk("users/getUsers", async () => {
 
 export const followUser = createAsyncThunk("users/follow", async (id) => {
   try {
+    const encodedToken = localStorage.getItem("StormMediaToken");
     const response = await axios.post(
       `/api/users/follow/${id}`,
       {},
@@ -25,6 +25,7 @@ export const followUser = createAsyncThunk("users/follow", async (id) => {
         headers: { authorization: encodedToken },
       }
     );
+    console.log(response)
     SuccessToast("Followed");
     return response.data;
   } catch (error) {
@@ -34,6 +35,7 @@ export const followUser = createAsyncThunk("users/follow", async (id) => {
 
 export const unfollowUser = createAsyncThunk("users/unfollow", async (id) => {
   try {
+    const encodedToken = localStorage.getItem("StormMediaToken");
     const response = await axios.post(
       `/api/users/unfollow/${id}`,
       {},
@@ -62,6 +64,7 @@ const followUnfollowUser = (state, action) => {
 
 export const editUser = createAsyncThunk("users/edit", async (userData) => {
   try {
+    const encodedToken = localStorage.getItem("StormMediaToken");
     const response = await axios.post(
       "/api/users/edit",
       { userData },

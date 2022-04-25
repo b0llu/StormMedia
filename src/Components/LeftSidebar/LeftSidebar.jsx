@@ -9,7 +9,7 @@ export const LeftSidebar = () => {
   return (
     <aside className={styles.left_sidebar}>
       <p className={styles.brand_name}>
-        <i className="fas fa-bolt"></i> StormPlay
+        <i className="fas fa-bolt"></i> StormMedia
       </p>
       <ul className={styles.list}>
         <Link to={`/home`}>

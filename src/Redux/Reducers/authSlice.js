@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { AlertToast, SuccessToast } from "Components";
 import axios from "axios";
 
-const encodedToken = localStorage.getItem("StormMediaToken");
 const initialState = {
   currentUser: {},
 };
@@ -45,6 +44,7 @@ export const testLogger = createAsyncThunk("auth/testLogger", async () => {
 });
 
 export const tokenChecker = createAsyncThunk("auth/tokenChecker", async () => {
+  const encodedToken = localStorage.getItem("StormMediaToken");
   if (encodedToken) {
     try {
       const response = await axios.post("/api/auth/verify", {
@@ -99,7 +99,9 @@ const authSlice = createSlice({
       })
 
       .addCase(tokenChecker.fulfilled, (state, action) => {
-        state.currentUser = action.payload.user;
+        if (action.payload) {
+          state.currentUser = action.payload.user;
+        }
       })
 
       .addCase(logout.fulfilled, (state, action) => {

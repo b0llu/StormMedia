@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import * as styles from "./GridContainer.module.css";
+import styles from "./GridContainer.module.css";
 
 export const GridContainer = ({ children }) => {
   const location = useLocation();

@@ -1,9 +1,11 @@
-import { useAuthContext, usePostContext } from "Context";
-import * as styles from "./UserPosts.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import styles from "./UserPosts.module.css";
+import { dislikePost, likePost } from "Redux/Reducers/postsSlice";
+import { Link } from "react-router-dom";
 
 export const UserPosts = ({ posts }) => {
-  const { userState } = useAuthContext();
-  const { likePost, dislikePost } = usePostContext();
+  const currentUser = useSelector((state) => state.auth.currentUser);
+  const dispatch = useDispatch();
 
   return (
     posts !== undefined &&
@@ -26,13 +28,18 @@ export const UserPosts = ({ posts }) => {
             </div>
             <p>{post.content}</p>
             <div className={styles.icons_container}>
-              <span className="material-icons">chat_bubble</span>
+              <Link
+                style={{ color: "var(--cta-btn-bg)" }}
+                to={`/${post.username}/${post._id}`}
+              >
+                <span className="material-icons">chat_bubble</span>
+              </Link>
               <div className={styles.like_div}>
                 {post.likes.likedBy
                   .map((liked) => liked.username)
-                  .includes(userState.username) ? (
+                  .includes(currentUser.username) ? (
                   <span
-                    onClick={() => dislikePost(post._id)}
+                    onClick={() => dispatch(dislikePost(post._id))}
                     className="material-icons"
                     style={{
                       color: "var(--alert-color)",
@@ -42,7 +49,7 @@ export const UserPosts = ({ posts }) => {
                   </span>
                 ) : (
                   <span
-                    onClick={() => likePost(post._id)}
+                    onClick={() => dispatch(likePost(post._id))}
                     className="material-icons"
                   >
                     favorite_border

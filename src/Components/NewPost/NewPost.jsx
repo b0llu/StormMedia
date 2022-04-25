@@ -1,21 +1,21 @@
-import { useAuthContext, usePostContext } from "Context";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import * as styles from "./NewPost.module.css";
+import { createNewPost } from "Redux/Reducers/postsSlice";
+import styles from "./NewPost.module.css";
 
 export const NewPost = () => {
   const [postDetails, setPostDetails] = useState("");
-
-  const { addPost } = usePostContext();
-  const { userState } = useAuthContext();
+  const currentUser = useSelector(state => state.auth.currentUser)
+  const dispatch = useDispatch();
 
   return (
     <div className={styles.post_container}>
-      <Link to={`/${userState.username}`}>
+      <Link to={`/${currentUser.username}`}>
         <img
           src={
-            userState.profilePhoto
-              ? userState.profilePhoto
+            currentUser.profilePhoto
+              ? currentUser.profilePhoto
               : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
           }
           alt="user image"
@@ -40,7 +40,7 @@ export const NewPost = () => {
           </div>
           <button
             onClick={() => {
-              addPost(postDetails);
+              dispatch(createNewPost(postDetails));
               setPostDetails("");
             }}
           >

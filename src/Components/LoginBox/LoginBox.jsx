@@ -1,11 +1,11 @@
 import { AlertToast } from "Components/Toasts";
-import { useAuthContext } from "Context";
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import * as styles from "./LoginBox.module.css";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { login, testLogger } from "Redux/Reducers/authSlice";
+import styles from "./LoginBox.module.css";
 
 export const LoginBox = ({ setAuth }) => {
-  const { login, testLogger } = useAuthContext();
+  const dispatch = useDispatch();
   const [userDetails, setUserDetails] = useState({
     username: "",
     password: "",
@@ -17,7 +17,7 @@ export const LoginBox = ({ setAuth }) => {
 
   const loginHandler = () => {
     if (userDetails.password.match(passowrdValidation)) {
-      login(userDetails);
+      dispatch(login(userDetails));
     } else if (!userDetails.username || !userDetails.password) {
       AlertToast("Dont leave any field empty");
     } else {
@@ -62,7 +62,11 @@ export const LoginBox = ({ setAuth }) => {
           </span>
         )}
       </div>
-      <button onClick={testLogger} type="button" className="btn">
+      <button
+        onClick={() => dispatch(testLogger())}
+        type="button"
+        className="btn"
+      >
         Login with Test Credentials
       </button>
       <button onClick={loginHandler} type="button" className="btn">

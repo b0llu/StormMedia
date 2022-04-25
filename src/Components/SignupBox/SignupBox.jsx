@@ -1,11 +1,12 @@
 import { AlertToast } from "Components/Toasts";
-import { useAuthContext } from "Context";
-import { useState, useEffect } from "react";
-import * as styles from "./SignupBox.module.css";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { signup } from "Redux/Reducers/authSlice";
+import styles from "./SignupBox.module.css";
 
 export const SignupBox = ({ setAuth }) => {
   //   useDocTitle("Signup | StormKeep");
-  const { signup } = useAuthContext();
+  const dispatch = useDispatch();
   const [userDetails, setUserDetails] = useState({
     name: "",
     username: "",
@@ -34,7 +35,7 @@ export const SignupBox = ({ setAuth }) => {
         "Password must be same and Alphanumeric and minimum 5 letters long"
       );
     } else {
-      signup(userDetails);
+      dispatch(signup(userDetails));
     }
   };
 

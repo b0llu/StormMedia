@@ -1,11 +1,11 @@
 import { useLocation, Navigate, Outlet } from "react-router-dom";
-import { useAuthContext } from "Context";
+import { useSelector } from "react-redux";
 
 export const RestrictAuth = () => {
-  const { userState } = useAuthContext();
   const location = useLocation();
+  const currentUser = useSelector((state) => state.auth.currentUser);
 
-  return userState._id ? (
+  return currentUser._id ? (
     <Navigate
       to={location.state !== null ? location.state.from.pathname : "/home"}
       state={{ from: location }}

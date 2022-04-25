@@ -1,6 +1,6 @@
 import { LoginBox, SignupBox } from "Components";
 import { useState } from "react";
-import * as styles from "./LandingPage.module.css";
+import styles from "./LandingPage.module.css";
 
 export const LandingPage = () => {
   const [auth, setAuth] = useState(true);

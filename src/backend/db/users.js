@@ -11,7 +11,8 @@ export const users = [
     firstName: "Admin",
     username: "TheAdmin",
     password: "Admin123",
-    profilePhoto: "",
+    profilePhoto:
+      "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
     coverPhoto: "",
     createdAt: formatDate(),
     updatedAt: formatDate(),

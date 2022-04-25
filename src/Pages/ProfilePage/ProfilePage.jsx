@@ -1,51 +1,37 @@
-import axios from "axios";
 import { EditProfileModal, Loader, UserPosts } from "Components";
-import { useAuthContext, useReducerContext, useUserContext } from "Context";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { FETCH_POSTS, LOADING } from "Utils/Action";
-import * as styles from "./ProfilePage.module.css";
+import styles from "./ProfilePage.module.css";
+import { followUser, unfollowUser } from "Redux/Reducers/usersSlice";
 
 export const ProfilePage = () => {
   const [modal, setModal] = useState(false);
-  const { userState } = useAuthContext();
-  const { userFollowing, userFollowers, posts, users, loading, dispatch } =
-    useReducerContext();
   const { username } = useParams();
-  const { followUser, unfollowUser } = useUserContext();
 
-  useEffect(() => {
-    (async function () {
-      try {
-        dispatch({ type: LOADING });
-        const response = await axios.get("/api/posts");
-        if (response.status === 200) {
-          dispatch({ type: LOADING });
-          dispatch({ type: FETCH_POSTS, payload: response.data.posts });
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-  }, []);
+  const dispatch = useDispatch();
+  const allPosts = useSelector((state) => state.posts.posts);
+  const allUsers = useSelector((state) => state.users.users);
+  const loading = useSelector((state) => state.posts.loading);
+  const currentUser = useSelector((state) => state.auth.currentUser);
 
   return loading ? (
     <Loader />
-  ) : username === userState.username ? (
+  ) : username === currentUser.username ? (
     <div className={styles.profile_container}>
       {modal && (
         <EditProfileModal
-          firstName={userState.firstName}
-          bio={userState.bio}
-          profilePhoto={userState.profilePhoto}
-          coverPhoto={userState.coverPhoto}
+          firstName={currentUser.firstName}
+          bio={currentUser.bio}
+          profilePhoto={currentUser.profilePhoto}
+          coverPhoto={currentUser.coverPhoto}
           setModal={setModal}
         />
       )}
-      {userState.coverPhoto ? (
+      {currentUser.coverPhoto ? (
         <img
           className={styles.profile_backdrop}
-          src={userState.coverPhoto}
+          src={currentUser.coverPhoto}
           alt=""
         />
       ) : (
@@ -55,8 +41,8 @@ export const ProfilePage = () => {
         <div className={styles.user_img}>
           <img
             src={
-              userState.profilePhoto
-                ? userState.profilePhoto
+              currentUser.profilePhoto
+                ? currentUser.profilePhoto
                 : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
             }
             alt=""
@@ -64,28 +50,44 @@ export const ProfilePage = () => {
           <button onClick={() => setModal(true)}>Edit profile</button>
         </div>
         <div className={styles.user_data}>
-          <h1>{userState.firstName}</h1>
-          <h3>@{userState.username}</h3>
-          <p>{userState.bio}</p>
+          <h1>{currentUser.firstName}</h1>
+          <h3>@{currentUser.username}</h3>
+          <p>{currentUser.bio}</p>
           <div className={styles.follower_status}>
             <p>
-              {userFollowing.length !== 0 ? userFollowing.length : 0} Following
+              {allUsers
+                .filter((user) => user.username === username)
+                .map((user) => user.following)[0].length !== 0
+                ? allUsers
+                    .filter((user) => user.username === username)
+                    .map((user) => user.following)[0].length
+                : 0}{" "}
+              Following
             </p>
             <p>
-              {userFollowers.length !== 0 ? userFollowers.length : 0} Followers
+              {allUsers
+                .filter((user) => user.username === username)
+                .map((user) => user.followers)[0].length !== 0
+                ? allUsers
+                    .filter((user) => user.username === username)
+                    .map((user) => user.followers)[0].length
+                : 0}{" "}
+              Followers
             </p>
           </div>
         </div>
         <div className={styles.post_show_container}>
           <p className={styles.post_header}>Posts</p>
           <UserPosts
-            posts={posts.filter((post) => post.username === userState.username)}
+            posts={allPosts.filter(
+              (post) => post.username === currentUser.username
+            )}
           />
         </div>
       </div>
     </div>
   ) : (
-    users
+    allUsers
       .filter((user) => user.username === username)
       .map((user) => {
         return (
@@ -109,16 +111,20 @@ export const ProfilePage = () => {
                   }
                   alt=""
                 />
-                {userFollowing.some((user) => user.username === username) ? (
+                {allUsers
+                  .filter((user) => user.username === currentUser.username)
+                  .map((user) =>
+                    user.following.some((user) => user.username === username)
+                  )[0] ? (
                   <button
-                    onClick={() => unfollowUser(user._id)}
+                    onClick={() => dispatch(unfollowUser(user._id))}
                     className={styles.follow_btn}
                   >
                     Unfollow
                   </button>
                 ) : (
                   <button
-                    onClick={() => followUser(user._id)}
+                    onClick={() => dispatch(followUser(user._id))}
                     className={styles.follow_btn}
                   >
                     Follow
@@ -131,20 +137,20 @@ export const ProfilePage = () => {
                 <p>{user.bio}</p>
                 <div className={styles.follower_status}>
                   <p>
-                    {users
+                    {allUsers
                       .filter((user) => user.username === username)
                       .map((user) => user.following)[0].length !== 0
-                      ? users
+                      ? allUsers
                           .filter((user) => user.username === username)
                           .map((user) => user.following)[0].length
                       : 0}{" "}
                     Following
                   </p>
                   <p>
-                    {users
+                    {allUsers
                       .filter((user) => user.username === username)
                       .map((user) => user.followers)[0].length !== 0
-                      ? users
+                      ? allUsers
                           .filter((user) => user.username === username)
                           .map((user) => user.followers)[0].length
                       : 0}{" "}
@@ -155,7 +161,7 @@ export const ProfilePage = () => {
               <div className={styles.post_show_container}>
                 <p className={styles.post_header}>Posts</p>
                 <UserPosts
-                  posts={posts.filter(
+                  posts={allPosts.filter(
                     (post) => post.username === user.username
                   )}
                 />

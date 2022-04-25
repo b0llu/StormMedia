@@ -23,6 +23,7 @@ export const posts = [
     time: formatTime(),
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    trending: true,
   },
   {
     _id: uuid(),
@@ -57,6 +58,7 @@ export const posts = [
     time: formatTime(),
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    trending: true,
   },
   {
     _id: uuid(),
@@ -89,5 +91,23 @@ export const posts = [
     time: formatTime(),
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    trending: true,
+  },
+  {
+    _id: uuid(),
+    name: "Admin",
+    username: "TheAdmin",
+    profilePhoto:
+      "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+    content: "This is Admin's first post!",
+    likes: {
+      likeCount: 0,
+      likedBy: [],
+      dislikedBy: [],
+    },
+    time: formatTime(),
+    createdAt: formatDate(),
+    updatedAt: formatDate(),
+    trending: true,
   },
 ];

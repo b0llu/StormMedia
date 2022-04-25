@@ -1,5 +1,5 @@
 import { EachPost, NewPost } from "Components";
-import * as styles from "./HomePage.module.css";
+import styles from "./HomePage.module.css";
 
 export const HomePage = () => {
 

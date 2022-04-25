@@ -1,5 +1,6 @@
-import { useUserContext } from "Context";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { editUser } from "Redux/Reducers/usersSlice";
 import styles from "./EditProfileModal.module.css";
 
 export const EditProfileModal = ({
@@ -9,7 +10,7 @@ export const EditProfileModal = ({
   coverPhoto,
   setModal,
 }) => {
-  const { editProfile } = useUserContext();
+  const dispatch = useDispatch();
   const [editedData, setEditedData] = useState({
     firstName: firstName,
     bio: bio,
@@ -28,7 +29,7 @@ export const EditProfileModal = ({
           </div>
           <button
             onClick={() => {
-              editProfile(editedData);
+              dispatch(editUser(editedData));
               setModal(false);
             }}
           >

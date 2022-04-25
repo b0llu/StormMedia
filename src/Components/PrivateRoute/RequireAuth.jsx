@@ -1,13 +1,13 @@
 import { useLocation, Navigate, Outlet } from "react-router-dom";
-import { useAuthContext } from "Context";
+import { useSelector } from "react-redux";
 
 export const RequireAuth = () => {
-  const { userState } = useAuthContext();
+  const currentUser = useSelector((state) => state.auth.currentUser);
   const location = useLocation();
-  return userState._id ? (
+
+  return currentUser._id ? (
     <Outlet />
   ) : (
     <Navigate to="/" state={{ from: location }} replace />
   );
 };
-

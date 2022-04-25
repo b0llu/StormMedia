@@ -1,35 +1,19 @@
-import axios from "axios";
 import { Loader } from "Components";
-import { useAuthContext, usePostContext, useReducerContext } from "Context";
-import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { FETCH_POSTS, LOADING } from "Utils/Action";
-import * as styles from "./EachPost.module.css";
+import { dislikePost, likePost } from "Redux/Reducers/postsSlice";
+import styles from "./EachPost.module.css";
 
 export const EachPost = () => {
-  const { dispatch, loading, posts } = useReducerContext();
-  const { likePost, dislikePost } = usePostContext();
-  const { userState } = useAuthContext();
-
-  useEffect(() => {
-    (async function () {
-      try {
-        dispatch({ type: LOADING });
-        const response = await axios.get("/api/posts");
-        if (response.status === 200) {
-          dispatch({ type: LOADING });
-          dispatch({ type: FETCH_POSTS, payload: response.data.posts });
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-  }, []);
+  const dispatch = useDispatch();
+  const allPosts = useSelector((state) => state.posts.posts);
+  const loading = useSelector((state) => state.posts.loading);
+  const currentUser = useSelector((state) => state.auth.currentUser);
 
   return loading ? (
     <Loader />
   ) : (
-    posts.map((post) => {
+    allPosts.map((post) => {
       return (
         <div key={post._id} className={styles.post}>
           <Link to={`/${post.username}`}>
@@ -71,9 +55,11 @@ export const EachPost = () => {
               <div className={styles.like_div}>
                 {post.likes.likedBy
                   .map((liked) => liked.username)
-                  .includes(userState.username) ? (
+                  .includes(currentUser.username) ? (
                   <span
-                    onClick={() => dislikePost(post._id)}
+                    onClick={() => {
+                      dispatch(dislikePost(post._id));
+                    }}
                     className="material-icons"
                     style={{
                       color: "var(--alert-color)",
@@ -83,7 +69,9 @@ export const EachPost = () => {
                   </span>
                 ) : (
                   <span
-                    onClick={() => likePost(post._id)}
+                    onClick={() => {
+                      dispatch(likePost(post._id));
+                    }}
                     className="material-icons"
                   >
                     favorite_border

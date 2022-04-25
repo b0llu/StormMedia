@@ -1,5 +1,5 @@
 import { useThemeContext } from "Context";
-import * as styles from "./ThemeToggler.module.css";
+import styles from "./ThemeToggler.module.css";
 
 export const ThemeToggler = () => {
   const { theme, toggleLightDarkTheme } = useThemeContext();

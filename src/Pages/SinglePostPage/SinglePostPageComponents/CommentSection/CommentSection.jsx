@@ -1,14 +1,16 @@
-import { useAuthContext, usePostContext } from "Context";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { postComment } from "Redux/Reducers/postsSlice";
 import { v4 as uuid } from "uuid";
 import styles from "./CommentSection.module.css";
 
 export const CommentSection = () => {
-  const { userState } = useAuthContext();
-  const { comments, addComment } = usePostContext();
+  const dispatch = useDispatch()
+  const currentUser = useSelector((state) => state.auth.currentUser);
+  const comments = useSelector((state) => state.posts.comments);
   const [comment, setComment] = useState({
-    firstName: userState.firstName,
-    username: userState.username,
+    firstName: currentUser.firstName,
+    username: currentUser.username,
     comment: "",
   });
 
@@ -16,7 +18,7 @@ export const CommentSection = () => {
     <>
       <div className={styles.comment_section}>
         <div className={styles.comment}>
-          <img src={userState.profilePhoto} alt="user-image" />
+          <img src={currentUser.profilePhoto} alt="user-image" />
           <textarea
             onChange={(e) =>
               setComment({ ...comment, comment: e.target.value })
@@ -28,7 +30,7 @@ export const CommentSection = () => {
           ></textarea>
           <button
             onClick={() => {
-              addComment(comment);
+              dispatch(postComment(comment));
               setComment({ ...comment, comment: "" });
             }}
           >
@@ -36,15 +38,15 @@ export const CommentSection = () => {
           </button>
         </div>
       </div>
-      {comments.length !== 0 &&
+      {comments !== undefined && comments.length !== 0 &&
         comments.map((commentData) => {
           return (
             <div key={uuid()} className={styles.comments}>
               <div className={styles.post}>
                 <img
                   src={
-                    userState.profilePhoto
-                      ? userState.profilePhoto
+                    currentUser.profilePhoto
+                      ? currentUser.profilePhoto
                       : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
                   }
                   alt="User Thumbnail"

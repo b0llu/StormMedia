@@ -17,6 +17,7 @@
     align-items: flex-start;
     justify-content: center;
     flex-direction: column;
+    width: 100%;
 }
 
 .user_name {
@@ -56,6 +57,7 @@
     color: var(--cta-btn-bg);
     display: flex;
     align-items: center;
+    width: 100%;
 }
 
 
@@ -76,4 +78,8 @@
     align-items: center;
     justify-content: center;
     margin-right: 1rem;
+}
+
+.margin_left_auto {
+    margin-left: auto;
 }

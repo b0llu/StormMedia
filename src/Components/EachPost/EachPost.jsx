@@ -1,8 +1,10 @@
-import { Loader } from "Components";
+import { EditPostModal, Loader } from "Components";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
   bookmark,
+  deletePost,
   dislikePost,
   likePost,
   removeBookmark,
@@ -10,12 +12,17 @@ import {
 import styles from "./EachPost.module.css";
 
 export const EachPost = () => {
+  const [postModal, setPostModal] = useState({
+    modalState: false,
+    profilePhoto: "",
+    content: "",
+    id: "",
+  });
   const dispatch = useDispatch();
   const allPosts = useSelector((state) => state.posts.posts);
   const loading = useSelector((state) => state.posts.loading);
   const currentUser = useSelector((state) => state.auth.currentUser);
   const bookmarks = useSelector((state) => state.posts.bookmarks);
-  console.log(bookmarks)
 
   return loading ? (
     <Loader />
@@ -23,6 +30,14 @@ export const EachPost = () => {
     allPosts.map((post) => {
       return (
         <div key={post._id} className={styles.post}>
+          {postModal.modalState && (
+            <EditPostModal
+              profilePhoto={postModal.profilePhoto}
+              content={postModal.content}
+              id={postModal.id}
+              setPostModal={setPostModal}
+            />
+          )}
           <Link to={`/${post.username}`}>
             <img
               src={
@@ -103,6 +118,29 @@ export const EachPost = () => {
                 )}
                 <p>{post.likes.likeCount}</p>
               </div>
+              {post.username === currentUser.username && (
+                <div className={styles.margin_left_auto}>
+                  <span
+                    onClick={() =>
+                      setPostModal({
+                        modalState: true,
+                        profilePhoto: post.profilePhoto,
+                        content: post.content,
+                        id: post._id,
+                      })
+                    }
+                    className="material-icons"
+                  >
+                    edit
+                  </span>
+                  <span
+                    onClick={() => dispatch(deletePost(post._id))}
+                    className="material-icons"
+                  >
+                    delete
+                  </span>
+                </div>
+              )}
             </div>
           </div>
         </div>

@@ -13,3 +13,4 @@ export { SuccessToast, AlertToast } from "./Toasts";
 export { UserPosts } from "./UserPosts/UserPosts";
 export { EditProfileModal } from "./EditProfileModal/EditProfileModal";
 export { Loader } from "./Loader/Loader";
+export { EditPostModal } from "./EditPostModal/EditPostModal";

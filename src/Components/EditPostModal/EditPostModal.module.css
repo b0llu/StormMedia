@@ -1,0 +1,132 @@
+.editPost_modal {
+  width: 100vw;
+  height: 100vh;
+  z-index: 20;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: fixed;
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-area: contentarea;
+}
+
+.modal {
+  background-color: var(--card-container-bg);
+  color: var(--content-color);
+  border-radius: 1rem;
+  position: relative;
+  width: 60rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--default-color);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.5rem;
+  padding: 1rem;
+  width: 100%;
+}
+
+.left {
+  display: flex;
+}
+
+.header span {
+  margin-right: 2rem;
+  cursor: pointer;
+}
+
+.header span:hover {
+  color: var(--primary-color);
+  transition: 0.2s ease-in-out;
+}
+
+.header button {
+  margin-right: 1rem;
+  padding: 1rem 2rem;
+  border-radius: 100rem;
+  border: none;
+  background-color: var(--follow-btn-bg);
+  color: var(--follow-btn-clr);
+  cursor: pointer;
+}
+
+.header button:hover {
+  background-color: var(--follow-btn-hover);
+  transition: 0.2s ease-in-out;
+}
+
+.post_container {
+  display: flex;
+  padding: 2rem;
+  width: 100%;
+}
+
+.post_container img {
+  border-radius: 50%;
+  align-self: flex-start;
+  height: 7rem;
+  width: 7rem;
+}
+
+.post_details {
+  margin: 0 1rem;
+  width: 85%;
+}
+
+.post_details textarea {
+  width: 100%;
+  outline: none;
+  word-wrap: break-word;
+  font-size: 2.5rem;
+  padding: 1rem 1rem 3rem 1rem;
+  color: var(--content-color);
+  height: fit-content;
+  background-color: transparent;
+  resize: none;
+  outline: none;
+  border: none;
+}
+
+.post_cta_section {
+  padding: 1rem 2rem 1rem 0;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.icons span {
+  font-size: 3rem;
+  color: var(--cta-btn-bg);
+  cursor: pointer;
+  border-radius: 100rem;
+  padding: 1rem;
+}
+
+.icons span:hover {
+  background-color: var(--faint-bg);
+}
+
+.post_cta_section button {
+  margin-left: auto;
+  padding: 1rem 2.5rem;
+  border-radius: 100rem;
+  background-color: var(--cta-btn-bg);
+  border: none;
+  color: var(--cta-btn);
+  font-size: 1.7rem;
+  cursor: pointer;
+}
+
+p:empty:not(:focus)::before {
+  content: attr(data-placeholder);
+}

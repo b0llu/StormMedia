@@ -1,10 +1,25 @@
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./UserPosts.module.css";
-import { dislikePost, likePost } from "Redux/Reducers/postsSlice";
+import {
+  bookmark,
+  deletePost,
+  dislikePost,
+  likePost,
+  removeBookmark,
+} from "Redux/Reducers/postsSlice";
 import { Link } from "react-router-dom";
+import { EditPostModal } from "Components";
+import { useState } from "react";
 
 export const UserPosts = ({ posts }) => {
+  const [postModal, setPostModal] = useState({
+    modalState: false,
+    profilePhoto: "",
+    content: "",
+    id: "",
+  });
   const currentUser = useSelector((state) => state.auth.currentUser);
+  const bookmarks = useSelector((state) => state.posts.bookmarks);
   const dispatch = useDispatch();
 
   return (
@@ -12,6 +27,14 @@ export const UserPosts = ({ posts }) => {
     posts.map((post) => {
       return (
         <div key={post._id} className={styles.post}>
+          {postModal.modalState && (
+            <EditPostModal
+              profilePhoto={postModal.profilePhoto}
+              content={postModal.content}
+              id={postModal.id}
+              setPostModal={setPostModal}
+            />
+          )}
           <img
             src={
               post.profilePhoto
@@ -34,6 +57,23 @@ export const UserPosts = ({ posts }) => {
               >
                 <span className="material-icons">chat_bubble</span>
               </Link>
+              {bookmarks
+                .map((bookmarked) => bookmarked._id)
+                .includes(post._id) ? (
+                <span
+                  onClick={() => dispatch(removeBookmark(post._id))}
+                  className="material-icons"
+                >
+                  bookmark
+                </span>
+              ) : (
+                <span
+                  onClick={() => dispatch(bookmark(post._id))}
+                  className="material-icons"
+                >
+                  bookmark_border
+                </span>
+              )}
               <div className={styles.like_div}>
                 {post.likes.likedBy
                   .map((liked) => liked.username)
@@ -57,6 +97,29 @@ export const UserPosts = ({ posts }) => {
                 )}
                 <p>{post.likes.likeCount}</p>
               </div>
+              {post.username === currentUser.username && (
+                <div className={styles.margin_left_auto}>
+                  <span
+                    onClick={() =>
+                      setPostModal({
+                        modalState: true,
+                        profilePhoto: post.profilePhoto,
+                        content: post.content,
+                        id: post._id,
+                      })
+                    }
+                    className="material-icons"
+                  >
+                    edit
+                  </span>
+                  <span
+                    onClick={() => dispatch(deletePost(post._id))}
+                    className="material-icons"
+                  >
+                    delete
+                  </span>
+                </div>
+              )}
             </div>
           </div>
         </div>

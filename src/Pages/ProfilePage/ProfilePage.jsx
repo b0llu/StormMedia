@@ -166,7 +166,6 @@ export const ProfilePage = () => {
                   )}
                 />
               </div>
-              {modal && <EditProfileModal />}
             </div>
           </div>
         );

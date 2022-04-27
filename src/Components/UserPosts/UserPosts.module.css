@@ -57,6 +57,7 @@
     color: var(--cta-btn-bg);
     display: flex;
     align-items: center;
+    width: 100%;
 }
 
 .icons_container span {
@@ -76,4 +77,8 @@
     align-items: center;
     justify-content: center;
     margin-right: 3rem;
+}
+
+.margin_left_auto {
+    margin-left: auto;
 }

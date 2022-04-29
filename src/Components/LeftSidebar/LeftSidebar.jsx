@@ -24,7 +24,7 @@ export const LeftSidebar = () => {
             Explore
           </li>
         </Link>
-        <Link to={`/bookmark`}>
+        <Link to={`/bookmarks`}>
           <li className={`${location.pathname === "/bookmark" && styles.bold}`}>
             <span className="material-icons">bookmark</span>Bookmarks
           </li>

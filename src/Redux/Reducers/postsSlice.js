@@ -4,8 +4,8 @@ import axios from "axios";
 
 const initialState = {
   posts: [],
-  singlePost: [],
   comments: [],
+  bookmarks: [],
   loading: false,
 };
 
@@ -71,6 +71,37 @@ export const postComment = createAsyncThunk(
   }
 );
 
+export const bookmark = createAsyncThunk("post/bookmark", async (postId) => {
+  try {
+    const encodedToken = localStorage.getItem("StormMediaToken");
+    const response = await axios.post(
+      `/api/users/bookmark/${postId}`,
+      {},
+      { headers: { authorization: encodedToken } }
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+export const removeBookmark = createAsyncThunk(
+  "post/removeBookmark",
+  async (postId) => {
+    try {
+      const encodedToken = localStorage.getItem("StormMediaToken");
+      const response = await axios.post(
+        `api/users/remove-bookmark/${postId}`,
+        {},
+        { headers: { authorization: encodedToken } }
+      );
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
 const postsSlice = createSlice({
   name: "posts",
   initialState,
@@ -100,6 +131,16 @@ const postsSlice = createSlice({
 
       .addCase(postComment.fulfilled, (state, action) => {
         state.comments = [...state.comments, action.payload];
+      })
+
+      .addCase(bookmark.fulfilled, (state, action) => {
+        state.bookmarks = action.payload.bookmarks;
+        SuccessToast("Added to Bookmarks");
+      })
+
+      .addCase(removeBookmark.fulfilled, (state, action) => {
+        state.bookmarks = action.payload.bookmarks;
+        AlertToast("Removed From Bookmarks");
       });
   },
 });

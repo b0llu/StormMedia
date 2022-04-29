@@ -25,7 +25,7 @@ export const getUserHandler = function (schema, request) {
     const user = schema.users.findBy({ username: username }).attrs;
     return new Response(200, {}, { user });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     return new Response(
       500,
       {},
@@ -132,7 +132,7 @@ export const bookmarkPostHandler = function (schema, request) {
         { errors: ["This Post is already bookmarked"] }
       );
     }
-    user.bookmarks.push(post);
+    user.bookmarks.push(JSON.parse(JSON.stringify(post)));
     this.db.users.update(
       { _id: user._id },
       { ...user, updatedAt: formatDate() }

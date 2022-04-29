@@ -1,0 +1,90 @@
+.bookmarks_container {
+  grid-area: contentarea;
+}
+
+.header {
+  font-size: 3rem;
+  padding: 2rem;
+  color: var(--content-color);
+  border-bottom: 1px solid var(--content-color);
+  font-weight: 500;
+}
+
+.post {
+  padding: 2rem;
+  display: flex;
+  border-bottom: 1px solid var(--content-color);
+}
+
+.post img {
+  border-radius: 50%;
+  align-self: flex-start;
+  height: 7rem;
+  width: 7rem;
+}
+
+.post_user_details {
+  margin-left: 2.5rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.user_name {
+  color: var(--content-color);
+}
+
+.user_name {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user_name h1 {
+  font-size: 2rem;
+}
+
+.user_name h2 {
+  font-size: 2rem;
+  font-weight: 500;
+  color: var(--faint-text-clr);
+}
+
+.user_name h3 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--faint-text-clr);
+}
+
+.post_user_details p {
+  color: var(--content-color);
+  font-size: 2rem;
+  margin: 1rem 0;
+}
+
+.icons_container {
+  margin-top: 1rem;
+  color: var(--cta-btn-bg);
+  display: flex;
+  align-items: center;
+}
+
+.icons_container span {
+  font-size: 3rem;
+  cursor: pointer;
+  padding: 1rem;
+  margin-right: 5px;
+  border-radius: 50%;
+}
+
+.icons_container span:hover {
+  background-color: var(--faint-bg);
+}
+
+.like_div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+}

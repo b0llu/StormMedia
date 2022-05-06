@@ -12,10 +12,10 @@ export const EditProfileModal = ({
 }) => {
   const dispatch = useDispatch();
   const [editedData, setEditedData] = useState({
-    firstName: firstName,
-    bio: bio,
-    profilePhoto: profilePhoto,
-    coverPhoto: coverPhoto,
+    firstName,
+    bio,
+    profilePhoto,
+    coverPhoto,
   });
   return (
     <div className={styles.edit_modal}>

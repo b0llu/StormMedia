@@ -2,8 +2,10 @@ import { Link, useParams } from "react-router-dom";
 import styles from "./SinglePost.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  bookmark,
   dislikePost,
   likePost,
+  removeBookmark,
 } from "Redux/Reducers/postsSlice";
 
 export const SinglePost = () => {
@@ -11,6 +13,7 @@ export const SinglePost = () => {
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.auth.currentUser);
   const allPosts = useSelector((state) => state.posts.posts);
+  const bookmarks = useSelector((state) => state.posts.bookmarks);
 
   return allPosts
     .filter((post) => post._id === postId)
@@ -49,6 +52,23 @@ export const SinglePost = () => {
           </div>
           <div className={styles.icons_container}>
             <span className="material-icons">chat_bubble</span>
+            {bookmarks
+              .map((bookmarked) => bookmarked._id)
+              .includes(post._id) ? (
+              <span
+                onClick={() => dispatch(removeBookmark(post._id))}
+                className="material-icons"
+              >
+                bookmark
+              </span>
+            ) : (
+              <span
+                onClick={() => dispatch(bookmark(post._id))}
+                className="material-icons"
+              >
+                bookmark_border
+              </span>
+            )}
             <div className={styles.like_div}>
               {post.likes.likedBy
                 .map((liked) => liked.username)

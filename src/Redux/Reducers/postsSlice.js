@@ -102,6 +102,36 @@ export const removeBookmark = createAsyncThunk(
   }
 );
 
+export const editPost = createAsyncThunk(
+  "post/edit",
+  async ({ id, content }) => {
+    try {
+      const encodedToken = localStorage.getItem("StormMediaToken");
+      const response = await axios.post(
+        `/api/posts/edit/${id}`,
+        { postData: { content } },
+        { headers: { authorization: encodedToken } }
+      );
+      console.log({ response });
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+export const deletePost = createAsyncThunk("post/delete", async (id) => {
+  try {
+    const encodedToken = localStorage.getItem("StormMediaToken");
+    const response = await axios.delete(`/api/posts/${id}`, {
+      headers: { authorization: encodedToken },
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 const postsSlice = createSlice({
   name: "posts",
   initialState,
@@ -141,6 +171,16 @@ const postsSlice = createSlice({
       .addCase(removeBookmark.fulfilled, (state, action) => {
         state.bookmarks = action.payload.bookmarks;
         AlertToast("Removed From Bookmarks");
+      })
+
+      .addCase(editPost.fulfilled, (state, action) => {
+        state.posts = action.payload.posts;
+        SuccessToast("Post Edited");
+      })
+
+      .addCase(deletePost.fulfilled, (state, action) => {
+        state.posts = action.payload.posts;
+        AlertToast("Post Deleted");
       });
   },
 });

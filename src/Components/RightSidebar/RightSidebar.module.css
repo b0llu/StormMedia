@@ -98,3 +98,9 @@
 .follow_btn:hover {
   background-color: var(--follow-btn-hover);
 }
+
+@media screen and (max-width:920px) {
+  .right_sidebar {
+    display: none;
+  }
+}

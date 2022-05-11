@@ -15,6 +15,7 @@ import {
   likePostHandler,
   dislikePostHandler,
   getAllUserPostsHandler,
+  commentPostHandler,
 } from "./backend/controllers/PostController";
 import {
   followUserHandler,
@@ -68,6 +69,7 @@ export function makeServer({ environment = "development" } = {}) {
       // post routes (private)
       this.post("/user/posts", createPostHandler.bind(this));
       this.delete("/posts/:postId", deletePostHandler.bind(this));
+      this.post("/posts/:postId/comment", commentPostHandler.bind(this));
       this.post("/posts/edit/:postId", editPostHandler.bind(this));
       this.post("/posts/like/:postId", likePostHandler.bind(this));
       this.post("/posts/dislike/:postId", dislikePostHandler.bind(this));

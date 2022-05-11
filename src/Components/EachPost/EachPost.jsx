@@ -1,5 +1,5 @@
 import { EditPostModal, Loader } from "Components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
@@ -9,9 +9,11 @@ import {
   likePost,
   removeBookmark,
 } from "Redux/Reducers/postsSlice";
+import { followUser, unfollowUser } from "Redux/Reducers/usersSlice";
+
 import styles from "./EachPost.module.css";
 
-export const EachPost = () => {
+export const EachPost = ({ filterState }) => {
   const [postModal, setPostModal] = useState({
     modalState: false,
     profilePhoto: "",
@@ -20,9 +22,14 @@ export const EachPost = () => {
   });
   const dispatch = useDispatch();
   const allPosts = useSelector((state) => state.posts.posts);
+  const allUsers = useSelector((state) => state.users.users);
   const loading = useSelector((state) => state.posts.loading);
   const currentUser = useSelector((state) => state.auth.currentUser);
   const bookmarks = useSelector((state) => state.posts.bookmarks);
+
+  useEffect(() => {
+    filterState && dispatch(filterState);
+  }, [allPosts]);
 
   return loading ? (
     <Loader />
@@ -63,6 +70,43 @@ export const EachPost = () => {
                 <h2>@{post.username}</h2>
               </Link>
               <h3>{post.time}</h3>
+              <div className={styles.follow_btn}>
+                {allUsers
+                  .filter((user) => user.username === currentUser.username)
+                  .map((user) =>
+                    user.following.some(
+                      (user) => user.username === post.username
+                    )
+                  )[0] ? (
+                  <button
+                    onClick={() =>
+                      dispatch(
+                        unfollowUser(
+                          allUsers.filter(
+                            (user) => user.username === post.username
+                          )[0]._id
+                        )
+                      )
+                    }
+                  >
+                    Unfollow
+                  </button>
+                ) : (
+                  <button
+                    onClick={() =>
+                      dispatch(
+                        followUser(
+                          allUsers.filter(
+                            (user) => user.username === post.username
+                          )[0]._id
+                        )
+                      )
+                    }
+                  >
+                    Follow
+                  </button>
+                )}
+              </div>
             </div>
             <Link to={`/${post.username}/${post._id}`}>
               <p>{post.content}</p>

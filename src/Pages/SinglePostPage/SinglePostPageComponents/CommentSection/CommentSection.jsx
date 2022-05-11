@@ -1,18 +1,16 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import { postComment } from "Redux/Reducers/postsSlice";
 import { v4 as uuid } from "uuid";
 import styles from "./CommentSection.module.css";
 
 export const CommentSection = () => {
-  const dispatch = useDispatch()
+  const { postId } = useParams();
+  const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.auth.currentUser);
-  const comments = useSelector((state) => state.posts.comments);
-  const [comment, setComment] = useState({
-    firstName: currentUser.firstName,
-    username: currentUser.username,
-    comment: "",
-  });
+  const allPosts = useSelector((state) => state.posts.posts);
+  const [comment, setComment] = useState({ id: postId, comment: "" });
 
   return (
     <>
@@ -38,30 +36,35 @@ export const CommentSection = () => {
           </button>
         </div>
       </div>
-      {comments !== undefined && comments.length !== 0 &&
-        comments.map((commentData) => {
-          return (
-            <div key={uuid()} className={styles.comments}>
-              <div className={styles.post}>
-                <img
-                  src={
-                    currentUser.profilePhoto
-                      ? currentUser.profilePhoto
-                      : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
-                  }
-                  alt="User Thumbnail"
-                />
-                <div className={styles.post_user_details}>
-                  <div className={styles.user_name}>
-                    <h1>{commentData.firstName}</h1>
-                    <h2>@{commentData.username}</h2>
+      {allPosts
+        .filter((post) => post._id === postId)
+        .map((post) => post.comments)[0] !== undefined &&
+        allPosts
+          .filter((post) => post._id === postId)
+          .map((post) => post.comments)[0]
+          .map((commentData) => {
+            return (
+              <div key={commentData.createdAt} className={styles.comments}>
+                <div className={styles.post}>
+                  <img
+                    src={
+                      currentUser.profilePhoto
+                        ? currentUser.profilePhoto
+                        : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+                    }
+                    alt="User Thumbnail"
+                  />
+                  <div className={styles.post_user_details}>
+                    <div className={styles.user_name}>
+                      <h1>{currentUser.firstName}</h1>
+                      <h2>@{commentData.username}</h2>
+                    </div>
+                    <p>{commentData.content}</p>
                   </div>
-                  <p>{commentData.comment}</p>
                 </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
     </>
   );
 };

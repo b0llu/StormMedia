@@ -9,3 +9,17 @@
   grid-template-columns: 1fr;
   grid-template-areas: "contentarea";
 }
+
+@media screen and (max-width:920px) {
+  .grid_container {
+    grid-template-columns: 1fr 30rem 70rem 1fr;
+    grid-template-areas: '... left-sidebar contentarea ...';
+  }
+}
+
+@media screen and (max-width:750px) {
+  .grid_container {
+    grid-template-columns: 1fr;
+    grid-template-areas: 'contentarea';
+  }
+}

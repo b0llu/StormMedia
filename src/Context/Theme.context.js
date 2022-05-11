@@ -5,6 +5,7 @@ const ThemeContext = createContext();
 const ThemeProvider = ({ children }) => {
   const localStorageTheme = localStorage.getItem("data-theme");
   const [theme, setTheme] = useState(localStorageTheme ?? "dark");
+  const [toggle, setToggle] = useState(false);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -16,7 +17,9 @@ const ThemeProvider = ({ children }) => {
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleLightDarkTheme }}>
+    <ThemeContext.Provider
+      value={{ theme, toggleLightDarkTheme, toggle, setToggle }}
+    >
       {children}
     </ThemeContext.Provider>
   );

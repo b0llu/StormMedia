@@ -1,6 +1,12 @@
+import { useThemeContext } from "Context";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { bookmark, dislikePost, likePost, removeBookmark } from "Redux/Reducers/postsSlice";
+import {
+  bookmark,
+  dislikePost,
+  likePost,
+  removeBookmark,
+} from "Redux/Reducers/postsSlice";
 import styles from "./BookmarksPage.module.css";
 
 export const BookmarksPage = () => {
@@ -8,14 +14,23 @@ export const BookmarksPage = () => {
   const allBookmarks = useSelector((state) => state.posts.bookmarks);
   const currentUser = useSelector((state) => state.auth.currentUser);
   const bookmarks = useSelector((state) => state.posts.bookmarks);
+  const { setToggle } = useThemeContext();
 
   return (
     <div className={styles.bookmarks_container}>
-      {allBookmarks.length !== 0 ? (
-        <h1 className={styles.header}>Bookmarks</h1>
-      ) : (
-        <h1 className={styles.header}>No Bookmarks</h1>
-      )}
+      <div className={styles.for_flex}>
+        <span
+          onClick={() => setToggle(true)}
+          className={`${styles.mobile_close} material-icons`}
+        >
+          menu
+        </span>
+        {allBookmarks.length !== 0 ? (
+          <h1 className={styles.header}>Bookmarks</h1>
+        ) : (
+          <h1 className={styles.header}>No Bookmarks</h1>
+        )}
+      </div>
       {allBookmarks.map((post) => {
         return (
           <div key={post._id} className={styles.post}>

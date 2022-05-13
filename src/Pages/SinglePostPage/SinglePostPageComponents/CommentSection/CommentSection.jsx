@@ -1,3 +1,4 @@
+import { AlertToast } from "Components";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -11,6 +12,15 @@ export const CommentSection = () => {
   const currentUser = useSelector((state) => state.auth.currentUser);
   const allPosts = useSelector((state) => state.posts.posts);
   const [comment, setComment] = useState({ id: postId, comment: "" });
+
+  const commentHandler = (comment) => {
+    if (comment.comment === "") {
+      AlertToast("Comment Field is empty!");
+    } else {
+      dispatch(postComment(comment));
+      setComment({ ...comment, comment: "" });
+    }
+  };
 
   return (
     <>
@@ -26,14 +36,7 @@ export const CommentSection = () => {
             rows="2"
             value={comment.comment}
           ></textarea>
-          <button
-            onClick={() => {
-              dispatch(postComment(comment));
-              setComment({ ...comment, comment: "" });
-            }}
-          >
-            Reply
-          </button>
+          <button onClick={() => commentHandler(comment)}>Reply</button>
         </div>
       </div>
       {allPosts

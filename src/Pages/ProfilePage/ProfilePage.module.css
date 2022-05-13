@@ -12,11 +12,18 @@
 .for_flex span {
   margin-left: 2rem;
   color: var(--content-color);
+  cursor: pointer;
+  display: none;
+}
+
+.for_flex span:hover {
+  color: var(--primary-color);
 }
 
 .for_flex h1 {
   padding: 2rem;
   color: var(--content-color);
+  font-weight: 500;
 }
 
 .profile_backdrop {
@@ -126,13 +133,17 @@
 }
 
 @media screen and (max-width: 920px) {
-    .profile_container {
-        border-right: 1px solid var(--content-color);
-    }
+  .profile_container {
+    border-right: 1px solid var(--content-color);
+  }
 }
 
 @media screen and (max-width: 750px) {
-    .profile_container {
-        border-right: none;
-    }
+  .profile_container {
+    border-right: none;
+  }
+
+  .for_flex span.mobile_close {
+    display: block;
+  }
 }

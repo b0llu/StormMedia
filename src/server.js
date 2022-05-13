@@ -91,6 +91,7 @@ export function makeServer({ environment = "development" } = {}) {
         "/users/unfollow/:followUserId/",
         unfollowUserHandler.bind(this)
       );
+      this.passthrough("https://api.cloudinary.com/**");
     },
   });
 }

@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { editUser } from "Redux/Reducers/usersSlice";
+import { editUser, imageTry } from "Redux/Reducers/usersSlice";
 import styles from "./EditProfileModal.module.css";
 
 export const EditProfileModal = ({
@@ -17,6 +17,37 @@ export const EditProfileModal = ({
     profilePhoto,
     coverPhoto,
   });
+
+  const imageHandler = async (editedData) => {
+    try {
+      const data = new FormData();
+      data.append("file", editedData.profilePhoto);
+      data.append("cloud_name", process.env.REACT_APP_CLOUDINARY_CLOUD_NAME);
+      data.append(
+        "upload_preset",
+        process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET ?? ""
+      );
+
+      fetch(process.env.REACT_APP_CLOUDINARY_API_URL ?? "", {
+        method: "post",
+        mode: "cors",
+        body: data,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          const obj = {
+            firstName: editedData.firstName,
+            bio: editedData.bio,
+            coverPhoto: editedData.coverPhoto,
+            profilePhoto: data.url,
+          };
+          dispatch(editUser(obj));
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className={styles.edit_modal}>
       <div className={styles.modal}>
@@ -29,7 +60,7 @@ export const EditProfileModal = ({
           </div>
           <button
             onClick={() => {
-              dispatch(editUser(editedData));
+              imageHandler(editedData);
               setModal(false);
             }}
           >
@@ -52,12 +83,12 @@ export const EditProfileModal = ({
           />
           <div className={styles.photo_upload_div}>
             <input
-              onChange={(e) =>
+              onChange={(e) => {
                 setEditedData({
                   ...editedData,
                   profilePhoto: e.target.files[0],
-                })
-              }
+                });
+              }}
               className={styles.photo_change}
               id="photo_change"
               type="file"

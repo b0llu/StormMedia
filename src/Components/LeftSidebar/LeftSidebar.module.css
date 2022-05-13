@@ -124,7 +124,6 @@ a {
 }
 
 .mobile_icon_container span.mobile_close {
-  /* display: none; */
   color: var(--content-color);
   cursor: pointer;
   margin-left: 1rem;

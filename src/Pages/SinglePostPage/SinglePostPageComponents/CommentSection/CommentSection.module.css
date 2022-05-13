@@ -26,7 +26,7 @@
   margin-right: 2rem;
   font-size: 2rem;
   outline: none;
-  font-style: inherit;
+  font-family: inherit;
 }
 
 .comment button {

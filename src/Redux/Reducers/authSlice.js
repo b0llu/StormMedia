@@ -69,33 +69,33 @@ const authSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(login.fulfilled, (state, action) => {
-        state.currentUser = action.payload.foundUser;
         localStorage.setItem("StormMediaToken", action.payload.encodedToken);
         localStorage.setItem(
           "StormMediaUser",
           action.payload.foundUser.firstName
         );
         SuccessToast("Login Successful");
+        state.currentUser = action.payload.foundUser;
       })
 
       .addCase(signup.fulfilled, (state, action) => {
-        state.currentUser = action.payload.createdUser;
         localStorage.setItem("StormMediaToken", action.payload.encodedToken);
         localStorage.setItem(
           "StormMediaUser",
           action.payload.createdUser.firstName
         );
         SuccessToast("Signup Successful");
+        state.currentUser = action.payload.createdUser;
       })
 
       .addCase(testLogger.fulfilled, (state, action) => {
-        state.currentUser = action.payload.foundUser;
         localStorage.setItem("StormMediaToken", action.payload.encodedToken);
         localStorage.setItem(
           "StormMediaUser",
           action.payload.foundUser.firstName
         );
         SuccessToast("Login Successful");
+        state.currentUser = action.payload.foundUser;
       })
 
       .addCase(tokenChecker.fulfilled, (state, action) => {

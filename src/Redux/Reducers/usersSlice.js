@@ -25,7 +25,6 @@ export const followUser = createAsyncThunk("users/follow", async (id) => {
         headers: { authorization: encodedToken },
       }
     );
-    console.log(response)
     SuccessToast("Followed");
     return response.data;
   } catch (error) {
@@ -93,13 +92,16 @@ const userSlice = createSlice({
       .addCase(unfollowUser.fulfilled, followUnfollowUser)
 
       .addCase(editUser.fulfilled, (state, action) => {
-        state.users = state.users.map((user) => {
-          if (user._id === action.payload.user._id) {
-            return action.payload.user;
-          } else {
-            return user;
-          }
-        });
+        return {
+          ...state,
+          users: state.users.map((user) => {
+            if (user._id === action.payload.user._id) {
+              return action.payload.user;
+            } else {
+              return user;
+            }
+          }),
+        };
       });
   },
 });

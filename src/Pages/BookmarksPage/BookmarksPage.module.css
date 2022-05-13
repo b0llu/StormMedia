@@ -6,8 +6,18 @@
   font-size: 3rem;
   padding: 2rem;
   color: var(--content-color);
-  border-bottom: 1px solid var(--content-color);
   font-weight: 500;
+}
+
+.for_flex {
+  display: flex;
+  border-bottom: 1px solid var(--content-color);
+  align-items: center;
+}
+
+.for_flex span {
+  margin-left: 2rem;
+  color: var(--content-color);
 }
 
 .post {
@@ -87,4 +97,16 @@
   align-items: center;
   justify-content: center;
   margin-right: 1rem;
+}
+
+@media screen and (max-width: 920px) {
+    .bookmarks_container {
+        border-right: 1px solid var(--content-color);
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .bookmarks_container {
+        border-right: none;
+    }
 }

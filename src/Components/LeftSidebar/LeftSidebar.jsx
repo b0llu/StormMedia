@@ -1,16 +1,60 @@
 import styles from "./LeftSidebar.module.css";
 import { Link, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "Redux/Reducers/authSlice";
+import { useThemeContext } from "Context";
 
 export const LeftSidebar = () => {
   const location = useLocation();
+  const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.auth.currentUser);
+  const { theme, toggleLightDarkTheme, setToggle, toggle } = useThemeContext();
 
   return (
-    <aside className={styles.left_sidebar}>
+    <aside
+      className={
+        toggle ? `${styles.left_sidebar_toggle}` : `${styles.left_sidebar}`
+      }
+    >
       <p className={styles.brand_name}>
         <i className="fas fa-bolt"></i> StormMedia
       </p>
+      <div className={styles.brand_name_mobile}>
+        <i className="fas fa-bolt"></i>
+        <div className={styles.mobile_icon_container}>
+          {currentUser._id && (
+            <span
+              onClick={() => {
+                dispatch(logout()), setToggle(false)
+              }}
+              className={`material-icons ${styles.logout_icon}`}
+            >
+              logout
+            </span>
+          )}
+          {theme === "light" ? (
+            <span
+              onClick={toggleLightDarkTheme}
+              className={`material-icons ${styles.theme_icon}`}
+            >
+              dark_mode
+            </span>
+          ) : (
+            <span
+              onClick={toggleLightDarkTheme}
+              className={`material-icons ${styles.theme_icon}`}
+            >
+              light_mode
+            </span>
+          )}
+          <span
+            onClick={() => setToggle(false)}
+            className={`${styles.mobile_close} material-icons`}
+          >
+            close
+          </span>
+        </div>
+      </div>
       <ul className={styles.list}>
         <Link to={`/home`}>
           <li className={`${location.pathname === "/home" && styles.bold}`}>
@@ -25,7 +69,9 @@ export const LeftSidebar = () => {
           </li>
         </Link>
         <Link to={`/bookmarks`}>
-          <li className={`${location.pathname === "/bookmark" && styles.bold}`}>
+          <li
+            className={`${location.pathname === "/bookmarks" && styles.bold}`}
+          >
             <span className="material-icons">bookmark</span>Bookmarks
           </li>
         </Link>

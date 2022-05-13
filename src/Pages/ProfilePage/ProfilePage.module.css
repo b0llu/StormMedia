@@ -3,6 +3,22 @@
   width: 100%;
 }
 
+.for_flex {
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+}
+
+.for_flex span {
+  margin-left: 2rem;
+  color: var(--content-color);
+}
+
+.for_flex h1 {
+  padding: 2rem;
+  color: var(--content-color);
+}
+
 .profile_backdrop {
   width: 100%;
 }
@@ -107,4 +123,16 @@
 
 .user_info .follow_btn:hover {
   background-color: var(--follow-btn-hover);
+}
+
+@media screen and (max-width: 920px) {
+    .profile_container {
+        border-right: 1px solid var(--content-color);
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .profile_container {
+        border-right: none;
+    }
 }

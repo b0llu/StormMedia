@@ -82,28 +82,6 @@ export const editUser = createAsyncThunk(
   }
 );
 
-export const imageTry = createAsyncThunk("users/imageTry", async (image) => {
-  try {
-    const data = new FormData();
-    data.append("file", image);
-    data.append("cloud_name", process.env.REACT_APP_CLOUDINARY_CLOUD_NAME);
-    data.append(
-      "upload_preset",
-      process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET ?? ""
-    );
-
-    fetch(process.env.REACT_APP_CLOUDINARY_API_URL ?? "", {
-      method: "post",
-      mode: "cors",
-      body: data,
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data.url));
-  } catch (error) {
-    console.log(error);
-  }
-});
-
 const userSlice = createSlice({
   name: "users",
   initialState,

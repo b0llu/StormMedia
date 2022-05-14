@@ -47,6 +47,7 @@
     background-color: var(--primary-color);
     font-weight: 500;
     font-size: 1.5rem;
+    width: 100%;
 }
 
 .signup_container button:hover {

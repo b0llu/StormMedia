@@ -61,23 +61,26 @@ const followUnfollowUser = (state, action) => {
   }
 };
 
-export const editUser = createAsyncThunk("users/edit", async (userData) => {
-  try {
-    const encodedToken = localStorage.getItem("StormMediaToken");
-    const response = await axios.post(
-      "/api/users/edit",
-      { userData },
-      {
-        headers: {
-          authorization: encodedToken,
-        },
-      }
-    );
-    return response.data;
-  } catch (error) {
-    console.log(error);
+export const editUser = createAsyncThunk(
+  "users/edit",
+  async (userData) => {
+    try {
+      const encodedToken = localStorage.getItem("StormMediaToken");
+      const response = await axios.post(
+        "/api/users/edit",
+        { userData },
+        {
+          headers: {
+            authorization: encodedToken,
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
   }
-});
+);
 
 const userSlice = createSlice({
   name: "users",
@@ -92,16 +95,13 @@ const userSlice = createSlice({
       .addCase(unfollowUser.fulfilled, followUnfollowUser)
 
       .addCase(editUser.fulfilled, (state, action) => {
-        return {
-          ...state,
-          users: state.users.map((user) => {
-            if (user._id === action.payload.user._id) {
-              return action.payload.user;
-            } else {
-              return user;
-            }
-          }),
-        };
+        state.users = state.users.map((user) => {
+          if (user._id === action.payload.user._id) {
+            return action.payload.user;
+          } else {
+            return user;
+          }
+        });
       });
   },
 });

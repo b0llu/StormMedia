@@ -49,7 +49,6 @@
   justify-content: flex-start;
   color: var(--content-color);
   padding: 1.5rem;
-  cursor: pointer;
   border-bottom-left-radius: 2rem;
   border-bottom-right-radius: 2rem;
 }
@@ -63,6 +62,7 @@
   height: 5rem;
   width: 5rem;
   border-radius: 50%;
+  cursor: pointer;
 }
 
 .small_profile h1 {
@@ -99,7 +99,14 @@
   background-color: var(--follow-btn-hover);
 }
 
-@media screen and (max-width:920px) {
+@media screen and (max-width: 1200px) {
+  .follow_btn {
+    font-size: 1.6rem;
+    padding: 5px 2rem;
+  }
+}
+
+@media screen and (max-width: 920px) {
   .right_sidebar {
     display: none;
   }

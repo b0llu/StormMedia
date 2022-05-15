@@ -42,3 +42,27 @@
     justify-content: center;
     flex-direction: column;
 }
+
+@media screen and (max-width: 1000px) {
+    .rsp_img {
+        display: none;
+    }
+
+    .landing_holder {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+    }
+
+    .landing_container h2 {
+        margin: 2rem 0;
+    }
+
+    .auth_container {
+        align-items: center;
+    }
+}

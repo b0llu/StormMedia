@@ -84,6 +84,13 @@
   color: var(--faint-text-clr);
   font-size: 2rem;
   margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.user_data a {
+  text-decoration: none;
+  color: #7192ca;
+  font-size: 2rem;
 }
 
 .user_data p {

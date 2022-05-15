@@ -9,6 +9,7 @@ export const EditProfileModal = ({
   profilePhoto,
   coverPhoto,
   setModal,
+  URL,
 }) => {
   const dispatch = useDispatch();
   const [editedData, setEditedData] = useState({
@@ -16,6 +17,7 @@ export const EditProfileModal = ({
     bio,
     profilePhoto,
     coverPhoto,
+    URL,
   });
 
   const imageHandler = async (editedData) => {
@@ -39,6 +41,7 @@ export const EditProfileModal = ({
             firstName: editedData.firstName,
             bio: editedData.bio,
             coverPhoto: editedData.coverPhoto,
+            URL: editedData.URL,
             profilePhoto: data.url,
           };
           dispatch(editUser(obj));
@@ -124,6 +127,16 @@ export const EditProfileModal = ({
                 cols="30"
                 rows="5"
               ></textarea>
+            </div>
+            <div className={styles.name_section}>
+              <label>URL</label>
+              <input
+                onChange={(e) =>
+                  setEditedData({ ...editedData, URL: e.target.value })
+                }
+                type="text"
+                value={editedData.URL}
+              />
             </div>
           </div>
         </div>

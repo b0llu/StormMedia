@@ -2,12 +2,22 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { createNewPost } from "Redux/Reducers/postsSlice";
+import { AlertToast } from "Components/Toasts";
 import styles from "./NewPost.module.css";
 
 export const NewPost = () => {
   const [postDetails, setPostDetails] = useState("");
-  const currentUser = useSelector(state => state.auth.currentUser)
+  const currentUser = useSelector((state) => state.auth.currentUser);
   const dispatch = useDispatch();
+
+  const postHandler = (postDetails) => {
+    if (postDetails === "") {
+      AlertToast("Why are you Posting Empty Post?");
+    } else {
+      dispatch(createNewPost(postDetails));
+      setPostDetails("");
+    }
+  };
 
   return (
     <div className={styles.post_container}>
@@ -38,14 +48,7 @@ export const NewPost = () => {
             <span className="material-icons">poll</span>
             <span className="material-icons">emoji_emotions</span>
           </div>
-          <button
-            onClick={() => {
-              dispatch(createNewPost(postDetails));
-              setPostDetails("");
-            }}
-          >
-            Post
-          </button>
+          <button onClick={() => postHandler(postDetails)}>Post</button>
         </div>
       </div>
     </div>

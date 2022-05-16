@@ -49,7 +49,7 @@ export const HomePage = () => {
         </span>
         <h1 className={styles.section_header}>Home</h1>
         <span
-          onMouseEnter={(e) => setSortDropdown(!sortDropdown)}
+          onMouseEnter={() => setSortDropdown(!sortDropdown)}
           className="material-icons"
         >
           sort

@@ -71,27 +71,13 @@ export const EachPost = ({ filterState }) => {
               </Link>
               <h3>{post.time}</h3>
               <div className={styles.follow_btn}>
-                {allUsers
+                {!allUsers
                   .filter((user) => user.username === currentUser.username)
                   .map((user) =>
                     user.following.some(
                       (user) => user.username === post.username
                     )
-                  )[0] ? (
-                  <button
-                    onClick={() =>
-                      dispatch(
-                        unfollowUser(
-                          allUsers.filter(
-                            (user) => user.username === post.username
-                          )[0]._id
-                        )
-                      )
-                    }
-                  >
-                    Unfollow
-                  </button>
-                ) : (
+                  )[0] && (
                   <button
                     onClick={() =>
                       dispatch(

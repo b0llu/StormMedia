@@ -40,6 +40,7 @@ export const ProfilePage = () => {
                 bio={post.bio}
                 profilePhoto={post.profilePhoto}
                 coverPhoto={post.coverPhoto}
+                URL={post.URL}
                 setModal={setModal}
               />
             )}
@@ -67,6 +68,7 @@ export const ProfilePage = () => {
               <div className={styles.user_data}>
                 <h1>{post.firstName}</h1>
                 <h3>@{post.username}</h3>
+                <a target={'_blank'} href={post.URL}>{post.URL}</a>
                 <p>{post.bio}</p>
                 <div className={styles.follower_status}>
                   <p>

@@ -29,6 +29,7 @@
   resize: none;
   outline: none;
   border: none;
+  font-family: inherit;
 }
 
 .post_details textarea:focus {

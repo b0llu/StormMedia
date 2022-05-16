@@ -104,7 +104,12 @@
 }
 
 @media screen and (max-width: 920px) {
-    .follow_btn {
-        display: block;
-    }
+  .follow_btn {
+    display: block;
+  }
+
+  .follow_btn button {
+    padding: 2px 1rem;
+    font-size: 1.6rem;
+  }
 }

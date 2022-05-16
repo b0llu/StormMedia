@@ -18,6 +18,12 @@
 .for_flex span {
   margin-left: 2rem;
   color: var(--content-color);
+  display: none;
+  cursor: pointer;
+}
+
+.for_flex span:hover {
+  color: var(--primary-color);
 }
 
 .post {
@@ -109,4 +115,8 @@
     .bookmarks_container {
         border-right: none;
     }
+
+    .for_flex span.mobile_close {
+    display: block;
+  }
 }

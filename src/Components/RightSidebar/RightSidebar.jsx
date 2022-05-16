@@ -1,10 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./RightSidebar.module.css";
 import { followUser, unfollowUser } from "Redux/Reducers/usersSlice";
+import { Link } from "react-router-dom";
 
 export const RightSidebar = () => {
   const allUsers = useSelector((state) => state.users.users);
-  const currentUser = useSelector(state => state.auth.currentUser)
+  const currentUser = useSelector((state) => state.auth.currentUser);
   const dispatch = useDispatch();
 
   return (
@@ -20,8 +21,9 @@ export const RightSidebar = () => {
         ) : (
           <h1>No Following</h1>
         )}
-        {allUsers.filter((user) => user.username === currentUser.username)[0] !==
-          undefined &&
+        {allUsers.filter(
+          (user) => user.username === currentUser.username
+        )[0] !== undefined &&
           allUsers.filter((user) => user.username === currentUser.username)[0]
             .following.length !== 0 &&
           allUsers
@@ -30,15 +32,17 @@ export const RightSidebar = () => {
               return (
                 <div key={user._id}>
                   <div className={styles.small_profile}>
-                    <img
-                      src={
-                        user.profilePhoto
-                          ? user.profilePhoto
-                          : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
-                      }
-                      alt="profile_image"
-                      className={styles.avatar}
-                    />
+                    <Link to={`/${user.username}`}>
+                      <img
+                        src={
+                          user.profilePhoto
+                            ? user.profilePhoto
+                            : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+                        }
+                        alt="profile_image"
+                        className={styles.avatar}
+                      />
+                    </Link>
                     <div className={styles.user}>
                       <div>
                         <h1>{user.firstName}</h1>
@@ -59,8 +63,9 @@ export const RightSidebar = () => {
             })}
       </div>
       <div className={styles.follower_section}>
-        {allUsers.filter((user) => user.username === currentUser.username)[0] !==
-          undefined &&
+        {allUsers.filter(
+          (user) => user.username === currentUser.username
+        )[0] !== undefined &&
         allUsers
           .filter((user) => user.username !== currentUser.username)
           .filter((user) =>
@@ -76,13 +81,15 @@ export const RightSidebar = () => {
         ) : (
           <h1>No Suggetions</h1>
         )}
-        {allUsers.filter((user) => user.username === currentUser.username)[0] !==
-          undefined &&
+        {allUsers.filter(
+          (user) => user.username === currentUser.username
+        )[0] !== undefined &&
           allUsers
             .filter((user) => user.username !== currentUser.username)
             .filter((user) =>
-              allUsers.filter((user) => user.username === currentUser.username)[0]
-                .following.length === 0
+              allUsers.filter(
+                (user) => user.username === currentUser.username
+              )[0].following.length === 0
                 ? user
                 : !allUsers
                     .filter((user) => user.username === currentUser.username)[0]
@@ -92,15 +99,17 @@ export const RightSidebar = () => {
             .map((user) => {
               return (
                 <div key={user._id} className={styles.small_profile}>
-                  <img
-                    src={
-                      user.profilePhoto
-                        ? user.profilePhoto
-                        : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
-                    }
-                    alt="profile_image"
-                    className={styles.avatar}
-                  />
+                  <Link to={`/${user.username}`}>
+                    <img
+                      src={
+                        user.profilePhoto
+                          ? user.profilePhoto
+                          : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+                      }
+                      alt="profile_image"
+                      className={styles.avatar}
+                    />
+                  </Link>
                   <div className={styles.user}>
                     <div>
                       <h1>{user.firstName}</h1>

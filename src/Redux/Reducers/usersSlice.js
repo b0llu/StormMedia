@@ -6,48 +6,57 @@ const initialState = {
   users: [],
 };
 
-export const getAllUsers = createAsyncThunk("users/getUsers", async () => {
-  try {
-    const response = await axios.get("/api/users");
-    return response.data;
-  } catch (error) {
-    AlertToast(error.response.data.message);
+export const getAllUsers = createAsyncThunk(
+  "users/getUsers",
+  async (mockParameter, { rejectWithValue }) => {
+    try {
+      const response = await axios.get("/api/users");
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
   }
-});
+);
 
-export const followUser = createAsyncThunk("users/follow", async (id) => {
-  try {
-    const encodedToken = localStorage.getItem("StormMediaToken");
-    const response = await axios.post(
-      `/api/users/follow/${id}`,
-      {},
-      {
-        headers: { authorization: encodedToken },
-      }
-    );
-    SuccessToast("Followed");
-    return response.data;
-  } catch (error) {
-    AlertToast(error.response.data.errors[0]);
+export const followUser = createAsyncThunk(
+  "users/follow",
+  async (id, { rejectWithValue }) => {
+    try {
+      const encodedToken = localStorage.getItem("StormMediaToken");
+      const response = await axios.post(
+        `/api/users/follow/${id}`,
+        {},
+        {
+          headers: { authorization: encodedToken },
+        }
+      );
+      SuccessToast("Followed");
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
   }
-});
+);
 
-export const unfollowUser = createAsyncThunk("users/unfollow", async (id) => {
-  try {
-    const encodedToken = localStorage.getItem("StormMediaToken");
-    const response = await axios.post(
-      `/api/users/unfollow/${id}`,
-      {},
-      {
-        headers: { authorization: encodedToken },
-      }
-    );
-    AlertToast("Unfollowed");
-    return response.data;
-  } catch (error) {
-    AlertToast(error.response.data.errors[0]);
+export const unfollowUser = createAsyncThunk(
+  "users/unfollow",
+  async (id, { rejectWithValue }) => {
+    try {
+      const encodedToken = localStorage.getItem("StormMediaToken");
+      const response = await axios.post(
+        `/api/users/unfollow/${id}`,
+        {},
+        {
+          headers: { authorization: encodedToken },
+        }
+      );
+      AlertToast("Unfollowed");
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
   }
-});
+);
 
 const followUnfollowUser = (state, action) => {
   if (action.payload !== undefined) {
@@ -61,23 +70,26 @@ const followUnfollowUser = (state, action) => {
   }
 };
 
-export const editUser = createAsyncThunk("users/edit", async (userData) => {
-  try {
-    const encodedToken = localStorage.getItem("StormMediaToken");
-    const response = await axios.post(
-      "/api/users/edit",
-      { userData },
-      {
-        headers: {
-          authorization: encodedToken,
-        },
-      }
-    );
-    return response.data;
-  } catch (error) {
-    console.log(error);
+export const editUser = createAsyncThunk(
+  "users/edit",
+  async (userData, { rejectWithValue }) => {
+    try {
+      const encodedToken = localStorage.getItem("StormMediaToken");
+      const response = await axios.post(
+        "/api/users/edit",
+        { userData },
+        {
+          headers: {
+            authorization: encodedToken,
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
   }
-});
+);
 
 const userSlice = createSlice({
   name: "users",
@@ -87,21 +99,30 @@ const userSlice = createSlice({
       .addCase(getAllUsers.fulfilled, (state, action) => {
         state.users = action.payload.users;
       })
+      .addCase(getAllUsers.rejected, (state, action) => {
+        AlertToast(`${action.payload.errors[0]}`);
+      })
 
       .addCase(followUser.fulfilled, followUnfollowUser)
+      .addCase(followUser.rejected, (state, action) => {
+        AlertToast(`${action.payload.errors[0]}`);
+      })
       .addCase(unfollowUser.fulfilled, followUnfollowUser)
+      .addCase(unfollowUser.rejected, (state, action) => {
+        AlertToast(`${action.payload.errors[0]}`);
+      })
 
       .addCase(editUser.fulfilled, (state, action) => {
-        return {
-          ...state,
-          users: state.users.map((user) => {
-            if (user._id === action.payload.user._id) {
-              return action.payload.user;
-            } else {
-              return user;
-            }
-          }),
-        };
+        state.users = state.users.map((user) => {
+          if (user._id === action.payload.user._id) {
+            return action.payload.user;
+          } else {
+            return user;
+          }
+        });
+      })
+      .addCase(editUser.rejected, (state, action) => {
+        AlertToast(`${action.payload.errors[0]}`);
       });
   },
 });

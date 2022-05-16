@@ -11,18 +11,21 @@ const initialState = {
   sortOrder: null,
 };
 
-export const getAllPosts = createAsyncThunk("posts/getAll", async () => {
-  try {
-    const response = await axios.get("/api/posts");
-    return response.data;
-  } catch (error) {
-    AlertToast(error.response.data.errors[0]);
+export const getAllPosts = createAsyncThunk(
+  "posts/getAll",
+  async (mockParameter, { rejectWithValue }) => {
+    try {
+      const response = await axios.get("/api/posts");
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
   }
-});
+);
 
 export const createNewPost = createAsyncThunk(
   "posts/createNew",
-  async (post) => {
+  async (post, { rejectWithValue }) => {
     const encodedToken = localStorage.getItem("StormMediaToken");
     try {
       const response = await axios.post(
@@ -32,42 +35,48 @@ export const createNewPost = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      AlertToast(error.response.data.errors[0]);
+      return rejectWithValue(error.response.data);
     }
   }
 );
 
-export const likePost = createAsyncThunk("posts/like", async (id) => {
-  try {
-    const encodedToken = localStorage.getItem("StormMediaToken");
-    const response = await axios.post(
-      `/api/posts/like/${id}`,
-      {},
-      { headers: { authorization: encodedToken } }
-    );
-    return response.data;
-  } catch (error) {
-    console.log(error);
+export const likePost = createAsyncThunk(
+  "posts/like",
+  async (id, { rejectWithValue }) => {
+    try {
+      const encodedToken = localStorage.getItem("StormMediaToken");
+      const response = await axios.post(
+        `/api/posts/like/${id}`,
+        {},
+        { headers: { authorization: encodedToken } }
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
   }
-});
+);
 
-export const dislikePost = createAsyncThunk("posts/dislike", async (id) => {
-  try {
-    const encodedToken = localStorage.getItem("StormMediaToken");
-    const response = await axios.post(
-      `/api/posts/dislike/${id}`,
-      {},
-      { headers: { authorization: encodedToken } }
-    );
-    return response.data;
-  } catch (error) {
-    console.log(error);
+export const dislikePost = createAsyncThunk(
+  "posts/dislike",
+  async (id, { rejectWithValue }) => {
+    try {
+      const encodedToken = localStorage.getItem("StormMediaToken");
+      const response = await axios.post(
+        `/api/posts/dislike/${id}`,
+        {},
+        { headers: { authorization: encodedToken } }
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
   }
-});
+);
 
 export const postComment = createAsyncThunk(
   "posts/comment",
-  async ({ id, comment }) => {
+  async ({ id, comment }, { rejectWithValue }) => {
     try {
       const encodedToken = localStorage.getItem("StormMediaToken");
       const response = await axios.post(
@@ -79,28 +88,31 @@ export const postComment = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      console.log(error.response);
+      return rejectWithValue(error.response.data);
     }
   }
 );
 
-export const bookmark = createAsyncThunk("post/bookmark", async (postId) => {
-  try {
-    const encodedToken = localStorage.getItem("StormMediaToken");
-    const response = await axios.post(
-      `/api/users/bookmark/${postId}`,
-      {},
-      { headers: { authorization: encodedToken } }
-    );
-    return response.data;
-  } catch (error) {
-    console.log(error);
+export const bookmark = createAsyncThunk(
+  "post/bookmark",
+  async (postId, { rejectWithValue }) => {
+    try {
+      const encodedToken = localStorage.getItem("StormMediaToken");
+      const response = await axios.post(
+        `/api/users/bookmark/${postId}`,
+        {},
+        { headers: { authorization: encodedToken } }
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
   }
-});
+);
 
 export const removeBookmark = createAsyncThunk(
   "post/removeBookmark",
-  async (postId) => {
+  async (postId, { rejectWithValue }) => {
     try {
       const encodedToken = localStorage.getItem("StormMediaToken");
       const response = await axios.post(
@@ -110,14 +122,14 @@ export const removeBookmark = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      console.log(error);
+      return rejectWithValue(error.response.data);
     }
   }
 );
 
 export const editPost = createAsyncThunk(
   "post/edit",
-  async ({ id, content }) => {
+  async ({ id, content }, { rejectWithValue }) => {
     try {
       const encodedToken = localStorage.getItem("StormMediaToken");
       const response = await axios.post(
@@ -127,22 +139,25 @@ export const editPost = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      console.log(error);
+      return rejectWithValue(error.response.data);
     }
   }
 );
 
-export const deletePost = createAsyncThunk("post/delete", async (id) => {
-  try {
-    const encodedToken = localStorage.getItem("StormMediaToken");
-    const response = await axios.delete(`/api/posts/${id}`, {
-      headers: { authorization: encodedToken },
-    });
-    return response.data;
-  } catch (error) {
-    console.log(error);
+export const deletePost = createAsyncThunk(
+  "post/delete",
+  async (id, { rejectWithValue }) => {
+    try {
+      const encodedToken = localStorage.getItem("StormMediaToken");
+      const response = await axios.delete(`/api/posts/${id}`, {
+        headers: { authorization: encodedToken },
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
   }
-});
+);
 
 const postsSlice = createSlice({
   name: "posts",
@@ -171,42 +186,69 @@ const postsSlice = createSlice({
         state.loading = false;
         state.posts = action.payload.posts;
       })
+      .addCase(getAllPosts.rejected, (state, action) => {
+        AlertToast(`${action.payload.errors[0]}`);
+      })
 
       .addCase(createNewPost.fulfilled, (state, action) => {
         SuccessToast("Posted");
         state.posts = action.payload.posts;
       })
+      .addCase(createNewPost.rejected, (state, action) => {
+        AlertToast(`${action.payload.errors[0]}`);
+      })
 
       .addCase(likePost.fulfilled, (state, action) => {
         state.posts = action.payload.posts;
+      })
+      .addCase(likePost.rejected, (state, action) => {
+        AlertToast(`${action.payload.errors[0]}`);
       })
 
       .addCase(dislikePost.fulfilled, (state, action) => {
         state.posts = action.payload.posts;
       })
+      .addCase(dislikePost.rejected, (state, action) => {
+        AlertToast(`${action.payload.errors[0]}`);
+      })
 
       .addCase(postComment.fulfilled, (state, action) => {
         state.posts = action.payload.posts;
+      })
+      .addCase(postComment.rejected, (state, action) => {
+        AlertToast(`${action.payload.errors[0]}`);
       })
 
       .addCase(bookmark.fulfilled, (state, action) => {
         SuccessToast("Added to Bookmarks");
         state.bookmarks = action.payload.bookmarks;
       })
+      .addCase(bookmark.rejected, (state, action) => {
+        AlertToast(`${action.payload.errors[0]}`);
+      })
 
       .addCase(removeBookmark.fulfilled, (state, action) => {
         AlertToast("Removed From Bookmarks");
         state.bookmarks = action.payload.bookmarks;
+      })
+      .addCase(removeBookmark.rejected, (state, action) => {
+        AlertToast(`${action.payload.errors[0]}`);
       })
 
       .addCase(editPost.fulfilled, (state, action) => {
         SuccessToast("Post Edited");
         state.posts = action.payload.posts;
       })
+      .addCase(editPost.rejected, (state, action) => {
+        AlertToast(`${action.payload.errors[0]}`);
+      })
 
       .addCase(deletePost.fulfilled, (state, action) => {
         AlertToast("Post Deleted");
         state.posts = action.payload.posts;
+      })
+      .addCase(deletePost.rejected, (state, action) => {
+        AlertToast(`${action.payload.errors[0]}`);
       });
   },
 });

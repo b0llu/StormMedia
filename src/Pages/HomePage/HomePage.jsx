@@ -1,8 +1,9 @@
 import { EachPost, NewPost } from "Components";
 import { useThemeContext } from "Context";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  getAllPosts,
   sortByDate,
   sortByRecent,
   sortByTrending,

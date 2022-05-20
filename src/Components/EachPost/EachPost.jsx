@@ -9,7 +9,7 @@ import {
   likePost,
   removeBookmark,
 } from "Redux/Reducers/postsSlice";
-import { followUser, unfollowUser } from "Redux/Reducers/usersSlice";
+import { followUser } from "Redux/Reducers/usersSlice";
 
 import styles from "./EachPost.module.css";
 
@@ -46,14 +46,21 @@ export const EachPost = ({ filterState }) => {
             />
           )}
           <Link to={`/${post.username}`}>
-            <img
-              src={
-                post.profilePhoto
-                  ? post.profilePhoto
-                  : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
-              }
-              alt="User Thumbnail"
-            />
+            {allUsers
+              .filter((posts) => posts.username === post.username)
+              .map((user) => {
+                return (
+                  <img
+                    key={user._id}
+                    src={
+                      user.profilePhoto
+                        ? user.profilePhoto
+                        : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+                    }
+                    alt="User Thumbnail"
+                  />
+                );
+              })}
           </Link>
           <div className={styles.post_user_details}>
             <div className={styles.user_name}>

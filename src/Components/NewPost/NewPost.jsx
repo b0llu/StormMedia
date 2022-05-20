@@ -7,6 +7,7 @@ import styles from "./NewPost.module.css";
 
 export const NewPost = () => {
   const [postDetails, setPostDetails] = useState("");
+  const allUsers = useSelector((state) => state.users.users);
   const currentUser = useSelector((state) => state.auth.currentUser);
   const dispatch = useDispatch();
 
@@ -22,14 +23,21 @@ export const NewPost = () => {
   return (
     <div className={styles.post_container}>
       <Link to={`/${currentUser.username}`}>
-        <img
-          src={
-            currentUser.profilePhoto
-              ? currentUser.profilePhoto
-              : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
-          }
-          alt="user image"
-        />
+        {allUsers
+          .filter((posts) => posts.username === currentUser.username)
+          .map((user) => {
+            return (
+              <img
+                key={user._id}
+                src={
+                  user.profilePhoto
+                    ? user.profilePhoto
+                    : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+                }
+                alt="User Thumbnail"
+              />
+            );
+          })}
       </Link>
       <div className={styles.post_details}>
         <textarea

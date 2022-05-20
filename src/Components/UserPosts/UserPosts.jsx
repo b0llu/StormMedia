@@ -18,6 +18,7 @@ export const UserPosts = ({ posts }) => {
     content: "",
     id: "",
   });
+  const allUsers = useSelector((state) => state.users.users);
   const currentUser = useSelector((state) => state.auth.currentUser);
   const bookmarks = useSelector((state) => state.posts.bookmarks);
   const dispatch = useDispatch();
@@ -35,14 +36,21 @@ export const UserPosts = ({ posts }) => {
               setPostModal={setPostModal}
             />
           )}
-          <img
-            src={
-              post.profilePhoto
-                ? post.profilePhoto
-                : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
-            }
-            alt="User Thumbnail"
-          />
+          {allUsers
+            .filter((posts) => posts.username === currentUser.username)
+            .map((user) => {
+              return (
+                <img
+                  key={user._id}
+                  src={
+                    user.profilePhoto
+                      ? user.profilePhoto
+                      : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+                  }
+                  alt="User Thumbnail"
+                />
+              );
+            })}
           <div className={styles.post_user_details}>
             <div className={styles.user_name}>
               <h1>{post.name}</h1>

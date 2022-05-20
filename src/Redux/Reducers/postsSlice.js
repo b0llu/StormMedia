@@ -11,21 +11,18 @@ const initialState = {
   sortOrder: null,
 };
 
-export const getAllPosts = createAsyncThunk(
-  "posts/getAll",
-  async (mockParameter, { rejectWithValue }) => {
-    try {
-      const response = await axios.get("/api/posts");
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(error.response.data);
-    }
+export const getAllPosts = createAsyncThunk("posts/getAll", async (_, thunkAPI) => {
+  try {
+    const response = await axios.get("/api/posts");
+    return response.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.response.data);
   }
-);
+});
 
 export const createNewPost = createAsyncThunk(
   "posts/createNew",
-  async (post, { rejectWithValue }) => {
+  async (post, thunkAPI) => {
     const encodedToken = localStorage.getItem("StormMediaToken");
     try {
       const response = await axios.post(
@@ -35,48 +32,42 @@ export const createNewPost = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      return thunkAPI.rejectWithValue(error.response.data);
     }
   }
 );
 
-export const likePost = createAsyncThunk(
-  "posts/like",
-  async (id, { rejectWithValue }) => {
-    try {
-      const encodedToken = localStorage.getItem("StormMediaToken");
-      const response = await axios.post(
-        `/api/posts/like/${id}`,
-        {},
-        { headers: { authorization: encodedToken } }
-      );
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(error.response.data);
-    }
+export const likePost = createAsyncThunk("posts/like", async (id, thunkAPI) => {
+  try {
+    const encodedToken = localStorage.getItem("StormMediaToken");
+    const response = await axios.post(
+      `/api/posts/like/${id}`,
+      {},
+      { headers: { authorization: encodedToken } }
+    );
+    return response.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.response.data);
   }
-);
+});
 
-export const dislikePost = createAsyncThunk(
-  "posts/dislike",
-  async (id, { rejectWithValue }) => {
-    try {
-      const encodedToken = localStorage.getItem("StormMediaToken");
-      const response = await axios.post(
-        `/api/posts/dislike/${id}`,
-        {},
-        { headers: { authorization: encodedToken } }
-      );
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(error.response.data);
-    }
+export const dislikePost = createAsyncThunk("posts/dislike", async (id, thunkAPI) => {
+  try {
+    const encodedToken = localStorage.getItem("StormMediaToken");
+    const response = await axios.post(
+      `/api/posts/dislike/${id}`,
+      {},
+      { headers: { authorization: encodedToken } }
+    );
+    return response.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.response.data);
   }
-);
+});
 
 export const postComment = createAsyncThunk(
   "posts/comment",
-  async ({ id, comment }, { rejectWithValue }) => {
+  async ({ id, comment }, thunkAPI) => {
     try {
       const encodedToken = localStorage.getItem("StormMediaToken");
       const response = await axios.post(
@@ -88,31 +79,28 @@ export const postComment = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      return thunkAPI.rejectWithValue(error.response.data);
     }
   }
 );
 
-export const bookmark = createAsyncThunk(
-  "post/bookmark",
-  async (postId, { rejectWithValue }) => {
-    try {
-      const encodedToken = localStorage.getItem("StormMediaToken");
-      const response = await axios.post(
-        `/api/users/bookmark/${postId}`,
-        {},
-        { headers: { authorization: encodedToken } }
-      );
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(error.response.data);
-    }
+export const bookmark = createAsyncThunk("post/bookmark", async (postId, thunkAPI) => {
+  try {
+    const encodedToken = localStorage.getItem("StormMediaToken");
+    const response = await axios.post(
+      `/api/users/bookmark/${postId}`,
+      {},
+      { headers: { authorization: encodedToken } }
+    );
+    return response.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.response.data);
   }
-);
+});
 
 export const removeBookmark = createAsyncThunk(
   "post/removeBookmark",
-  async (postId, { rejectWithValue }) => {
+  async (postId, thunkAPI) => {
     try {
       const encodedToken = localStorage.getItem("StormMediaToken");
       const response = await axios.post(
@@ -122,14 +110,14 @@ export const removeBookmark = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      return thunkAPI.rejectWithValue(error.response.data);
     }
   }
 );
 
 export const editPost = createAsyncThunk(
   "post/edit",
-  async ({ id, content }, { rejectWithValue }) => {
+  async ({ id, content }, thunkAPI) => {
     try {
       const encodedToken = localStorage.getItem("StormMediaToken");
       const response = await axios.post(
@@ -139,14 +127,14 @@ export const editPost = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      return thunkAPI.rejectWithValue(error.response.data);
     }
   }
 );
 
 export const deletePost = createAsyncThunk(
   "post/delete",
-  async (id, { rejectWithValue }) => {
+  async (id, thunkAPI) => {
     try {
       const encodedToken = localStorage.getItem("StormMediaToken");
       const response = await axios.delete(`/api/posts/${id}`, {
@@ -154,7 +142,7 @@ export const deletePost = createAsyncThunk(
       });
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      return thunkAPI.rejectWithValue(error.response.data);
     }
   }
 );

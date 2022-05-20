@@ -8,19 +8,19 @@ const initialState = {
 
 export const getAllUsers = createAsyncThunk(
   "users/getUsers",
-  async (mockParameter, { rejectWithValue }) => {
+  async (_, thunkAPI) => {
     try {
       const response = await axios.get("/api/users");
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      return thunkAPI.rejectWithValue(error.response.data);
     }
   }
 );
 
 export const followUser = createAsyncThunk(
   "users/follow",
-  async (id, { rejectWithValue }) => {
+  async (id, thunkAPI) => {
     try {
       const encodedToken = localStorage.getItem("StormMediaToken");
       const response = await axios.post(
@@ -33,14 +33,14 @@ export const followUser = createAsyncThunk(
       SuccessToast("Followed");
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      return thunkAPI.rejectWithValue(error.response.data);
     }
   }
 );
 
 export const unfollowUser = createAsyncThunk(
   "users/unfollow",
-  async (id, { rejectWithValue }) => {
+  async (id, thunkAPI) => {
     try {
       const encodedToken = localStorage.getItem("StormMediaToken");
       const response = await axios.post(
@@ -53,7 +53,7 @@ export const unfollowUser = createAsyncThunk(
       AlertToast("Unfollowed");
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      return thunkAPI.rejectWithValue(error.response.data);
     }
   }
 );
@@ -70,26 +70,23 @@ const followUnfollowUser = (state, action) => {
   }
 };
 
-export const editUser = createAsyncThunk(
-  "users/edit",
-  async (userData, { rejectWithValue }) => {
-    try {
-      const encodedToken = localStorage.getItem("StormMediaToken");
-      const response = await axios.post(
-        "/api/users/edit",
-        { userData },
-        {
-          headers: {
-            authorization: encodedToken,
-          },
-        }
-      );
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(error.response.data);
-    }
+export const editUser = createAsyncThunk("users/edit", async (userData, thunkAPI) => {
+  try {
+    const encodedToken = localStorage.getItem("StormMediaToken");
+    const response = await axios.post(
+      "/api/users/edit",
+      { userData },
+      {
+        headers: {
+          authorization: encodedToken,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.response.data);
   }
-);
+});
 
 const userSlice = createSlice({
   name: "users",

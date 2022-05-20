@@ -8,7 +8,7 @@ const initialState = {
 
 export const login = createAsyncThunk(
   "auth/login",
-  async (userDetails, { rejectWithValue }) => {
+  async (userDetails, thunkAPI) => {
     try {
       const response = await axios.post(`/api/auth/login`, {
         username: userDetails.username,
@@ -16,14 +16,14 @@ export const login = createAsyncThunk(
       });
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      return thunkAPI.rejectWithValue(error.response.data);
     }
   }
 );
 
 export const signup = createAsyncThunk(
   "auth/signup",
-  async (userDetails, { rejectWithValue }) => {
+  async (userDetails, thunkAPI) => {
     try {
       const response = await axios.post(`/api/auth/signup`, {
         firstName: userDetails.name,
@@ -32,14 +32,14 @@ export const signup = createAsyncThunk(
       });
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      return thunkAPI.rejectWithValue(error.response.data);
     }
   }
 );
 
 export const testLogger = createAsyncThunk(
   "auth/testLogger",
-  async (mockParameter, { rejectWithValue }) => {
+  async (_, thunkAPI) => {
     try {
       const response = await axios.post("/api/auth/login", {
         username: "TheAdmin",
@@ -47,14 +47,14 @@ export const testLogger = createAsyncThunk(
       });
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      return thunkAPI.rejectWithValue(error.response.data);
     }
   }
 );
 
 export const tokenChecker = createAsyncThunk(
   "auth/tokenChecker",
-  async (mockParameter, { rejectWithValue }) => {
+  async (_, thunkAPI) => {
     const encodedToken = localStorage.getItem("StormMediaToken");
     if (encodedToken) {
       try {
@@ -63,7 +63,7 @@ export const tokenChecker = createAsyncThunk(
         });
         return response.data;
       } catch (error) {
-        return rejectWithValue(error.response.data);
+        return thunkAPI.rejectWithValue(error.response.data);
       }
     }
   }

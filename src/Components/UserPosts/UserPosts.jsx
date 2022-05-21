@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import styles from "./UserPosts.module.css";
 import {
   bookmark,
@@ -18,6 +19,7 @@ export const UserPosts = ({ posts }) => {
     content: "",
     id: "",
   });
+  const { username } = useParams();
   const allUsers = useSelector((state) => state.users.users);
   const currentUser = useSelector((state) => state.auth.currentUser);
   const bookmarks = useSelector((state) => state.posts.bookmarks);
@@ -37,7 +39,7 @@ export const UserPosts = ({ posts }) => {
             />
           )}
           {allUsers
-            .filter((posts) => posts.username === currentUser.username)
+            .filter((posts) => posts.username === username)
             .map((user) => {
               return (
                 <img

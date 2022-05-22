@@ -20,6 +20,16 @@ export const EditProfileModal = ({
     URL,
   });
 
+  const urlCheck = (url) => {
+    let str = "https://";
+
+    if (url.startsWith(str)) {
+      return url;
+    } else {
+      return str + url;
+    }
+  };
+
   const imageHandler = async (editedData) => {
     try {
       const data = new FormData();
@@ -41,7 +51,7 @@ export const EditProfileModal = ({
             firstName: editedData.firstName,
             bio: editedData.bio,
             coverPhoto: editedData.coverPhoto,
-            URL: editedData.URL,
+            URL: urlCheck(editedData.URL),
             profilePhoto: data.url,
           };
           dispatch(editUser(obj));

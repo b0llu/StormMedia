@@ -1,5 +1,5 @@
 import { v4 as uuid } from "uuid";
-import { formatDate, formatTime } from "../utils/authUtils";
+import { formatDate, formatMonth } from "../utils/authUtils";
 
 /**
  * Posts can be added here.
@@ -21,8 +21,8 @@ export const posts = [
       dislikedBy: [],
     },
     comments: [],
-    time: formatTime(),
-    createdAt: formatDate(),
+    time: "21 May 2022",
+    createdAt: new Date("21 May 2022 11:58:15 PM"),
     updatedAt: formatDate(),
     trending: true,
   },
@@ -40,8 +40,8 @@ export const posts = [
       dislikedBy: [],
     },
     comments: [],
-    time: formatTime(),
-    createdAt: formatDate(),
+    time: "20 May 2022",
+    createdAt: new Date("20 May 2022 11:58:15 PM"),
     updatedAt: formatDate(),
   },
   {
@@ -58,8 +58,8 @@ export const posts = [
       dislikedBy: [],
     },
     comments: [],
-    time: formatTime(),
-    createdAt: formatDate(),
+    time: "19 May 2022",
+    createdAt: new Date("19 May 2022 11:58:15 PM"),
     updatedAt: formatDate(),
     trending: true,
   },
@@ -76,8 +76,8 @@ export const posts = [
       dislikedBy: [],
     },
     comments: [],
-    time: formatTime(),
-    createdAt: formatDate(),
+    time: "18 May 2022",
+    createdAt: new Date("18 May 2022 11:58:15 PM"),
     updatedAt: formatDate(),
   },
   {
@@ -93,8 +93,8 @@ export const posts = [
       dislikedBy: [],
     },
     comments: [],
-    time: formatTime(),
-    createdAt: formatDate(),
+    time: "17 May 2022",
+    createdAt: new Date("17 May 2022 11:58:15 PM"),
     updatedAt: formatDate(),
     trending: true,
   },
@@ -111,8 +111,8 @@ export const posts = [
       dislikedBy: [],
     },
     comments: [],
-    time: formatTime(),
-    createdAt: formatDate(),
+    time: "15 May 2022",
+    createdAt: new Date("15 May 2022 11:58:15 PM"),
     updatedAt: formatDate(),
     trending: true,
   },

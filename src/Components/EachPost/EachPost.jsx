@@ -1,4 +1,5 @@
 import { EditPostModal, Loader } from "Components";
+import { sortPosts } from "Hook/sortPosts";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -13,7 +14,7 @@ import { followUser } from "Redux/Reducers/usersSlice";
 
 import styles from "./EachPost.module.css";
 
-export const EachPost = ({ filterState }) => {
+export const EachPost = () => {
   const [postModal, setPostModal] = useState({
     modalState: false,
     profilePhoto: "",
@@ -26,15 +27,13 @@ export const EachPost = ({ filterState }) => {
   const loading = useSelector((state) => state.posts.loading);
   const currentUser = useSelector((state) => state.auth.currentUser);
   const bookmarks = useSelector((state) => state.posts.bookmarks);
-
-  useEffect(() => {
-    filterState && dispatch(filterState);
-  }, [allPosts]);
+  const sortState = useSelector((state) => state.posts.sortBy);
+  const finalPosts = sortPosts(allPosts, sortState);
 
   return loading ? (
     <Loader />
   ) : (
-    allPosts.map((post) => {
+    finalPosts.map((post) => {
       return (
         <div key={post._id} className={styles.post}>
           {postModal.modalState && (

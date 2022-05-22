@@ -30,6 +30,7 @@ export const users = [
 I have a knack for creating websites and styling them.🎨`,
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    URL: "https://dhruv-samant.netlify.app/",
   },
   {
     _id: uuid(),
@@ -42,6 +43,7 @@ I have a knack for creating websites and styling them.🎨`,
       "https://pbs.twimg.com/profile_banners/2712374694/1637864766/1080x360",
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    URL: "https://gadgetfather.netlify.app/",
   },
   {
     _id: uuid(),

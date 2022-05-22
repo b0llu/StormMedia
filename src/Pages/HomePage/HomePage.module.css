@@ -33,20 +33,28 @@
   font-weight: 500;
 }
 
-.sort {
-  position: absolute;
-  color: var(--content-color);
-  font-size: 2rem;
-  padding: 2rem;
-  border: 1px solid var(--content-color);
-  display: flex;
-  flex-direction: column;
-  right: 5rem;
-  top: 5rem;
+.sort input {
+  margin-right: 2rem;
 }
 
-.sort input {
-    margin-right: 2rem;
+.filter_selector {
+  width: fit-content;
+  color: var(--content-color);
+  background: var(--default-color);
+  padding: 1rem;
+  font-weight: 700;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 500;
+}
+
+.filter_selector:focus {
+  outline: none;
+}
+
+.filter_selector option {
+  background-color: var();
 }
 
 @media screen and (max-width: 750px) {

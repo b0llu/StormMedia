@@ -15,6 +15,7 @@ export const ProfilePage = () => {
   const allUsers = useSelector((state) => state.users.users);
   const loading = useSelector((state) => state.posts.loading);
   const currentUser = useSelector((state) => state.auth.currentUser);
+
   const { setToggle } = useThemeContext();
 
   return loading ? (
@@ -68,7 +69,15 @@ export const ProfilePage = () => {
               <div className={styles.user_data}>
                 <h1>{post.firstName}</h1>
                 <h3>@{post.username}</h3>
-                <a target={'_blank'} href={post.URL}>{post.URL}</a>
+                {allUsers
+                  .filter((user) => user.username === currentUser.username)
+                  .map((user) => {
+                    return (
+                      <a target={"_blank"} href={user.URL}>
+                        {user.URL}
+                      </a>
+                    );
+                  })}
                 <p>{post.bio}</p>
                 <div className={styles.follower_status}>
                   <p>
@@ -153,6 +162,9 @@ export const ProfilePage = () => {
               <div className={styles.user_data}>
                 <h1>{user.firstName}</h1>
                 <h3>@{user.username}</h3>
+                <a target={"_blank"} href={user.URL}>
+                  {user.URL}
+                </a>
                 <p>{user.bio}</p>
                 <div className={styles.follower_status}>
                   <p>

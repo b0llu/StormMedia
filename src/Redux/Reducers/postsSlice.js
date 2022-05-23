@@ -1,14 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { AlertToast, SuccessToast } from "Components";
 import axios from "axios";
-import { sortDate, sortRecent, sortTrending } from "./utils";
 
 const initialState = {
   posts: [],
   bookmarks: [],
   loading: false,
-  sortBy: "Recent",
-  sortOrder: null,
+  sortBy: "Latest",
 };
 
 export const getAllPosts = createAsyncThunk("posts/getAll", async (_, thunkAPI) => {
@@ -151,18 +149,8 @@ const postsSlice = createSlice({
   name: "posts",
   initialState,
   reducers: {
-    sortByDate: (state, action) => {
-      state.sortBy = "Date";
-      state.sortOrder = action.payload;
-      state.posts = state.posts.sort(sortDate(state.sortOrder));
-    },
-    sortByTrending: (state) => {
-      state.sortBy = "Trending";
-      state.posts = state.posts.sort(sortTrending);
-    },
-    sortByRecent: (state) => {
-      state.sortBy = "Recent";
-      state.posts = state.posts.sort(sortRecent);
+    sortByValue: (state, action) => {
+      state.sortBy = action.payload;
     },
   },
   extraReducers(builder) {
@@ -242,5 +230,5 @@ const postsSlice = createSlice({
 });
 
 const { actions, reducer } = postsSlice;
-export const { sortByDate, sortByRecent, sortByTrending } = actions;
+export const { sortByValue } = actions;
 export { actions, reducer as default };

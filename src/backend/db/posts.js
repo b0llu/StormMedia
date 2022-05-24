@@ -11,8 +11,6 @@ export const posts = [
     _id: uuid(),
     name: "Dhruv",
     username: "TheBestDhruv",
-    profilePhoto:
-      "https://pbs.twimg.com/profile_images/1464407388228780036/NFY5UUPn_200x200.jpg",
     content:
       "It's been 1 and half year since I started playing Dota 2! With this much experience let me tell you something, Dota 2 is the number one free-to-play online game for me until now and I hope it always be.",
     likes: {
@@ -30,8 +28,6 @@ export const posts = [
     _id: uuid(),
     name: "Akshay",
     username: "Gadgetfather",
-    profilePhoto:
-      "https://pbs.twimg.com/profile_images/1463934993692987392/TXpTXOl6_200x200.jpg",
     content:
       "Already Diamond in Apex. I just cant get enough of this Game man!",
     likes: {
@@ -46,12 +42,10 @@ export const posts = [
   },
   {
     _id: uuid(),
-    name: "Tanay",
-    username: "tanaypratap",
-    profilePhoto:
-      "https://pbs.twimg.com/profile_images/1501178147420585987/5_2plEJW_200x200.jpg",
+    name: "NZXT",
+    username: "NZXT",
     content:
-      "Kids playing pubg and fortnight need to realize how beautiful the world outside gaming is!",
+      "What if... it was YOU that made a mistake and NOT your teammates?",
     likes: {
       likeCount: 500,
       likedBy: [],
@@ -65,11 +59,10 @@ export const posts = [
   },
   {
     _id: uuid(),
-    name: "Narendra Modi",
-    username: "narendramodi",
-    profilePhoto:
-      "https://pbs.twimg.com/profile_images/1479443900368519169/PgOyX1vt_200x200.jpg",
-    content: "Ye PUBG wala hei kya?",
+    name: "ROG Global",
+    username: "ASUS_ROG",
+    content:
+      "ASUS is bringing five new series of motherboards to exponentially raise performance of upcoming AMD Ryzen 7000-series processors.",
     likes: {
       likeCount: 500,
       likedBy: [],
@@ -82,11 +75,10 @@ export const posts = [
   },
   {
     _id: uuid(),
-    name: "Rahul Gandhi",
-    username: "RahulGandhi",
-    profilePhoto:
-      "https://pbs.twimg.com/profile_images/1394646637004431361/43eyqnqr_200x200.jpg",
-    content: "This Morning I Got up at Night!",
+    name: "NVIDIA",
+    username: "nvidia",
+    content:
+      "Pearl, a NVIDIA Inception startup program member, landed FDA clearance last month, the first to get such a go-ahead for dentistry #AI. Their software platform, enables dentists to run real-time screening of X-rays.",
     likes: {
       likeCount: 20000,
       likedBy: [],
@@ -102,8 +94,6 @@ export const posts = [
     _id: uuid(),
     name: "Admin",
     username: "TheAdmin",
-    profilePhoto:
-      "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
     content: "This is Admin's first post!",
     likes: {
       likeCount: 0,

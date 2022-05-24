@@ -41,7 +41,7 @@ export const ProfilePage = () => {
                 bio={post.bio}
                 profilePhoto={post.profilePhoto}
                 coverPhoto={post.coverPhoto}
-                URL={post.URL}
+                URL={post.URL ?? ''}
                 setModal={setModal}
               />
             )}
@@ -73,7 +73,7 @@ export const ProfilePage = () => {
                   .filter((user) => user.username === currentUser.username)
                   .map((user) => {
                     return (
-                      <a target={"_blank"} href={user.URL}>
+                      <a key={user._id} target={"_blank"} href={user.URL}>
                         {user.URL}
                       </a>
                     );

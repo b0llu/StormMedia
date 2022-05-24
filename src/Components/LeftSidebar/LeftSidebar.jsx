@@ -5,9 +5,10 @@ import { logout } from "Redux/Reducers/authSlice";
 import { useThemeContext } from "Context";
 
 export const LeftSidebar = () => {
-  const location = useLocation();
   const dispatch = useDispatch();
+  const location = useLocation();
   const currentUser = useSelector((state) => state.auth.currentUser);
+  const allUsers = useSelector((state) => state.users.users);
   const { theme, toggleLightDarkTheme, setToggle, toggle } = useThemeContext();
 
   return (
@@ -25,7 +26,7 @@ export const LeftSidebar = () => {
           {currentUser._id && (
             <span
               onClick={() => {
-                dispatch(logout()), setToggle(false)
+                dispatch(logout()), setToggle(false);
               }}
               className={`material-icons ${styles.logout_icon}`}
             >
@@ -89,15 +90,23 @@ export const LeftSidebar = () => {
         </Link>
       </ul>
       <div className={styles.small_profile}>
-        <img
-          src={
-            currentUser.profilePhoto
-              ? currentUser.profilePhoto
-              : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
-          }
-          alt="profile_image"
-          className={styles.avatar}
-        />
+        {allUsers
+          .filter((user) => user.username === currentUser.username)
+          .map((user) => {
+            return (
+              <img
+              key={user._id}
+                src={
+                  user.profilePhoto
+                    ? user.profilePhoto
+                    : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+                }
+                alt="profile_image"
+                className={styles.avatar}
+              />
+            );
+          })}
+        
         <div className={styles.user}>
           <h1>{currentUser.firstName}</h1>
           <h3>@{currentUser.username}</h3>

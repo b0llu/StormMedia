@@ -23,7 +23,9 @@ export const EditProfileModal = ({
   const urlCheck = (url) => {
     let str = "https://";
 
-    if (url.startsWith(str)) {
+    if (url === "") {
+      return "";
+    } else if (url.startsWith(str)) {
       return url;
     } else {
       return str + url;
@@ -39,7 +41,6 @@ export const EditProfileModal = ({
         "upload_preset",
         process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET ?? ""
       );
-
       fetch(process.env.REACT_APP_CLOUDINARY_API_URL ?? "", {
         method: "post",
         mode: "cors",
@@ -51,7 +52,7 @@ export const EditProfileModal = ({
             firstName: editedData.firstName,
             bio: editedData.bio,
             coverPhoto: editedData.coverPhoto,
-            URL: urlCheck(editedData.URL),
+            URL: urlCheck(editedData.URL) ?? editedData.URL,
             profilePhoto: data.url,
           };
           dispatch(editUser(obj));

@@ -1,4 +1,5 @@
 import { useThemeContext } from "Context";
+import { useDocTitle } from "Hook/useTitle";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
@@ -10,6 +11,7 @@ import {
 import styles from "./BookmarksPage.module.css";
 
 export const BookmarksPage = () => {
+  useDocTitle("Bookmarks | StormMedia")
   const dispatch = useDispatch();
   const allBookmarks = useSelector((state) => state.posts.bookmarks);
   const currentUser = useSelector((state) => state.auth.currentUser);

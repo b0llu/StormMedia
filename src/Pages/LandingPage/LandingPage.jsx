@@ -1,9 +1,11 @@
 import { LoginBox, SignupBox } from "Components";
+import { useDocTitle } from "Hook/useTitle";
 import { useState } from "react";
 import styles from "./LandingPage.module.css";
 
 export const LandingPage = () => {
   const [auth, setAuth] = useState(true);
+  useDocTitle('Login | StormMedia')
 
   return (
     <div className={styles.landing_container}>

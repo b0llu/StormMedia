@@ -5,8 +5,10 @@ import { useParams } from "react-router-dom";
 import styles from "./ProfilePage.module.css";
 import { followUser, unfollowUser } from "Redux/Reducers/usersSlice";
 import { useThemeContext } from "Context";
+import { useDocTitle } from "Hook/useTitle";
 
 export const ProfilePage = () => {
+  useDocTitle('Profile | StormMedia')
   const [modal, setModal] = useState(false);
   const { username } = useParams();
 

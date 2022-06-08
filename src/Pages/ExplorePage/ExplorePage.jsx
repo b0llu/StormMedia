@@ -1,8 +1,10 @@
 import { EachPost } from "Components";
 import { useThemeContext } from "Context";
+import { useDocTitle } from "Hook/useTitle";
 import styles from "./ExplorePage.module.css";
 
 export const ExplorePage = () => {
+  useDocTitle("Explore | StormMedia")
   const { setToggle } = useThemeContext();
   return (
     <div className={styles.explore_container}>

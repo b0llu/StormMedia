@@ -1,11 +1,13 @@
 import { EachPost, NewPost } from "Components";
 import { useThemeContext } from "Context";
+import { useDocTitle } from "Hook/useTitle";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { sortByValue } from "Redux/Reducers/postsSlice";
 import styles from "./HomePage.module.css";
 
 export const HomePage = () => {
+  useDocTitle('Home | StormMedia')
   const sortState = useSelector((state) => state.posts.sortBy);
   const [filterSelector, useFilterSelector] = useState(sortState);
   const { setToggle } = useThemeContext();

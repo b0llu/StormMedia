@@ -51,9 +51,9 @@ I have a knack for creating websites and styling them.🎨`,
     username: "NZXT",
     password: "NZXT123",
     profilePhoto:
-      "https://pbs.twimg.com/profile_images/1455182854351061000/YJR3nuxY_reasonably_small.png",
+      "https://pbs.twimg.com/profile_images/1532029151573446656/TU8Bb05l_400x400.jpg",
     coverPhoto:
-      "https://pbs.twimg.com/profile_banners/19936982/1631051641/300x100",
+      "https://pbs.twimg.com/profile_banners/19936982/1654099189/1500x500",
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
@@ -65,7 +65,7 @@ I have a knack for creating websites and styling them.🎨`,
     profilePhoto:
       "https://pbs.twimg.com/profile_images/1346369825019371525/awnlfQQs_200x200.jpg",
     coverPhoto:
-      "https://pbs.twimg.com/profile_banners/111519701/1651463969/1080x360",
+      "https://pbs.twimg.com/profile_banners/111519701/1654143826/1500x500",
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
@@ -77,7 +77,7 @@ I have a knack for creating websites and styling them.🎨`,
     profilePhoto:
       "https://pbs.twimg.com/profile_images/1145524454170062848/U4lxVYEw_200x200.png",
     coverPhoto:
-      "https://pbs.twimg.com/profile_banners/61559439/1653365289/1080x360",
+      "https://pbs.twimg.com/profile_banners/61559439/1654129042/1500x500",
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },

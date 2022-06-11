@@ -22,8 +22,9 @@
 }
 
 .right_sidebar input::placeholder {
-  padding-left: 1rem;
+  padding: 0;
 }
+
 
 .right_sidebar input:focus {
   border: 1px solid var(--primary-color);

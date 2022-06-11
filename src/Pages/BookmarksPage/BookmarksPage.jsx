@@ -89,33 +89,6 @@ export const BookmarksPage = () => {
                     bookmark_border
                   </span>
                 )}
-                <div className={styles.like_div}>
-                  {post.likes.likedBy
-                    .map((liked) => liked.username)
-                    .includes(currentUser.username) ? (
-                    <span
-                      onClick={() => {
-                        dispatch(dislikePost(post._id));
-                      }}
-                      className="material-icons"
-                      style={{
-                        color: "var(--alert-color)",
-                      }}
-                    >
-                      favorite
-                    </span>
-                  ) : (
-                    <span
-                      onClick={() => {
-                        dispatch(likePost(post._id));
-                      }}
-                      className="material-icons"
-                    >
-                      favorite_border
-                    </span>
-                  )}
-                  <p>{post.likes.likeCount}</p>
-                </div>
               </div>
             </div>
           </div>

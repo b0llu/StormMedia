@@ -42,7 +42,6 @@
   color: var(--content-color);
   background: var(--default-color);
   padding: 1rem;
-  font-weight: 700;
   border-radius: 5px;
   cursor: pointer;
   font-family: inherit;
@@ -51,10 +50,6 @@
 
 .filter_selector:focus {
   outline: none;
-}
-
-.filter_selector option {
-  background-color: var();
 }
 
 @media screen and (max-width: 750px) {

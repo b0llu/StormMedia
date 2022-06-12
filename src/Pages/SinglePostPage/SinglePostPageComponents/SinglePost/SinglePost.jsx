@@ -9,11 +9,12 @@ import {
 } from "Redux/Reducers/postsSlice";
 
 export const SinglePost = () => {
-  const { postId } = useParams();
+  const { postId, username } = useParams();
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.auth.currentUser);
   const allPosts = useSelector((state) => state.posts.posts);
   const bookmarks = useSelector((state) => state.posts.bookmarks);
+  const allUsers = useSelector((state) => state.users.users);
 
   return allPosts
     .filter((post) => post._id === postId)
@@ -22,14 +23,21 @@ export const SinglePost = () => {
         <div key={post._id}>
           <div className={styles.post}>
             <Link to={`/${post.username}`}>
-              <img
-                src={
-                  post.profilePhoto
-                    ? post.profilePhoto
-                    : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
-                }
-                alt="User Thumbnail"
-              />
+              {allUsers
+                .filter((user) => user.username === username)
+                .map((user) => {
+                  return (
+                    <img
+                      key={user._id}
+                      src={
+                        user.profilePhoto
+                          ? user.profilePhoto
+                          : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+                      }
+                      alt="profile_image"
+                    />
+                  );
+                })}
             </Link>
             <div className={styles.post_user_details}>
               <div className={styles.user_name}>

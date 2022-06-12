@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { postComment } from "Redux/Reducers/postsSlice";
-import { v4 as uuid } from "uuid";
 import styles from "./CommentSection.module.css";
 
 export const CommentSection = () => {
@@ -12,6 +11,7 @@ export const CommentSection = () => {
   const currentUser = useSelector((state) => state.auth.currentUser);
   const allPosts = useSelector((state) => state.posts.posts);
   const [comment, setComment] = useState({ id: postId, comment: "" });
+  const allUsers = useSelector((state) => state.users.users);
 
   const commentHandler = (comment) => {
     if (comment.comment === "") {
@@ -26,7 +26,21 @@ export const CommentSection = () => {
     <>
       <div className={styles.comment_section}>
         <div className={styles.comment}>
-          <img src={currentUser.profilePhoto} alt="user-image" />
+          {allUsers
+            .filter((user) => user.username === currentUser.username)
+            .map((user) => {
+              return (
+                <img
+                  key={user._id}
+                  src={
+                    user.profilePhoto
+                      ? user.profilePhoto
+                      : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+                  }
+                  alt="profile_image"
+                />
+              );
+            })}
           <textarea
             onChange={(e) =>
               setComment({ ...comment, comment: e.target.value })
@@ -49,14 +63,21 @@ export const CommentSection = () => {
             return (
               <div key={commentData.createdAt} className={styles.comments}>
                 <div className={styles.post}>
-                  <img
-                    src={
-                      currentUser.profilePhoto
-                        ? currentUser.profilePhoto
-                        : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
-                    }
-                    alt="User Thumbnail"
-                  />
+                  {allUsers
+                    .filter((user) => user.username === currentUser.username)
+                    .map((user) => {
+                      return (
+                        <img
+                          key={user._id}
+                          src={
+                            user.profilePhoto
+                              ? user.profilePhoto
+                              : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+                          }
+                          alt="profile_image"
+                        />
+                      );
+                    })}
                   <div className={styles.post_user_details}>
                     <div className={styles.user_name}>
                       <h1>{currentUser.firstName}</h1>

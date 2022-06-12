@@ -4,14 +4,19 @@ import { useDocTitle } from "Hook/useTitle";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { sortByValue } from "Redux/Reducers/postsSlice";
+import { getAllUsers } from "Redux/Reducers/usersSlice";
 import styles from "./HomePage.module.css";
 
 export const HomePage = () => {
-  useDocTitle('Home | StormMedia')
+  useDocTitle("Home | StormMedia");
   const sortState = useSelector((state) => state.posts.sortBy);
   const [filterSelector, useFilterSelector] = useState(sortState);
   const { setToggle } = useThemeContext();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllUsers());
+  }, []);
 
   return (
     <section className={styles.content_container}>

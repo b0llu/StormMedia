@@ -35,14 +35,18 @@ export const signupHandler = function (schema, request) {
       _id,
       createdAt: formatDate(),
       updatedAt: formatDate(),
+      firstName: "",
       username,
       password,
       ...rest,
       followers: [],
       following: [],
       bookmarks: [],
+      profilePhoto: "",
+      coverPhoto: "",
     };
     const createdUser = schema.users.create(newUser);
+    console.log(createdUser)
     const encodedToken = sign(
       { _id, username },
       process.env.REACT_APP_JWT_SECRET

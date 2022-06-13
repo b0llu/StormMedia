@@ -9,17 +9,6 @@ const allBookmarks = useSelector((state) => state.posts.bookmarks);
 const currentUser = useSelector((state) => state.auth.currentUser);
 const allUsers = useSelector((state) => state.users.users);
 const { setToggle } = useThemeContext();
-console.log(
-  allBookmarks
-    .map((post) => post.username)
-    .includes(allUsers.map((user) => user.username))
-);
-const something = allBookmarks.map((post) => post.username);
-console.log(
-  allUsers.filter((user) =>
-    user.username.includes(allBookmarks.map((post) => post.username))
-  )
-);
 
 return (
     <div className={styles.bookmarks_container}>

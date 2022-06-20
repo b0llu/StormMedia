@@ -41,6 +41,7 @@ function App() {
       <LogoutBtn />
       <ToastContainer />
       {location.pathname !== "/" && <LeftSidebar />}
+      {location.pathname !== "/" && <RightSidebar />}
       <Routes>
         <Route element={<RestrictAuth />}>
           <Route path="/" element={<LandingPage />} />
@@ -54,7 +55,6 @@ function App() {
         </Route>
         <Route path="/mockman" element={<MockAPI />} />
       </Routes>
-      {location.pathname !== "/" && <RightSidebar />}
     </GridContainer>
   );
 }

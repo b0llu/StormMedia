@@ -67,7 +67,7 @@ export const LoginBox = ({ setAuth }) => {
         type="button"
         className="btn"
       >
-        Login with Test Credentials
+        Guest Login
       </button>
       <button onClick={loginHandler} type="button" className="btn">
         Login

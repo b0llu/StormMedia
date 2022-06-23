@@ -1,6 +1,6 @@
 import { EditPostModal, Loader } from "Components";
 import { sortPosts } from "Hook/sortPosts";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
@@ -28,10 +28,32 @@ export const EachPost = () => {
   const currentUser = useSelector((state) => state.auth.currentUser);
   const bookmarks = useSelector((state) => state.posts.bookmarks);
   const sortState = useSelector((state) => state.posts.sortBy);
-  const finalPosts = sortPosts(allPosts, sortState);
+
+  const user = allUsers.find((user) => user.username === currentUser.username);
+  const followingUserNameArray = user.following.map((user) => user.username);
+  const followingOnlyPosts = allPosts.filter((post) =>
+    followingUserNameArray.includes(post.username)
+  );
+  const userAndFollowingPost = allPosts
+    .filter((post) => post.username === currentUser.username)
+    .concat(followingOnlyPosts);
+
+  const finalPosts = sortPosts(userAndFollowingPost, sortState);
 
   return loading ? (
     <Loader />
+  ) : finalPosts.length < 1 ? (
+    <h1
+      style={{
+        fontSize: "3rem",
+        color: "var(--content-color)",
+        textAlign: "center",
+        fontWeight: "500",
+        marginTop: '2rem'
+      }}
+    >
+      {"Follow people to see posts -->"}
+    </h1>
   ) : (
     finalPosts.map((post) => {
       return (

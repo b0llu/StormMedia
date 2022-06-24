@@ -11,7 +11,12 @@
   top: 0;
 }
 
-.right_sidebar input {
+.input_container {
+  width: 100%;
+  position: relative;
+}
+
+.right_sidebar .search_bar {
   margin-top: 1rem;
   padding: 1.5rem;
   background-color: var(--faint-bg);
@@ -19,16 +24,65 @@
   border-radius: 100rem;
   color: var(--content-color);
   border: 1px solid transparent;
+  width: 100%;
 }
 
-.right_sidebar input::placeholder {
+.right_sidebar .search_bar::placeholder {
   padding: 0;
 }
 
-
-.right_sidebar input:focus {
+.right_sidebar .search_bar:focus {
   border: 1px solid var(--primary-color);
   outline: none;
+}
+
+.input_search_result {
+  position: absolute;
+  background-color: var(--default-color);
+  width: 100%;
+  top: 7.4rem;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px -2px var(--content-color);
+}
+
+.input_search_result .small_profile {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: var(--content-color);
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 100rem;
+  cursor: pointer;
+}
+
+.input_search_result .small_profile:hover {
+  background-color: var(--faint-bg);
+  transition: 0.2s ease-in-out;
+}
+
+.input_search_result .avatar {
+  height: 5rem;
+  width: 5rem;
+  border-radius: 50%;
+}
+
+.input_search_result .small_profile h1 {
+  font-size: 2rem;
+  margin-left: 2rem;
+  font-weight: 600;
+}
+
+.input_search_result .small_profile h3 {
+  font-size: 2rem;
+  margin-left: 2rem;
+  font-weight: 500;
+  color: var(--faint-text-clr);
+}
+
+.input_search_result .user {
+  align-self: flex-start;
+  flex-direction: column;
 }
 
 .follower_section {

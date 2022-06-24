@@ -1,16 +1,65 @@
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./RightSidebar.module.css";
 import { followUser, unfollowUser } from "Redux/Reducers/usersSlice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export const RightSidebar = () => {
   const allUsers = useSelector((state) => state.users.users);
   const currentUser = useSelector((state) => state.auth.currentUser);
   const dispatch = useDispatch();
+  const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate()
 
   return (
     <aside className={styles.right_sidebar}>
-      <input placeholder="Search Here...." type="text" />
+      <div className={styles.input_container}>
+        <input
+          className={styles.search_bar}
+          placeholder="Search Here...."
+          type="text"
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <div className={styles.input_search_result}>
+          {searchTerm.length > 0 &&
+            allUsers
+              .filter((user) =>
+                user.username.toLowerCase().includes(searchTerm)
+              )
+              .map((user) => {
+                return (
+                  <div
+                    key={user.id}
+                    onClick={() => navigate(`/${user.username}`)}
+                    className={styles.small_profile}
+                  >
+                    <img
+                      key={user._id}
+                      src={
+                        user.profilePhoto
+                          ? user.profilePhoto
+                          : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+                      }
+                      alt="profile_image"
+                      className={styles.avatar}
+                    />
+                    <div className={styles.user}>
+                      <h1>{user.firstName}</h1>
+                      <h3>@{user.username}</h3>
+                    </div>
+                  </div>
+                );
+              })}
+          {searchTerm.length > 0 &&
+            allUsers.filter((user) =>
+              user.username.toLowerCase().includes(searchTerm)
+            ).length === 0 && (
+              <div className={styles.small_profile}>
+                <h1>No User Found</h1>
+              </div>
+            )}
+        </div>
+      </div>
       <div className={styles.follower_section}>
         {allUsers.filter(
           (user) => user.username === currentUser.username

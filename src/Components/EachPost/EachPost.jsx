@@ -133,7 +133,7 @@ export const EachPost = () => {
                 style={{ color: "var(--cta-btn-bg)" }}
                 to={`/${post.username}/${post._id}`}
               >
-                <span className="material-icons">chat_bubble</span>
+                <span className="material-icons">chat_bubble_outline</span>
               </Link>
               {bookmarks
                 .map((bookmarked) => bookmarked._id)

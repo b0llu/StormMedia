@@ -44,15 +44,9 @@
 }
 
 .icons span {
-  font-size: 3rem;
-  color: var(--cta-btn-bg);
-  cursor: pointer;
-  border-radius: 100rem;
+  font-size: 2rem;
+  color: var(--content-color);
   padding: 1rem;
-}
-
-.icons span:hover {
-  background-color: var(--faint-bg);
 }
 
 .post_cta_section button {

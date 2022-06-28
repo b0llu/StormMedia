@@ -10,6 +10,7 @@ export const NewPost = () => {
   const allUsers = useSelector((state) => state.users.users);
   const currentUser = useSelector((state) => state.auth.currentUser);
   const dispatch = useDispatch();
+  const [textLength, setTextLength] = useState(0);
 
   const postHandler = (postDetails) => {
     if (postDetails === "") {
@@ -46,15 +47,16 @@ export const NewPost = () => {
           placeholder="What's Happening....."
           autoFocus
           rows="3"
+          maxLength={'150'}
           value={postDetails}
-          onChange={(e) => setPostDetails(e.target.value)}
+          onChange={(e) => {
+            setPostDetails(e.target.value);
+            setTextLength(e.target.value.length);
+          }}
         />
         <div className={styles.post_cta_section}>
           <div className={styles.icons}>
-            <span className="material-icons">image</span>
-            <span className="material-icons">gif</span>
-            <span className="material-icons">poll</span>
-            <span className="material-icons">emoji_emotions</span>
+            <span>{textLength}/150</span>
           </div>
           <button onClick={() => postHandler(postDetails)}>Post</button>
         </div>

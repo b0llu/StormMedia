@@ -15,3 +15,4 @@ export { EditProfileModal } from "./EditProfileModal/EditProfileModal";
 export { Loader } from "./Loader/Loader";
 export { EditPostModal } from "./EditPostModal/EditPostModal";
 export { BookmarkPost } from "./BookmarkPost/BookmarkPost";
+export { ExplorePosts } from "./ExplorePosts/ExplorePosts";

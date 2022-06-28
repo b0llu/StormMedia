@@ -1,4 +1,4 @@
-import { EachPost } from "Components";
+import { ExplorePosts } from "Components";
 import { useThemeContext } from "Context";
 import { useDocTitle } from "Hook/useTitle";
 import styles from "./ExplorePage.module.css";
@@ -17,7 +17,7 @@ export const ExplorePage = () => {
         </span>
         <h1 className={styles.header}>Explore</h1>
       </div>
-      <EachPost />
+      <ExplorePosts />
     </div>
   );
 };

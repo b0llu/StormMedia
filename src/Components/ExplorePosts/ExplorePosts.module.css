@@ -1,0 +1,115 @@
+.post {
+  padding: 2rem;
+  display: flex;
+  border-bottom: 1px solid var(--content-color);
+}
+
+.post img {
+  border-radius: 50%;
+  align-self: flex-start;
+  height: 7rem;
+  width: 7rem;
+}
+
+.post_user_details {
+  margin-left: 2.5rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.user_name {
+  color: var(--content-color);
+}
+
+.user_name {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.user_name h1 {
+  font-size: 2rem;
+}
+
+.user_name h2 {
+  font-size: 2rem;
+  font-weight: 500;
+  color: var(--faint-text-clr);
+}
+
+.user_name h3 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--faint-text-clr);
+}
+
+.post_user_details p {
+  color: var(--content-color);
+  font-size: 2rem;
+  margin: 1rem 0;
+}
+
+.icons_container {
+  margin-top: 1rem;
+  color: var(--cta-btn-bg);
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.icons_container span {
+  font-size: 3rem;
+  cursor: pointer;
+  padding: 1rem;
+  margin-right: 5px;
+  border-radius: 50%;
+}
+
+.icons_container span:hover {
+  background-color: var(--faint-bg);
+}
+
+.like_div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+}
+
+.margin_left_auto {
+  margin-left: auto;
+}
+
+.follow_btn {
+  margin-left: auto;
+  display: none;
+}
+
+.follow_btn button {
+  padding: 1rem 2rem;
+  border-radius: 100rem;
+  background-color: var(--follow-btn-bg);
+  color: var(--follow-btn-clr);
+  border: none;
+  cursor: pointer;
+}
+
+.follow_btn button:hover {
+  background-color: var(--follow-btn-hover);
+  transition: 0.2s ease-in-out;
+}
+
+@media screen and (max-width: 920px) {
+  .follow_btn {
+    display: block;
+  }
+
+  .follow_btn button {
+    padding: 2px 1rem;
+    font-size: 1.6rem;
+  }
+}

@@ -49,7 +49,7 @@ export const EachPost = () => {
         color: "var(--content-color)",
         textAlign: "center",
         fontWeight: "500",
-        marginTop: '2rem'
+        marginTop: "2rem",
       }}
     >
       {"Follow people to see posts -->"}
@@ -99,27 +99,30 @@ export const EachPost = () => {
               </Link>
               <h3>{post.time}</h3>
               <div className={styles.follow_btn}>
-                {!allUsers
-                  .filter((user) => user.username === currentUser.username)
-                  .map((user) =>
-                    user.following.some(
-                      (user) => user.username === post.username
-                    )
-                  )[0] && (
-                  <button
-                    onClick={() =>
-                      dispatch(
-                        followUser(
-                          allUsers.filter(
-                            (user) => user.username === post.username
-                          )[0]._id
-                        )
+                {!allUsers.filter(
+                  (user) => user.username === currentUser.username
+                ) &&
+                  !allUsers
+                    .filter((user) => user.username === currentUser.username)
+                    .map((user) =>
+                      user.following.some(
+                        (user) => user.username === post.username
                       )
-                    }
-                  >
-                    Follow
-                  </button>
-                )}
+                    )[0] && (
+                    <button
+                      onClick={() =>
+                        dispatch(
+                          followUser(
+                            allUsers.filter(
+                              (user) => user.username === post.username
+                            )[0]._id
+                          )
+                        )
+                      }
+                    >
+                      Follow
+                    </button>
+                  )}
               </div>
             </div>
             <Link to={`/${post.username}/${post._id}`}>

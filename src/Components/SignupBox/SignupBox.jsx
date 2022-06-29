@@ -1,11 +1,12 @@
 import { AlertToast } from "Components/Toasts";
+import { useDocTitle } from "Hook/useTitle";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { signup } from "Redux/Reducers/authSlice";
 import styles from "./SignupBox.module.css";
 
 export const SignupBox = ({ setAuth }) => {
-    useDocTitle("Signup | StormKeep");
+  useDocTitle("Signup | StormKeep");
   const dispatch = useDispatch();
   const [userDetails, setUserDetails] = useState({
     name: "",

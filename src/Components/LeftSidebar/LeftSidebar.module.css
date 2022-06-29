@@ -19,7 +19,7 @@ a {
   font-size: 3rem;
   margin: 2rem;
   color: var(--primary-color);
-  pointer-events: none;
+  cursor: pointer;
 }
 
 .brand_name_mobile {

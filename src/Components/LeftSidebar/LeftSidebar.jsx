@@ -1,5 +1,5 @@
 import styles from "./LeftSidebar.module.css";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "Redux/Reducers/authSlice";
 import { useThemeContext } from "Context";
@@ -7,6 +7,7 @@ import { useThemeContext } from "Context";
 export const LeftSidebar = () => {
   const dispatch = useDispatch();
   const location = useLocation();
+  const navigate = useNavigate();
   const currentUser = useSelector((state) => state.auth.currentUser);
   const allUsers = useSelector((state) => state.users.users);
   const { theme, toggleLightDarkTheme, setToggle, toggle } = useThemeContext();
@@ -17,7 +18,7 @@ export const LeftSidebar = () => {
         toggle ? `${styles.left_sidebar_toggle}` : `${styles.left_sidebar}`
       }
     >
-      <p className={styles.brand_name}>
+      <p onClick={() => navigate("/home")} className={styles.brand_name}>
         <i className="fas fa-bolt"></i> StormMedia
       </p>
       <div className={styles.brand_name_mobile}>
@@ -85,31 +86,38 @@ export const LeftSidebar = () => {
             <span className="material-icons">person</span>Profile
           </li>
         </Link>
-        <Link to={"/home"}>
-          <button className={styles.cta_btn}>Say Something</button>
-        </Link>
+        {location.pathname !== "/home" && (
+          <Link to={"/home"}>
+            <button className={styles.cta_btn}>Say Something</button>
+          </Link>
+        )}
       </ul>
       <div className={styles.small_profile}>
         {allUsers
           .filter((user) => user.username === currentUser.username)
           .map((user) => {
             return (
-              <img
-              key={user._id}
-                src={
-                  user.profilePhoto
-                    ? user.profilePhoto
-                    : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
-                }
-                alt="profile_image"
-                className={styles.avatar}
-              />
+              <Link key={user._id} to={`/${user.username}`}>
+                <img
+                  src={
+                    user.profilePhoto
+                      ? user.profilePhoto
+                      : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+                  }
+                  alt="profile_image"
+                  className={styles.avatar}
+                />
+              </Link>
             );
           })}
-        
+
         <div className={styles.user}>
-          <h1>{currentUser.firstName}</h1>
-          <h3>@{currentUser.username}</h3>
+          <h1 onClick={() => navigate(`/${currentUser.username}`)}>
+            {currentUser.firstName}
+          </h1>
+          <h3 onClick={() => navigate(`/${currentUser.username}`)}>
+            @{currentUser.username}
+          </h3>
         </div>
       </div>
     </aside>

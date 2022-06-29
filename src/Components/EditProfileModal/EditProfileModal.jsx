@@ -32,10 +32,19 @@ export const EditProfileModal = ({
     }
   };
 
-  const imageHandler = async (editedData) => {
+  const profileUpdaterHandler = async (editedData) => {
+    const obj = {
+      firstName: editedData.firstName,
+      bio: editedData.bio,
+      URL: urlCheck(editedData.URL) ?? editedData.URL,
+    };
+    dispatch(editUser(obj));
+  };
+
+  const profilePhotoHandler = (image) => {
     try {
       const data = new FormData();
-      data.append("file", editedData.profilePhoto);
+      data.append("file", image);
       data.append("cloud_name", process.env.REACT_APP_CLOUDINARY_CLOUD_NAME);
       data.append(
         "upload_preset",
@@ -51,9 +60,37 @@ export const EditProfileModal = ({
           const obj = {
             firstName: editedData.firstName,
             bio: editedData.bio,
-            coverPhoto: editedData.coverPhoto,
             URL: urlCheck(editedData.URL) ?? editedData.URL,
             profilePhoto: data.url,
+          };
+          dispatch(editUser(obj));
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const backdropHandler = async (image) => {
+    try {
+      const data = new FormData();
+      data.append("file", image);
+      data.append("cloud_name", process.env.REACT_APP_CLOUDINARY_CLOUD_NAME);
+      data.append(
+        "upload_preset",
+        process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET ?? ""
+      );
+      fetch(process.env.REACT_APP_CLOUDINARY_API_URL ?? "", {
+        method: "post",
+        mode: "cors",
+        body: data,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          const obj = {
+            firstName: editedData.firstName,
+            bio: editedData.bio,
+            coverPhoto: data.url,
+            URL: urlCheck(editedData.URL) ?? editedData.URL,
           };
           dispatch(editUser(obj));
         });
@@ -74,7 +111,7 @@ export const EditProfileModal = ({
           </div>
           <button
             onClick={() => {
-              imageHandler(editedData);
+              profileUpdaterHandler(editedData);
               setModal(false);
             }}
           >
@@ -82,9 +119,49 @@ export const EditProfileModal = ({
           </button>
         </div>
         {coverPhoto ? (
-          <img className={styles.profile_backdrop} src={coverPhoto} alt="" />
+          <>
+            <img className={styles.profile_backdrop} src={coverPhoto} alt="" />
+            <div className={styles.backdrop_filter_change}>
+              <input
+                onChange={(e) => {
+                  backdropHandler(e.target.files[0]);
+                }}
+                className={styles.backdrop_change}
+                id="backdrop_change"
+                type="file"
+                accept="image/jpeg,image/png,image/webp"
+              />
+              <label htmlFor="backdrop_change">
+                <img
+                  className={styles.label_img}
+                  src="https://w7.pngwing.com/pngs/386/187/png-transparent-computer-icons-blog-change-angle-text-logo-thumbnail.png"
+                  alt="change image label"
+                />
+              </label>
+            </div>
+          </>
         ) : (
-          <div className={styles.no_img}></div>
+          <>
+            <div className={styles.no_img}></div>
+            <div className={styles.backdrop_filter_change}>
+              <input
+                onChange={(e) => {
+                  backdropHandler(e.target.files[0]);
+                }}
+                className={styles.backdrop_change}
+                id="backdrop_change"
+                type="file"
+                accept="image/jpeg,image/png,image/webp"
+              />
+              <label htmlFor="backdrop_change">
+                <img
+                  className={styles.label_img}
+                  src="https://w7.pngwing.com/pngs/386/187/png-transparent-computer-icons-blog-change-angle-text-logo-thumbnail.png"
+                  alt="change image label"
+                />
+              </label>
+            </div>
+          </>
         )}
         <div className={styles.user_img}>
           <img
@@ -98,10 +175,7 @@ export const EditProfileModal = ({
           <div className={styles.photo_upload_div}>
             <input
               onChange={(e) => {
-                setEditedData({
-                  ...editedData,
-                  profilePhoto: e.target.files[0],
-                });
+                profilePhotoHandler(e.target.files[0]);
               }}
               className={styles.photo_change}
               id="photo_change"

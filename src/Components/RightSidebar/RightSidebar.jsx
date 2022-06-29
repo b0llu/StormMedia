@@ -1,15 +1,20 @@
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./RightSidebar.module.css";
 import { followUser, unfollowUser } from "Redux/Reducers/usersSlice";
-import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 export const RightSidebar = () => {
+  const location = useLocation();
   const allUsers = useSelector((state) => state.users.users);
   const currentUser = useSelector((state) => state.auth.currentUser);
   const dispatch = useDispatch();
   const [searchTerm, setSearchTerm] = useState("");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    setSearchTerm("");
+  }, [location.pathname]);
 
   return (
     <aside className={styles.right_sidebar}>
@@ -18,6 +23,7 @@ export const RightSidebar = () => {
           className={styles.search_bar}
           placeholder="Search Here...."
           type="text"
+          value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
         <div className={styles.input_search_result}>

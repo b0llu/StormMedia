@@ -16,16 +16,11 @@ export const ExplorePosts = () => {
   const currentUser = useSelector((state) => state.auth.currentUser);
   const bookmarks = useSelector((state) => state.posts.bookmarks);
 
-  const user = allUsers.find((user) => user.username === currentUser.username);
-  const followingUserNameArray = user.following.map((user) => user.username);
-  const followingOnlyPosts = allPosts.filter(
-    (post) => !followingUserNameArray.includes(post.username)
-  );
-  const userAndFollowingPost = followingOnlyPosts.filter(
+  const posts = allPosts.filter(
     (post) => post.username !== currentUser.username
   );
 
-  return userAndFollowingPost.map((post) => {
+  return posts.map((post) => {
     return (
       <div key={post._id} className={styles.post}>
         <Link to={`/${post.username}`}>

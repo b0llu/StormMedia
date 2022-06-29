@@ -47,7 +47,7 @@ export const NewPost = () => {
           placeholder="What's Happening....."
           autoFocus
           rows="3"
-          maxLength={'150'}
+          maxLength={"150"}
           value={postDetails}
           onChange={(e) => {
             setPostDetails(e.target.value);
@@ -58,7 +58,13 @@ export const NewPost = () => {
           <div className={styles.icons}>
             <span>{textLength}/150</span>
           </div>
-          <button onClick={() => postHandler(postDetails)}>Post</button>
+          <button
+            onClick={() => {
+              postHandler(postDetails), setTextLength(0);
+            }}
+          >
+            Post
+          </button>
         </div>
       </div>
     </div>
